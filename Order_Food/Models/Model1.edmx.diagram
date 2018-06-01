@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c93bae77ff1a4b70aaf51ade4b6b463f" Name="Diagram1">
+        <EntityTypeShape EntityType="Order_Food_dbModel.user_account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Address_C" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Customer" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Food_Picture" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Location_C" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Menu" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Report" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.User" Width="1.5" PointX="6.75" PointY="6.75" />
+        <AssociationConnector Association="Order_Food_dbModel.FK_Customer_Customer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

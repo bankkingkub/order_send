@@ -1,0 +1,15 @@
+﻿
+        <div> @ViewBag.asd </div>
+<div class="cardview">
+    @using (Html.BeginForm("Login", "Index", FormMethod.Post))
+    {
+        <div>
+            test login<br>
+            Id: <input type="text" name="FirstName"><br>
+            Pw: <input type="password" name="pw"><br>
+            <input type="submit" value="Login">
+        </div>
+    }
+    <div> @ViewBag.testlogin </div>
+    <a href="http://localhost:55400/Index/Resgister">Resgister</a>
+    </div>
