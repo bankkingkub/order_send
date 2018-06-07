@@ -1,13 +1,36 @@
-﻿@if (ViewBag.UserExists != null)
-{
-    if (ViewBag.UserExists == "test")
-    {
+﻿@ViewBag.Checlogin
+@ViewBag.usename
+<style>
+    div {
+        border: 1px solid;
     }
+</style>
+@if (ViewBag.Checlogin == "ยังไม่เข้าสู่ระบบ")
+{
+
+    @RenderPage("~/Views/Index/Login.cshtml ")
 
 }
-@ViewBag.asd
-@ViewBag.asdasd
-@using (Html.BeginForm("Logout", "Index", FormMethod.Post)) {
-<input type="submit" value="Logout">
 
+@if (ViewBag.Checkpage != null)
+{
+    using (Html.BeginForm("Logout", "Index", FormMethod.Post))
+    {
+        <input type="submit" value="Logout">
+    }
+    if (ViewBag.Checkpage == "admin")
+    {
+        @RenderPage("~/Views/UsingU/Admin.cshtml ")
+        <div>เข้าหน้า admin</div>
+    }
+    else if (ViewBag.Checkpage == "user")
+    {
+        @RenderPage("~/Views/UsingU/User.cshtml ")
+        <div>เข้าหน้า user</div>
+    }
+    else if (ViewBag.Checkpage == "customer")
+    {
+        <div>เข้าหน้า customer</div>
+        @RenderPage("~/Views/UsingU/Customer.cshtml ")
+    }
 }

@@ -1,0 +1,9 @@
+﻿@model Order_Food.Models.Food_Picture
+
+@using (Html.BeginForm("UploadFile", "Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}
+
+ @ViewBag.savestage

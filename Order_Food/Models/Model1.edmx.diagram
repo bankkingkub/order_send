@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="Order_Food_dbModel.Report" Width="1.5" PointX="4.75" PointY="6.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.User" Width="1.5" PointX="6.75" PointY="6.75" />
         <AssociationConnector Association="Order_Food_dbModel.FK_Customer_Customer" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.View_redit" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

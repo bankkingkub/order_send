@@ -1,15 +1,17 @@
 ﻿
-        <div> @ViewBag.asd </div>
+<div> @ViewBag.asd </div>
 <div class="cardview">
     @using (Html.BeginForm("Login", "Index", FormMethod.Post))
     {
         <div>
-            test login<br>
+            login
+            <br>
             Id: <input type="text" name="FirstName"><br>
             Pw: <input type="password" name="pw"><br>
-            <input type="submit" value="Login">
         </div>
+        <input type="submit" value="Login">
     }
     <div> @ViewBag.testlogin </div>
     <a href="http://localhost:55400/Index/Resgister">Resgister</a>
-    </div>
+    <a href="http://localhost:55400/Index/redit">Rwpas</a>
+</div>  

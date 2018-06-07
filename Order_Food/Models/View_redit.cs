@@ -12,11 +12,10 @@ namespace Order_Food.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Food_Picture
+    public partial class View_redit
     {
-        public int Food_Picture_id { get; set; }
-        public string C_FK_Customer_id { get; set; }
-        public byte[] Food_Picture_pic { get; set; }
-        public string Food_Picture_name { get; set; }
+        public int User_id { get; set; }
+        public string User_user { get; set; }
+        public string User_pw { get; set; }
     }
 }

@@ -1,21 +1,35 @@
 ﻿
 @model Order_Food.Models.User
-
-        @using (Html.BeginForm("Resgister", "Index", FormMethod.Post))
-    {
+<style>
+    .red > .field-validation-error {
+        color: red;
+    }
+</style>
+@using (Html.BeginForm("Resgister", "Index", FormMethod.Post))
+{
+    //    @Html.ValidationSummary(true, "")
+    <div class="red">
         <p>User</p>
+        <p>@Html.ValidationMessageFor(m => m.User_user)</p>
         @Html.EditorFor(n => n.User_user)
         <p>Pw</p>
-        @Html.EditorFor(n => n.User_pw, new { htmlAttributes = new { @type = "password" } })
+        <p>@Html.ValidationMessageFor(m => m.User_pw)</p>
+        @Html.EditorFor(n => n.User_pw)
         <p>RePw</p>
-        @Html.EditorFor(n => n.User_repw, new { htmlAttributes = new { @type = "password" } })
+        @Html.ValidationMessageFor(m => m.User_repw)<br>
+        @Html.EditorFor(n => n.User_repw)
         <p>Name</p>
+        @Html.ValidationMessageFor(m => m.User_name)<br>
         @Html.EditorFor(n => n.User_name)
         <p>Last Name</p>
+        @Html.ValidationMessageFor(m => m.User_last_name)<br>
         @Html.EditorFor(n => n.User_last_name)
         <p>Phone</p>
+        @Html.ValidationMessageFor(m => m.User_phone)<br>
         @Html.EditorFor(n => n.User_phone)
 
         <input type="submit" value="Submit">
+    </div>
 }
-        <div> @ViewBag.ab </div>
+@RenderPage("~/Views/Index/UploadFile.cshtml ")
+<div> @ViewBag.ab </div>

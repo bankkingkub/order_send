@@ -42,6 +42,7 @@
     <EntitySetMapping Name="Food_Picture">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Food_Picture">
         <MappingFragment StoreEntitySet="Food_Picture">
+          <ScalarProperty Name="Food_Picture_name" ColumnName="Food_Picture_name" />
           <ScalarProperty Name="Food_Picture_pic" ColumnName="Food_Picture_pic" />
           <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
           <ScalarProperty Name="Food_Picture_id" ColumnName="Food_Picture_id" />
@@ -86,11 +87,21 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="Order_Food_dbModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="User_phone" ColumnName="User_phone" />
           <ScalarProperty Name="C_FK_Location_U_id" ColumnName="(FK)Location_U_id" />
           <ScalarProperty Name="C_FK_Address_U" ColumnName="(FK)Address_U" />
           <ScalarProperty Name="User_last_name" ColumnName="User_last_name" />
           <ScalarProperty Name="User_name" ColumnName="User_name" />
+          <ScalarProperty Name="User_pw" ColumnName="User_pw" />
+          <ScalarProperty Name="User_user" ColumnName="User_user" />
+          <ScalarProperty Name="User_id" ColumnName="User_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_redit">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.View_redit">
+        <MappingFragment StoreEntitySet="View_redit">
           <ScalarProperty Name="User_pw" ColumnName="User_pw" />
           <ScalarProperty Name="User_user" ColumnName="User_user" />
           <ScalarProperty Name="User_id" ColumnName="User_id" />

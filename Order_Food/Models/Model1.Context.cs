@@ -33,5 +33,6 @@ namespace Order_Food.Models
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<View_redit> View_redit { get; set; }
     }
 }
