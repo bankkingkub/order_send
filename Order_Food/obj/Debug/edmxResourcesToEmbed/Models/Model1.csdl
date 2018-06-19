@@ -1,29 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Order_Food_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="user_account">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="last" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="pw" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityContainer Name="Order_Food_dbEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="user_account" EntityType="Self.user_account" />
-    <EntitySet Name="Address_C" EntityType="Order_Food_dbModel.Address_C" />
-    <EntitySet Name="Customers" EntityType="Order_Food_dbModel.Customer" />
-    <EntitySet Name="Food_Picture" EntityType="Order_Food_dbModel.Food_Picture" />
-    <EntitySet Name="Location_C" EntityType="Order_Food_dbModel.Location_C" />
-    <EntitySet Name="Menus" EntityType="Order_Food_dbModel.Menu" />
-    <EntitySet Name="Reports" EntityType="Order_Food_dbModel.Report" />
-    <EntitySet Name="Users" EntityType="Order_Food_dbModel.User" />
-    <AssociationSet Name="FK_Customer_Customer" Association="Order_Food_dbModel.FK_Customer_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="Customer1" EntitySet="Customers" />
-    </AssociationSet>
-    <EntitySet Name="View_redit" EntityType="Order_Food_dbModel.View_redit" />
-  </EntityContainer>
   <EntityType Name="Address_C">
     <Key>
       <PropertyRef Name="Address_C_id" />
@@ -37,11 +13,11 @@
       <PropertyRef Name="Customer_id" />
     </Key>
     <Property Name="Customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Customer_res_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Customer_user" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Customer_pw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Customer_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Customer_last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Customer_res_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Customer_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Customer_pw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Customer_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Address_C_id_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Customer_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -49,8 +25,8 @@
     <Property Name="Customer_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Customer_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Location_C_id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Customer1" Relationship="Order_Food_dbModel.FK_Customer_Customer" FromRole="Customer" ToRole="Customer1" />
-    <NavigationProperty Name="Customer2" Relationship="Order_Food_dbModel.FK_Customer_Customer" FromRole="Customer1" ToRole="Customer" />
+    <NavigationProperty Name="Customer1" Relationship="Self.FK_Customer_Customer" FromRole="Customer" ToRole="Customer1" />
+    <NavigationProperty Name="Customer2" Relationship="Self.FK_Customer_Customer" FromRole="Customer1" ToRole="Customer" />
   </EntityType>
   <EntityType Name="Food_Picture">
     <Key>
@@ -58,7 +34,7 @@
     </Key>
     <Property Name="Food_Picture_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="C_FK_Customer_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Food_Picture_pic" Type="Binary" MaxLength="50" FixedLength="false" />
+    <Property Name="Food_Picture_pic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Food_Picture_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Location_C">
@@ -97,7 +73,7 @@
     <Key>
       <PropertyRef Name="User_id" />
     </Key>
-    <Property Name="User_id" Type="Int32" Nullable="false" />
+    <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="User_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_pw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -107,9 +83,28 @@
     <Property Name="User_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="user_account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="last" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="pw" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="View_redit">
+    <Key>
+      <PropertyRef Name="User_id" />
+      <PropertyRef Name="User_user" />
+      <PropertyRef Name="User_pw" />
+    </Key>
+    <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_pw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <Association Name="FK_Customer_Customer">
-    <End Type="Order_Food_dbModel.Customer" Role="Customer" Multiplicity="1" />
-    <End Type="Order_Food_dbModel.Customer" Role="Customer1" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Customer1" Type="Self.Customer" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Customer">
         <PropertyRef Name="Customer_id" />
@@ -119,14 +114,29 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="View_redit">
+  <EntityContainer Name="Order_Food_dbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Address_C" EntityType="Self.Address_C" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" />
+    <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" />
+    <EntitySet Name="Location_C" EntityType="Self.Location_C" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" />
+    <EntitySet Name="Report" EntityType="Self.Report" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="user_account" EntityType="Self.user_account" />
+    <EntitySet Name="View_redit" EntityType="Self.View_redit" />
+    <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Customer1" EntitySet="Customer" />
+    </AssociationSet>
+    <EntitySet Name="Add_Store" EntityType="Order_Food_dbModel.Add_Store" />
+  </EntityContainer>
+  <EntityType Name="Add_Store">
     <Key>
-      <PropertyRef Name="User_id" />
-      <PropertyRef Name="User_user" />
-      <PropertyRef Name="User_pw" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="User_user" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="User_pw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

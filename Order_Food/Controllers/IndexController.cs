@@ -42,22 +42,41 @@ namespace Order_Food.Controllers
             }
             return View();
         }
-        public ActionResult Resgister(User obj)
+        public ActionResult Resgister(User obj, Food_Picture img, HttpPostedFileBase Food_Picture_pic, string Direction)
         {
             if (obj.User_user != null)
             {
-                using (Order_Food_dbEntities db = new Order_Food_dbEntities())
+                using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
                 {
                     if (!ModelState.IsValid)
                     {
                         return View();
                     }
-                    db.Users.Add(obj);
+                    obj.Status = Direction;
+                    db.User.Add(obj);
                     db.SaveChanges();
                     ViewBag.ab = "ใส้ข้อมูลสำเร็จ";
+                    if (Food_Picture_pic != null && Food_Picture_pic.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileName(Food_Picture_pic.FileName);
+                        string path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
+                        Food_Picture_pic.SaveAs(path);
+                        img.Food_Picture_pic = fileName;
+                        img.Food_Picture_name = obj.User_user;
+                        db.Food_Picture.Add(img);
+                        db.SaveChanges();
+                        Food_Picture newrow = new Food_Picture();
+                        ViewData.Model = db.Food_Picture;
+                        ViewBag.savestage = "บันทึกเรียบร้อย";
+                    }
+                    else
+                    {
+                        img.Food_Picture_name = obj.User_user;
+                        img.Food_Picture_pic = "noimg.jpg";
+                        db.Food_Picture.Add(img);
+                        db.SaveChanges();
+                    }
                     return RedirectToAction("Login", "Index");
-
-
 
                 }
             }
@@ -76,18 +95,18 @@ namespace Order_Food.Controllers
         {
             ViewBag.dd = "เข้าหน้า login";
             Boolean checklogin;
-            using (Order_Food_dbEntities db = new Order_Food_dbEntities())
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                var loguser = db.Users.Where(s => s.User_user == FirstName && s.User_pw == pw).FirstOrDefault();
+                var loguser = db.User.Where(s => s.User_user == FirstName && s.User_pw == pw).FirstOrDefault();
                 //               var test = (from a in db.user_account
                 //                           where a.name.Equals(FirstName)
                 //                           select a).ToList();
                 if (loguser != null)
                 {
-                    string nameuser = db.Users.Where(u => u.User_user == FirstName).Select(u => u.User_name).Single();
+                    string nameuser = db.User.Where(u => u.User_user == FirstName).Select(u => u.User_name).Single();
                     checklogin = true;
                     Session["checklogin"] = checklogin;
-                    string checkstatus = db.Users.Where(u => u.User_user == FirstName).Select(u => u.Status).Single();
+                    string checkstatus = db.User.Where(u => u.User_user == FirstName).Select(u => u.Status).Single();
                     Session.Add("checkstatus", checkstatus);
                     Session.Add("namesec", nameuser);
                     return RedirectToAction("Homepage", "Index");
@@ -109,57 +128,62 @@ namespace Order_Food.Controllers
         public ActionResult redit(string user, string re_pw)
         {
             ViewBag.regis = "เข้า Editpw";
-            using (Order_Food_dbEntities db = new Order_Food_dbEntities())
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                if (user != null)
+                try
                 {
                     //ModelState.Remove("User_repw");
-
-
-                    var userModel = db.Users.Single(u => u.User_user == user);
+                    var userModel = db.User.Single(u => u.User_user == user);
                     userModel.User_pw = re_pw;
                     db.SaveChanges();
                     ViewBag.regis = "ใส่ข้อมูลเรียบร้อย";
                 }
-                else
+                catch
+                {
                     ViewBag.regis = "ไม่สามรถแก้ไขได้";
+                }
+
                 return View();
             }
         }
-        public ActionResult userpage()
+        public ActionResult UploadFile()
         {
+            //if (Food_Picture_pic != null && Food_Picture_pic.ContentLength > 0)
+            //{
+            //    using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            //    {
+            //        string fileName = Path.GetFileName(Food_Picture_pic.FileName);
+            //        string path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
 
-            return View();
-        }
-        public ActionResult adminpage()
-        {
-
-            return View();
-        }
-        public ActionResult customer()
-        {
-
-            return View();
-        }
-
-        public ActionResult UploadFile(HttpPostedFileBase file, Food_Picture obj)
-        {
-
-            if (file != null && file.ContentLength > 0)
+            //        string fileName = System.IO.Path.GetFileName(Food_Picture_pic.FileName);
+            //        string path = Server.MapPath("~/img/user_img" + fileName);
+            //        Food_Picture_pic.SaveAs(path);
+            //        obj.Food_Picture_pic = fileName;
+            //        db.Food_Picture.Add(obj);
+            //        db.SaveChanges();
+            //        ViewBag.savestage = "บันทึกเรียบร้อย";
+            //    }
+            //}
+            //else
+            //{
+            //    ViewBag.savestage = "เอะมีปัญหา";
+            //}
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                using (Order_Food_dbEntities db = new Order_Food_dbEntities())
+                try
                 {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
-                    file.SaveAs(path);
-                    ViewBag.savestage = "บันทึกเรียบร้อย";
+                    string user_check = Session["namesec"].ToString();
+                    var get_img = db.Food_Picture.Where(c => c.Food_Picture_name == user_check).Select(c => c.Food_Picture_pic).Single();
+                    ViewBag.get_img = get_img;
                 }
+                catch
+                {
+
+                    return RedirectToAction("Homepage", "Index");
+                }
+
             }
-            else
-            {
-                ViewBag.savestage = "เอะมีปัญหา";
-            }
-            return RedirectToAction("Resgister", "Index");
+            return View();
         }
     }
 }

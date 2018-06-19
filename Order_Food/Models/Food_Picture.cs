@@ -16,7 +16,7 @@ namespace Order_Food.Models
     {
         public int Food_Picture_id { get; set; }
         public string C_FK_Customer_id { get; set; }
-        public byte[] Food_Picture_pic { get; set; }
+        public string Food_Picture_pic { get; set; }
         public string Food_Picture_name { get; set; }
     }
 }

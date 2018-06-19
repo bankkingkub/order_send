@@ -29,4 +29,26 @@ namespace Order_Food.Class
         public List<HttpPostedFileBase> Files { get; set; }
         public string FirstName { get; set; }
     }
+    public static class ConvertFile
+    {
+        public static byte[] ImageToByte(HttpPostedFileBase imageFile)
+        {
+            if (imageFile == null) { return null; }
+            return (imageFile.ContentType == "image/jpeg" || imageFile.ContentType == "image/gif" || imageFile.ContentType == "image/png") ? FileToByte(imageFile) : null;
+        }
+
+        public static byte[] FileToByte(HttpPostedFileBase file)
+        {
+            byte[] data = new byte[file.ContentLength];
+            file.InputStream.Read(data, 0, file.ContentLength);
+            return data;
+        }
+
+        public partial class ProductPhoto
+        {
+            [DisplayFormat(NullDisplayText = "n/a")]
+            //[Required(ErrorMessage = "Please select image file")]
+            public HttpPostedFileBase File { get; set; }
+        }
+    } 
 }

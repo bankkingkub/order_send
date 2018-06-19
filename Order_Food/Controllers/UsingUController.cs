@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Order_Food.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,25 +14,99 @@ namespace Order_Food.Controllers
         public ActionResult Admin()
         {
             ViewBag.test = "เข้าหน้า แอดมิน";
-            string checklog ;
-            try {
+            string checklog;
+            try
+            {
                 checklog = TempData["testsend"].ToString();
                 ViewBag.checktestfromecon = checklog;
-            } catch {
+            }
+            catch
+            {
                 ViewBag.checktestfromecon = null;
             }
 
             return View();
         }
-        public ActionResult User()
-        {
-            ViewBag.test = "เข้าหน้า user";
-            return View();
-        }
         public ActionResult Customer()
         {
             ViewBag.test = "เข้าหน้า customoer";
-            return View();
+            ViewBag.folder = Session["namesec"].ToString();
+            var s = loop_img();
+            return View(s);
+        }
+
+        //[AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg)
+        {
+            if (obj.description != null)
+            {
+                if (getimg != null)
+                {
+                    //----------------------new_folder------------------------
+                    string checkid = Session["namesec"].ToString();
+                    string name_folder = Path.Combine(Server.MapPath("~/img/user_img"), checkid);
+                    //----------------------name and save img------------------------
+                    string fileName = Path.GetFileNameWithoutExtension(getimg.FileName);
+                    string extention = Path.GetExtension(getimg.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yyyyMMdd") + extention;
+                    string path = Path.Combine(Server.MapPath("~/img/user_img" + "/" + checkid), fileName);
+                    if (System.IO.Directory.Exists(name_folder))
+                    {
+                        using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+                        {
+                            getimg.SaveAs(path);
+                            obj.pic = fileName;
+                            obj.name = checkid;
+                            db.Add_Store.Add(obj);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+                        {
+                            Directory.CreateDirectory(name_folder);
+                            getimg.SaveAs(path);
+                            obj.pic = fileName;
+                            obj.name = checkid;
+                            db.Add_Store.Add(obj);
+                            db.SaveChanges();
+                        }
+
+                    }
+                    //List<string> myList = new List<string>();
+                    //Session["var"] = myList;
+                }
+            }
+            else
+            {
+                using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+                {
+                    string checkid = Session["namesec"].ToString();
+                    var img = db.Add_Store.Where(s => s.name == checkid).Select(s => s.pic).ToList();
+                    return View(img);
+                }
+            }
+            //string fileName = Path.GetFileName(Food_Picture_pic.FileName);
+            //string path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
+            //Food_Picture_pic.SaveAs(path);
+            return RedirectToAction("Homepage", "Index");
+        }
+        //[AcceptVerbs(HttpVerbs.Post)]
+        public List<Add_Store> loop_img()
+        {
+            string checkid = Session["namesec"].ToString();
+            //List<string> img;
+            List<Add_Store> model = new List<Add_Store>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                //img = db.Add_Store.Where(s => s.name == checkid).Select(s => s.pic).ToList();
+                model = db.Add_Store.Where(s => s.name == checkid).ToList();
+
+            }
+            return model;
+            //return img;
         }
     }
 }

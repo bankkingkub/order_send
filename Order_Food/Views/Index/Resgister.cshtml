@@ -1,11 +1,12 @@
 ﻿
 @model Order_Food.Models.User
+
 <style>
     .red > .field-validation-error {
         color: red;
     }
 </style>
-@using (Html.BeginForm("Resgister", "Index", FormMethod.Post))
+@using (Html.BeginForm("Resgister", "Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     //    @Html.ValidationSummary(true, "")
     <div class="red">
@@ -28,8 +29,23 @@
         @Html.ValidationMessageFor(m => m.User_phone)<br>
         @Html.EditorFor(n => n.User_phone)
 
+
+        @{
+            var listItems = new List<SelectListItem>
+            {
+                new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
+                new SelectListItem { Text = "ร้านค้า", Value = "customer" }
+            };
+        }
+
+        @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"))
+
+
+        <br><input type="file" name="Food_Picture_pic"><br>
+
         <input type="submit" value="Submit">
     </div>
 }
-@RenderPage("~/Views/Index/UploadFile.cshtml ")
+@*@RenderPage("~/Views/Index/UploadFile.cshtml")*@
 <div> @ViewBag.ab </div>
+

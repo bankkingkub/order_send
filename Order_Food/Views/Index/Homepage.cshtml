@@ -1,9 +1,10 @@
 ﻿@ViewBag.Checlogin
 @ViewBag.usename
+
+@{
+    @model IList<Order_Food.Models.Food_Picture>
+}
 <style>
-    div {
-        border: 1px solid;
-    }
 </style>
 @if (ViewBag.Checlogin == "ยังไม่เข้าสู่ระบบ")
 {
@@ -27,10 +28,13 @@
     {
         @RenderPage("~/Views/UsingU/User.cshtml ")
         <div>เข้าหน้า user</div>
+        @ViewBag.testez
+
     }
     else if (ViewBag.Checkpage == "customer")
     {
         <div>เข้าหน้า customer</div>
-        @RenderPage("~/Views/UsingU/Customer.cshtml ")
+        @RenderPage("~/Views/UsingU/Customer.cshtml")
+        @RenderPage("~/Views/UsingU/Add_store.cshtml")
     }
 }

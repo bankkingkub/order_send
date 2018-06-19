@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Order_Food_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Add_Store">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="pic" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Address_C">
     <Key>
       <PropertyRef Name="Address_C_id" />
@@ -39,7 +48,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     </Key>
     <Property Name="Food_Picture_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="(FK)Customer_id" Type="varchar" MaxLength="50" />
-    <Property Name="Food_Picture_pic" Type="varchar" MaxLength="50" />
+    <Property Name="Food_Picture_pic" Type="varchar" MaxLength="100" />
     <Property Name="Food_Picture_name" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Location_C">
@@ -128,6 +137,7 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_redit' does not have a prim
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Order_Food_dbModelStoreContainer">
+    <EntitySet Name="Add_Store" EntityType="Self.Add_Store" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Address_C" EntityType="Self.Address_C" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />

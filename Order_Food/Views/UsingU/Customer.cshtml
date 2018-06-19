@@ -1,56 +1,23 @@
-﻿@ViewBag.test
-@if (Session["checkstatus"] != null)
-{
-    <div> เข้า section</div>
+﻿@{
+    @model List<Order_Food.Models.Add_Store>
+
+    if (Session["checkstatus"] == null)
+    {
+        <p>เอะมีปัญหา</p>
+    }
+    else
+    {
+        if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <img src="~/img/user_img/@ViewBag.folder/@item.pic" style="height: 120px;">
+                <p><@item.description</p>
+            }
+        }
+        else
+        {
+            <p>ไม่มึรูป</p>
+        }
+    }
 }
-
-
-<div>
-    <h4>ร้านค้าที่ใกล้เคียง</h4>
-</div>
-<div>
-<div style="padding:15px;">
-    <div class="row">
-
-
-        <div class="w3-card-4 col-lg-3" style="max-width:250px;">
-            <header class="w3-container w3-blue">
-                <h1>Header</h1>
-            </header>
-
-            <div class="w3-container">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-            </div>
-
-            <footer class="w3-container w3-blue">
-                <h5>Footer</h5>
-            </footer>
-        </div>
-
-        <div class="w3-card-4 col-lg-3" style="max-width:250px;">
-            <header class="w3-container w3-blue">
-                <h1>Header</h1>
-            </header>
-
-            <div class="w3-container">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-            </div>
-
-            <footer class="w3-container w3-blue">
-                <h5>Footer</h5>
-            </footer>
-        </div>
-
-
-
-    </div>
-</div>
-</div>

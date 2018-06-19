@@ -1,0 +1,13 @@
+﻿@{
+    @model Order_Food.Models.Add_Store
+
+    using (Html.BeginForm("update_customer", "UsingU", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <p>เพิ่มร้านค้า</p>
+        @Html.ValidationMessageFor(s => s.description)
+            @Html.EditorFor(s => s.description)
+        <br><input type="file" name="getimg"><br>
+        <input type="submit" value="Submit">
+
+    }
+}

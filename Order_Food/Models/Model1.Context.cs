@@ -13,10 +13,10 @@ namespace Order_Food.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Order_Food_dbEntities : DbContext
+    public partial class Order_Food_dbEntities1 : DbContext
     {
-        public Order_Food_dbEntities()
-            : base("name=Order_Food_dbEntities")
+        public Order_Food_dbEntities1()
+            : base("name=Order_Food_dbEntities1")
         {
         }
     
@@ -25,14 +25,15 @@ namespace Order_Food.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<user_account> user_account { get; set; }
         public virtual DbSet<Address_C> Address_C { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Food_Picture> Food_Picture { get; set; }
         public virtual DbSet<Location_C> Location_C { get; set; }
-        public virtual DbSet<Menu> Menus { get; set; }
-        public virtual DbSet<Report> Reports { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<Report> Report { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<user_account> user_account { get; set; }
         public virtual DbSet<View_redit> View_redit { get; set; }
+        public virtual DbSet<Add_Store> Add_Store { get; set; }
     }
 }

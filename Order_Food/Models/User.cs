@@ -26,5 +26,6 @@ namespace Order_Food.Models
         public Nullable<int> C_FK_Address_U { get; set; }
         public Nullable<int> C_FK_Location_U_id { get; set; }
         public string User_phone { get; set; }
+        public string Status { get; set; }
     }
 }
