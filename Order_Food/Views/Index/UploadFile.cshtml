@@ -1,10 +1,22 @@
-﻿@model Order_Food.Models.Food_Picture
+﻿@{
+    Layout = null;
+
+}
+
+@model Order_Food.Models.Food_Picture
 
 @*@using (Html.BeginForm("UploadFile", "Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="Food_Picture_pic">
+        @Html.TextBoxFor(a => a.Food_Picture_pic, new { type = "file" })
+        <input type="submit" value="OK" />
+    }
+    @ViewBag.savestage*@
+@if (@ViewBag.get_img != null)
 {
-    <input type="file" name="Food_Picture_pic">
-    @Html.TextBoxFor(a => a.Food_Picture_pic, new { type = "file" })
-    <input type="submit" value="OK" />
+    <img src="~/img/user_img/@ViewBag.get_img" style="height: 38px;border-radius: 50%;width:auto;">
 }
-@ViewBag.savestage*@
-<img src="~/img/user_img/@ViewBag.get_img" style="height: 120px;">
+else
+{
+}
+

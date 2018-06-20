@@ -287,6 +287,9 @@
     <Content Include="Views\UsingU\Customer.cshtml" />
     <Content Include="Views\Index\UploadFile.cshtml" />
     <Content Include="Views\UsingU\Add_store.cshtml" />
+    <Content Include="Views\Index\Login_logout.cshtml" />
+    <Content Include="Views\UsingU\Show_food.cshtml" />
+    <Content Include="Views\UsingU\Showsaveimg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

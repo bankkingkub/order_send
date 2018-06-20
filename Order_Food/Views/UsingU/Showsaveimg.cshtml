@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+@model List<Order_Food.Models.Add_Store>
+@if (Session["checkstatus"] == null)
+{
+    <p>เอะมีปัญหา</p>
+}
+else
+{
+    if (Model != null)
+    {
+        <div class="row">
+            @{
+                int i = 4;
+            }
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 ">
+                    <div class="sh_border" style="height:150px;width:auto">
+                        <img src="~/img/user_img/@ViewBag.folder/@item.pic" style="height: 120px;">
+                    </div>
+                    <div>
+                        @item.description
+                    </div>
+
+                </div>
+
+            }
+        </div>
+    }
+    else
+    {
+        <p>ไม่มึรูป</p>
+    }
+}
+

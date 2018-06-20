@@ -23,22 +23,20 @@ namespace Order_Food.Controllers
                 ViewBag.usename = Session["namesec"];
                 ViewBag.Checkpage = Session["checkstatus"];
 
-                TempData["testsend"] = "true";
-                RedirectToAction("Admin");
-
-                return RedirectToAction("Admin", "UsingU");
             }
             else if (Session["checkstatus"].Equals("user"))
             {
                 ViewBag.Checlogin = "ยินดีต้อนรับ user เข้าสู่ระบบ";
                 ViewBag.usename = Session["namesec"];
                 ViewBag.Checkpage = Session["checkstatus"];
+
             }
             else if (Session["checkstatus"].Equals("customer"))
             {
                 ViewBag.Checlogin = "ยินดีต้อนรับ customer เข้าสู่ระบบ";
                 ViewBag.usename = Session["namesec"];
                 ViewBag.Checkpage = Session["checkstatus"];
+
             }
             return View();
         }
@@ -175,15 +173,27 @@ namespace Order_Food.Controllers
                     string user_check = Session["namesec"].ToString();
                     var get_img = db.Food_Picture.Where(c => c.Food_Picture_name == user_check).Select(c => c.Food_Picture_pic).Single();
                     ViewBag.get_img = get_img;
+
                 }
                 catch
                 {
-
-                    return RedirectToAction("Homepage", "Index");
                 }
 
             }
             return View();
+        }
+        public ActionResult Login_logout()
+        {
+            if (Session["checklogin"] == null)
+            {
+                ViewBag.logcheck = 1;
+                return View();
+            }
+            else { 
+                ViewBag.logcheck = null;
+                return View();
+            }
+
         }
     }
 }

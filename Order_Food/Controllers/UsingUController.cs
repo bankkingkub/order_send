@@ -11,6 +11,9 @@ namespace Order_Food.Controllers
     public class UsingUController : Controller
     {
         // GET: UsingU
+        //อิอิ นี่คือสารท้ารบจากกลุ่มคนผู้เร่าร้อนจนมอดไหม้
+        //หากเจ้าแน่จิงจงตามข้ามา 
+        //หึหึหึหึหึหึหึ
         public ActionResult Admin()
         {
             ViewBag.test = "เข้าหน้า แอดมิน";
@@ -30,9 +33,7 @@ namespace Order_Food.Controllers
         public ActionResult Customer()
         {
             ViewBag.test = "เข้าหน้า customoer";
-            ViewBag.folder = Session["namesec"].ToString();
-            var s = loop_img();
-            return View(s);
+            return View();
         }
 
         //[AcceptVerbs(HttpVerbs.Post)]
@@ -58,8 +59,8 @@ namespace Order_Food.Controllers
                             getimg.SaveAs(path);
                             obj.pic = fileName;
                             obj.name = checkid;
-                            db.Add_Store.Add(obj);
-                            db.SaveChanges();
+                            //db.Add_Store.Add(obj);
+                            //db.SaveChanges();
                         }
                     }
                     else
@@ -101,12 +102,32 @@ namespace Order_Food.Controllers
             List<Add_Store> model = new List<Add_Store>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                //img = db.Add_Store.Where(s => s.name == checkid).Select(s => s.pic).ToList();
                 model = db.Add_Store.Where(s => s.name == checkid).ToList();
 
             }
             return model;
-            //return img;
         }
+        public ActionResult Show_food()
+        {
+            List<Food_Picture> show_food = new List<Food_Picture>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                show_food = db.Food_Picture.ToList();
+            }
+            var a = show_food;
+            return View(a);
+        }
+        public ActionResult showsaveimg()
+        {
+            ViewBag.folder = Session["namesec"].ToString();
+            var s = loop_img();
+            return View(s);
+        }
+        public ActionResult presaveshow()
+        {
+
+            return View();
+        }
+
     }
 }

@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+@if (ViewBag.logcheck == null)
+{
+    using (Html.BeginForm("Logout", "Index"))
+    {
+        <button class="w3-button w3-dark-grey">Logout</button>
+    }
+
+}
+else
+{
+    using (Html.BeginForm("Login", "Index"))
+    {
+        <button class="w3-button w3-dark-grey">Login</button>
+    }
+}

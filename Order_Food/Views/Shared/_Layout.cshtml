@@ -59,7 +59,11 @@
 
         .get_img {
             background-color: #808080;
-            height: 350px;
+            height: 450px;
+            background-image: url(../../img/user_img/faikak.png);
+            filter: brightness(30%);
+            position: absolute;
+            width: 100%;
         }
 
         .bg_w {
@@ -72,98 +76,101 @@
 
         .sh_border {
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 2px;
         }
 
         .icom_menu {
             padding: 21px 0;
             text-align: center;
         }
+
+        .bg_fl > .magin > div {
+            position: relative
+        }
     </style>
+
 </head>
 <body>
     <div>
         <div class="navbar">
             <div class="magin">
-                <span>
-                    @using (Html.BeginForm("Login", "Index"))
-                    {
-                        <button class="w3-button w3-dark-grey">Login</button>
-                    }
-
-                    @using (Html.BeginForm("Logout", "Index"))
-                    {
-                        <button class="w3-button w3-dark-grey">Logout</button>
-                    }
-                </span>
+                <div class="row">
+                    <div class="mr-auto">
+                        @Html.Action("Login_logout", "Index")
+                    </div>
+                    @Html.Action("UploadFile", "Index")
+                </div>
             </div>
         </div>
 
         @*----------------------------end_nev-----------------------------*@
 
         <div class="bg_fl">
-
             <div class="get_img">
-
-
-                <div class="magin">
-                    <div style="min-height:300px;">
-                        <div style="color:white;padding:80px 0px;font-size:30px;text-align:center">
-                            ค้นหาร้านอาหารที่อยู่ในพื่นที่ใกล้เคียงของคุณ
-                        </div>
-                    </div>
-
-                    <div class="bg_w sh_border_contetnt" style="border-radius: 4px;">
-                        <div class="row">
-                            <div class="col-md-3 icom_menu">
-                                <div>
-                                    <i class="fas fa-utensils fa-5x"></i>
-                                </div>
-                                <div>
-                                    asdasdasd
-                                </div>
-                            </div>
-                            <div class="col-md-3 icom_menu">
-                                <div>
-                                    <i class="fas fa-utensils fa-5x"></i>
-                                </div>
-                                <div>
-                                    asdasdasd
-                                </div>
-                            </div>
-                            <div class="col-md-3 icom_menu">
-                                <div>
-                                    <i class="fas fa-utensils fa-5x"></i>
-                                </div>
-                                <div>
-                                    asdasdasd
-                                </div>
-                            </div>
-                            <div class="col-md-3 icom_menu">
-                                <div>
-                                    <i class="fas fa-utensils fa-5x"></i>
-                                </div>
-                                <div>
-                                    asdasdasd
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="height:15px;">
-                    </div>
-                    <div class="bg_w rd sh_border" style="padding:15px;border-radius: 2px;">
-                        @RenderBody()
+            </div>
+            <div class="magin">
+                <div style="min-height:400px;">
+                    <div style="color:white;padding:80px 0px;font-size:30px;text-align:center">
+                        ค้นหาร้านอาหารที่อยู่ในพื่นที่ใกล้เคียงของคุณ
                     </div>
                 </div>
-            </div>
 
+                <div class="bg_w sh_border_contetnt" style="border-radius: 4px;">
+                    <div class="row">
+                        <div class="col-md-3 icom_menu">
+                            <div>
+                                <i class="fas fa-utensils fa-5x"></i>
+                            </div>
+                            <div>
+                                asdasdasd
+                            </div>
+                        </div>
+                        <div class="col-md-3 icom_menu">
+                            <div>
+                                <i class="fas fa-utensils fa-5x"></i>
+                            </div>
+                            <div>
+                                asdasdasd
+                            </div>
+                        </div>
+                        <div class="col-md-3 icom_menu">
+                            <div>
+                                <i class="fas fa-utensils fa-5x"></i>
+                            </div>
+                            <div>
+                                asdasdasd
+                            </div>
+                        </div>
+                        <div class="col-md-3 icom_menu">
+                            <div>
+                                <i class="fas fa-utensils fa-5x"></i>
+                            </div>
+                            <div>
+                                asdasdasd
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:15px;">
+                </div>
+                <div class="bg_w rd sh_border">
+                    @RenderBody()
+                </div>
+                <div style="height:15px;">
+
+                </div>
+
+
+            </div>
         </div>
 
     </div>
+
+
 </body>
 </html>
 <script>
-    function testfu() {
-        swal('test any way')
-    }
+
 </script>
 

@@ -1,4 +1,4 @@
-﻿
+﻿ 
 @model Order_Food.Models.User
 
 <style>
@@ -8,7 +8,7 @@
 </style>
 @using (Html.BeginForm("Resgister", "Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    //    @Html.ValidationSummary(true, "")
+    @*@Html.ValidationSummary(true, "")*@
     <div class="red">
         <p>User</p>
         <p>@Html.ValidationMessageFor(m => m.User_user)</p>

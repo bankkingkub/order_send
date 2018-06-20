@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+@model List<Order_Food.Models.Food_Picture>
+<div style="height:45px;padding:8px;">
+    <h4>ร้านค้าที่น่าสนใจ</h4>
+</div>
+<div style="padding-top:15px;">
+
+    <div class="row">
+        @{
+            if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    <div class="col-md-3 icom_menu">
+                        <div>
+                            <img src="~/img/user_img/@item.Food_Picture_pic" style="height:110px;width:auto;">
+                        </div>
+                        <div>
+                            @item.Food_Picture_name;
+                        </div>
+                        <div>
+                            ข้อความใต่รูป
+                        </div>
+                    </div>
+                }
+            }
+
+
+        }
+
+    </div>
+    <div style="text-align:right;padding-top:5px;">
+        <a href="">ข้อมูลเพิ่มเติม</a>
+    </div>
+
+</div>

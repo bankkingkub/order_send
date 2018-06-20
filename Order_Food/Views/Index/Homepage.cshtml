@@ -4,8 +4,6 @@
 @{
     @model IList<Order_Food.Models.Food_Picture>
 }
-<style>
-</style>
 @if (ViewBag.Checlogin == "ยังไม่เข้าสู่ระบบ")
 {
 
@@ -13,28 +11,31 @@
 
 }
 
-@if (ViewBag.Checkpage != null)
+@if (ViewBag.Checkpage == "admin")
 {
-    using (Html.BeginForm("Logout", "Index", FormMethod.Post))
-    {
-        <input type="submit" value="Logout">
-    }
-    if (ViewBag.Checkpage == "admin")
-    {
-        @RenderPage("~/Views/UsingU/Admin.cshtml ")
-        <div>เข้าหน้า admin</div>
-    }
-    else if (ViewBag.Checkpage == "user")
-    {
-        @RenderPage("~/Views/UsingU/User.cshtml ")
-        <div>เข้าหน้า user</div>
-        @ViewBag.testez
+    <div>เข้าหน้า admin</div>
+    @RenderPage("~/Views/UsingU/Admin.cshtml ")
 
-    }
-    else if (ViewBag.Checkpage == "customer")
-    {
-        <div>เข้าหน้า customer</div>
-        @RenderPage("~/Views/UsingU/Customer.cshtml")
-        @RenderPage("~/Views/UsingU/Add_store.cshtml")
-    }
 }
+else if (ViewBag.Checkpage == "user")
+{
+    <div>เข้าหน้า user</div>
+    @RenderPage("~/Views/UsingU/User.cshtml ")
+    <div style="height:15px;">
+    </div>
+    @Html.Action("Show_food", "UsingU")
+
+}
+else if (ViewBag.Checkpage == "customer")
+{
+
+    @Html.Action("Customer", "UsingU")
+    <div>เข้าหน้า customer</div>
+    @RenderPage("~/Views/UsingU/Add_store.cshtml")
+    <div style="height:15px;">
+    </div>
+    @Html.Action("Showsaveimg", "UsingU")
+
+}
+
+
