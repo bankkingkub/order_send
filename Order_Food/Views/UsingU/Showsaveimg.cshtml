@@ -11,19 +11,17 @@ else
     if (Model != null)
     {
         <div class="row">
-            @{
-                int i = 4;
-            }
+
             @foreach (var item in Model)
             {
-                <div class="col-md-3 ">
-                    <div class="sh_border" style="height:150px;width:auto">
-                        <img src="~/img/user_img/@ViewBag.folder/@item.pic" style="height: 120px;">
+
+                <div class="col-md-3" style="padding:0px;">
+                    <div class="img_loopshow sh_border">
+                        <img src="~/img/user_img/@ViewBag.folder/@item.pic">
                     </div>
-                    <div>
+                    <div style="text-align:center;padding-top:5px;">
                         @item.description
                     </div>
-
                 </div>
 
             }

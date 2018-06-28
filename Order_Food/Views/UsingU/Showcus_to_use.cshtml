@@ -1,0 +1,20 @@
+﻿@model List<Order_Food.Models.Add_Store>
+
+@for (int a = 1; a < 4; a++)
+{
+
+
+    <div class="col-md-3 icom_menu">
+        <div>
+            <img src="~/img/user_img/@Model[a].name/@Model[a].pic" style="height:110px;width:auto;">
+        </div>
+        <div>
+            @Model[a].description;
+        </div>
+        <div>
+            ข้อความใต่รูป
+        </div>
+
+    </div>
+
+}

@@ -3,7 +3,7 @@
 }
 @model List<Order_Food.Models.Food_Picture>
 <div style="height:45px;padding:8px;">
-    <h4>ร้านค้าที่น่าสนใจ</h4>
+    <h4>ร้านค้าที่เพิ่มล่าสุด</h4>
 </div>
 <div style="padding-top:15px;">
 
@@ -12,19 +12,42 @@
             if (Model != null)
             {
 
-                foreach (var item in Model)
+                for (int a = ViewBag.check - 4; a < ViewBag.check; a++)
                 {
+                    @*foreach (var item in Model)
+                        {
+                            <div class="col-md-3 icom_menu">
+                                <div>
+                                    <img src="~/img/user_img/@item.Food_Picture_pic" style="height:110px;width:auto;">
+                                </div>
+                                <div>
+                                    @item.Food_Picture_name;
+                                </div>
+                                <div>
+                                    ข้อความใต่รูป
+                                </div>
+                            </div>
+                        }*@
                     <div class="col-md-3 icom_menu">
+
                         <div>
-                            <img src="~/img/user_img/@item.Food_Picture_pic" style="height:110px;width:auto;">
+                            <img src="~/img/user_img/@Model[a].Food_Picture_pic" style="height:110px;width:auto;">
                         </div>
                         <div>
-                            @item.Food_Picture_name;
+                            @Model[a].Food_Picture_name
                         </div>
                         <div>
                             ข้อความใต่รูป
                         </div>
                     </div>
+                    @*using (Html.BeginForm("Showcus_to_use", "UsingU", FormMethod.Post))
+                    {
+                        string getname = @Model[a].Food_Picture_name;
+                        @Html.Value(getname, "getasd");
+
+                        <button> ใส่ชั่วคราว </button>
+
+                    }*@
                 }
             }
 

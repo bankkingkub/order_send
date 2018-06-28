@@ -59,8 +59,8 @@ namespace Order_Food.Controllers
                             getimg.SaveAs(path);
                             obj.pic = fileName;
                             obj.name = checkid;
-                            //db.Add_Store.Add(obj);
-                            //db.SaveChanges();
+                            db.Add_Store.Add(obj);
+                            db.SaveChanges();
                         }
                     }
                     else
@@ -113,6 +113,7 @@ namespace Order_Food.Controllers
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 show_food = db.Food_Picture.ToList();
+                ViewBag.check = show_food.Count;
             }
             var a = show_food;
             return View(a);
@@ -127,6 +128,19 @@ namespace Order_Food.Controllers
         {
 
             return View();
+        }
+        [HttpPost]
+        public ActionResult Showcus_to_use(string getasd)
+        {
+            List<Add_Store> show_customer = new List<Add_Store>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+
+                show_customer = db.Add_Store.ToList();
+            }
+            var a = show_customer;
+            ViewBag.test = getasd;
+            return View(a);
         }
 
     }
