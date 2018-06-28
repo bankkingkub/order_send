@@ -107,6 +107,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="(FK)Location_U_id" Type="int" />
           <Property Name="User_phone" Type="varchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Province" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="user_account">
           <Key>
@@ -249,6 +250,7 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_redit' does not have a prim
           <Property Name="C_FK_Location_U_id" Type="Int32" />
           <Property Name="User_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="user_account">
           <Key>
@@ -388,6 +390,7 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_redit' does not have a prim
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="Order_Food_dbModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Province" ColumnName="Province" />
                 <ScalarProperty Name="User_id" ColumnName="User_id" />
                 <ScalarProperty Name="User_user" ColumnName="User_user" />
                 <ScalarProperty Name="User_pw" ColumnName="User_pw" />

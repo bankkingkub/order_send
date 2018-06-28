@@ -102,6 +102,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
     <Property Name="(FK)Location_U_id" Type="int" />
     <Property Name="User_phone" Type="varchar" MaxLength="50" />
     <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Province" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="user_account">
     <Key>

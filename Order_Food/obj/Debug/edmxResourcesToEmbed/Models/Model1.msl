@@ -77,6 +77,7 @@
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="Order_Food_dbModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Province" ColumnName="Province" />
           <ScalarProperty Name="User_id" ColumnName="User_id" />
           <ScalarProperty Name="User_user" ColumnName="User_user" />
           <ScalarProperty Name="User_pw" ColumnName="User_pw" />

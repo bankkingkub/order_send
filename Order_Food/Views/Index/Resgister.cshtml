@@ -1,4 +1,4 @@
-﻿ 
+﻿
 @model Order_Food.Models.User
 
 <style>
@@ -32,15 +32,123 @@
 
         @{
             var listItems = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
-                new SelectListItem { Text = "ร้านค้า", Value = "customer" }
-            };
+{
+new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
+new SelectListItem { Text = "ร้านค้า", Value = "customer" }
+};
         }
 
         @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"))
 
 
+
+        @{
+            var list_province = new List<SelectListItem>
+{
+new SelectListItem { Text = "กรุณาเลือกจังหวัด", Value = ""},
+new SelectListItem { Text = "ภาคกลาง", Value = ""},
+new SelectListItem { Text = "จังหวัด กรุงเทพ", Value = "กรุงเทพ"},
+new SelectListItem { Text = "จังหวัด กำแพงเพชร", Value = "กำแพงเพชร"},
+new SelectListItem { Text = "จังหวัด ชัยนาท", Value = "ชัยนาท"},
+new SelectListItem { Text = "จังหวัด นครนายก", Value = "นครนายก"},
+new SelectListItem { Text = "จังหวัด นครปฐม", Value = "นครปฐม"},
+new SelectListItem { Text = "จังหวัด นครสวรรค์", Value = "นครสวรรค์"},
+new SelectListItem { Text = "จังหวัด นนทบุรี", Value = "นนทบุรี"},
+new SelectListItem { Text = "จังหวัด ปทุมธานี", Value = "ปทุมธานี"},
+new SelectListItem { Text = "จังหวัด พระนครศรีอยุธยา", Value = "พระนครศรีอยุธยา"},
+new SelectListItem { Text = "จังหวัด พิจิตร", Value = "พิจิตร"},
+new SelectListItem { Text = "จังหวัด พิษณุโลก", Value = "พิษณุโลก"},
+new SelectListItem { Text = "จังหวัด เพชรบูรณ์", Value = "เพชรบูรณ์"},
+new SelectListItem { Text = "จังหวัด ลพบุรี", Value = "ลพบุรี"},
+new SelectListItem { Text = "จังหวัด สมุทรปราการ", Value = "สมุทรปราการ"},
+new SelectListItem { Text = "จังหวัด สมุทรสงคราม", Value = "สมุทรสงคราม"},
+new SelectListItem { Text = "จังหวัด สมุทรสาคร", Value = "สมุทรสาคร"},
+new SelectListItem { Text = "จังหวัด สิงห์บุรี", Value = "สิงห์บุรี"},
+new SelectListItem { Text = "จังหวัด สุโขทัย", Value = "สุโขทัย"},
+new SelectListItem { Text = "จังหวัด สุพรรณบุรี", Value = "สุพรรณบุรี"},
+new SelectListItem { Text = "จังหวัด สระบุรี", Value = "สระบุรี"},
+new SelectListItem { Text = "จังหวัด อ่างทอง", Value = "อ่างทอง"},
+new SelectListItem { Text = "จังหวัด อุทัยธานี", Value = "อุทัยธานี"},
+
+new SelectListItem { Text = "ภาคเหนือ", Value = ""},
+new SelectListItem { Text = "จังหวัด เชียงราย", Value = "เชียงราย"},
+new SelectListItem { Text = "จังหวัด เชียงใหม่", Value = "เชียงใหม่"},
+new SelectListItem { Text = "จังหวัด น่าน", Value = "น่าน"},
+new SelectListItem { Text = "จังหวัด พะเยา", Value = "พะเยา"},
+new SelectListItem { Text = "จังหวัด แพร่", Value = "แพร่"},
+new SelectListItem { Text = "จังหวัด แม่ฮ่องสอน", Value = "แม่ฮ่องสอน"},
+new SelectListItem { Text = "จังหวัด ลำปาง", Value = "ลำปาง"},
+new SelectListItem { Text = "จังหวัด ลำพูน", Value = "ลำพูน"},
+new SelectListItem { Text = "จังหวัด อุตรดิตถ์", Value = "อุตรดิตถ์"},
+
+
+new SelectListItem { Text = "ภาคตะวันออกเฉียงเหนือ", Value = ""},
+new SelectListItem { Text = "จังหวัด กาฬสินธุ์", Value = "กาฬสินธุ์"},
+new SelectListItem { Text = "จังหวัด ขอนแก่น", Value = "ขอนแก่น"},
+new SelectListItem { Text = "จังหวัด ชัยภูมิ", Value = "ชัยภูมิ"},
+new SelectListItem { Text = "จังหวัด นครพนม", Value = "นครพนม"},
+new SelectListItem { Text = "จังหวัด นครราชสีมา", Value = "นครราชสีมา"},
+new SelectListItem { Text = "จังหวัด บึงกาฬ", Value = "บึงกาฬ"},
+new SelectListItem { Text = "จังหวัด บุรีรัมย์", Value = "บุรีรัมย์"},
+new SelectListItem { Text = "จังหวัด มหาสารคาม", Value = "มหาสารคาม"},
+new SelectListItem { Text = "จังหวัด มุกดาหาร", Value = "มุกดาหาร"},
+new SelectListItem { Text = "จังหวัด ยโสธร", Value = "ยโสธร"},
+new SelectListItem { Text = "จังหวัด ร้อยเอ็ด", Value = "ร้อยเอ็ด"},
+new SelectListItem { Text = "จังหวัด เลย", Value = "เลย"},
+new SelectListItem { Text = "จังหวัด สกลนคร", Value = "สกลนคร"},
+new SelectListItem { Text = "จังหวัด สุรินทร์", Value = "สุรินทร์"},
+new SelectListItem { Text = "จังหวัด ศรีสะเกษ", Value = "ศรีสะเกษ"},
+new SelectListItem { Text = "จังหวัด หนองคาย", Value = "หนองคาย"},
+new SelectListItem { Text = "จังหวัด หนองบัวลำภู", Value = "หนองบัวลำภู"},
+new SelectListItem { Text = "จังหวัด อุดรธานี", Value = "อุดรธานี"},
+new SelectListItem { Text = "จังหวัด อุบลราชธานี", Value = "อุบลราชธานี"},
+new SelectListItem { Text = "จังหวัด อำนาจเจริญ", Value = "อำนาจเจริญ"},
+
+new SelectListItem { Text = "ภาคตะวันออก", Value = ""},
+new SelectListItem { Text = "จังหวัด จันทบุรี", Value = "จันทบุรี"},
+new SelectListItem { Text = "จังหวัด ฉะเชิงเทรา", Value = "ฉะเชิงเทรา"},
+new SelectListItem { Text = "จังหวัด ชลบุรี", Value = "ชลบุรี"},
+new SelectListItem { Text = "จังหวัด ตราด", Value = "ตราด"},
+new SelectListItem { Text = "จังหวัด ปราจีนบุรี", Value = "ปราจีนบุรี"},
+new SelectListItem { Text = "จังหวัด ระยอง", Value = "ระยอง"},
+new SelectListItem { Text = "จังหวัด สระแก้ว", Value = "สระแก้ว"},
+
+
+new SelectListItem { Text = "ภาคตะวันตก", Value = ""},
+new SelectListItem { Text = "จังหวัด กาญจนบุรี", Value = "กาญจนบุรี"},
+new SelectListItem { Text = "จังหวัด ตาก", Value = "ตาก"},
+new SelectListItem { Text = "จังหวัด ประจวบคีรีขันธ์", Value = "ประจวบคีรีขันธ์"},
+new SelectListItem { Text = "จังหวัด เพชรบุรี", Value = "เพชรบุรี"},
+new SelectListItem { Text = "จังหวัด ราชบุรี", Value = "ราชบุรี"},
+
+
+new SelectListItem { Text = "ภาคใต้", Value = ""},
+new SelectListItem { Text = "จังหวัด กระบี่", Value = "กระบี่"},
+new SelectListItem { Text = "จังหวัด ชุมพร", Value = "ชุมพร"},
+new SelectListItem { Text = "จังหวัด ตรัง", Value = "ตรัง"},
+new SelectListItem { Text = "จังหวัด นครศรีธรรมราช", Value = "นครศรีธรรมราช"},
+new SelectListItem { Text = "จังหวัด นราธิวาส", Value = "นราธิวาส"},
+new SelectListItem { Text = "จังหวัด ปัตตานี", Value = "ปัตตานี"},
+new SelectListItem { Text = "จังหวัด พังงา", Value = "พังงา"},
+new SelectListItem { Text = "จังหวัด พัทลุง", Value = "พัทลุง"},
+new SelectListItem { Text = "จังหวัด ภูเก็ต", Value = "ภูเก็ต"},
+new SelectListItem { Text = "จังหวัด ระนอง", Value = "ระนอง"},
+new SelectListItem { Text = "จังหวัด สตูล", Value = "สตูล"},
+new SelectListItem { Text = "จังหวัด สงขลา", Value = "สงขลา"},
+new SelectListItem { Text = "จังหวัด สุราษฎร์ธานี", Value = "สุราษฎร์ธานี"},
+new SelectListItem { Text = "จังหวัด ยะลา", Value = "ยะลา"}
+};
+        }
+        @Html.DropDownList("province", new SelectList(list_province, "Value", "Text"), new { @class = "form-group" })
+
+
+        <div class="form-group">
+            <!-- แสดงตัวเลือก จังหวัด -->
+            <select class="form-control select2-single" id="province">
+                <option id="province_list"> -- Select --</option>
+
+            </select>
+        </div>
         <br><input type="file" name="Food_Picture_pic"><br>
 
         <input type="submit" value="Submit">

@@ -82,6 +82,7 @@
     <Property Name="C_FK_Location_U_id" Type="Int32" />
     <Property Name="User_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="user_account">
     <Key>
