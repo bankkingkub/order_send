@@ -6,14 +6,37 @@
 {
     using (Html.BeginForm("Logout", "Index"))
     {
-        <button class="w3-button w3-dark-grey">Logout</button>
+        <button class="w3-button w3-dark-grey">ออกจากระบบ</button>
     }
 
 }
 else
 {
     using (Html.BeginForm("Login", "Index"))
-    {
-        <button class="w3-button w3-dark-grey">Login</button>
-    }
+        {
+            <button class="w3-button w3-dark-grey">เข้าสู่ระบบ</button>
+        }
+    @*<button class="w3-button w3-dark-grey " id="contac">Login</button>*@
 }
+<script>
+    $(document).ready(function () {
+        $("#contac").click(function () {
+
+            swal({
+                title: 'What is your name?',
+                input: 'text',
+                inputPlaceholder: 'Enter your name or nickname',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    return !value && 'You need to write something!'
+                }
+            })
+
+            if (name) {
+                swal({ type: 'success', title: 'Hi, ' + name })
+            }
+
+        })
+
+    });
+</script>

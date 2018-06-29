@@ -1,5 +1,4 @@
-﻿@ViewBag.Checlogin
-@ViewBag.usename
+﻿@ViewBag.usename
 
 @{
     @model IList<Order_Food.Models.Food_Picture>
@@ -30,11 +29,10 @@ else if (ViewBag.Checkpage == "customer")
 {
 
     @Html.Action("Customer", "UsingU")
-    <div>เข้าหน้า customer</div>
-    @RenderPage("~/Views/UsingU/Add_store.cshtml")
+
+    @RenderPage("~/Views/UsingU/Homecustomer.cshtml")
     <div style="height:15px;">
     </div>
-    @Html.Action("Showsaveimg", "UsingU")
 
 }
 

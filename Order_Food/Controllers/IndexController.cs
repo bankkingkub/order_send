@@ -40,7 +40,7 @@ namespace Order_Food.Controllers
             }
             return View();
         }
-        public ActionResult Resgister(User obj, Food_Picture img, HttpPostedFileBase Food_Picture_pic, string Direction)
+        public ActionResult Resgister(User obj, Food_Picture img, HttpPostedFileBase Food_Picture_pic, string Direction,string Province)
         {
             if (obj.User_user != null)
             {
@@ -51,6 +51,7 @@ namespace Order_Food.Controllers
                         return View();
                     }
                     obj.Status = Direction;
+                    obj.Province = Province;
                     db.User.Add(obj);
                     db.SaveChanges();
                     ViewBag.ab = "ใส้ข้อมูลสำเร็จ";

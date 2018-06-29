@@ -13,18 +13,27 @@ namespace Order_Food.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+
     public partial class User
     {
         public int User_id { get; set; }
+        [Required(ErrorMessage = "กรุณาใส่อีเมล")]
         public string User_user { get; set; }
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "กรุณาใส่รหัสผ่าน")]
         public string User_pw { get; set; }
-        [Required(ErrorMessage = "กรุณาใส่ข้อมูล")]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "กรุณาใส่รหัสผ่านอีกครั้ง")]
         public string User_repw { get; set; }
+        [Required(ErrorMessage = "กรุณาใส่ชื่อ")]
         public string User_name { get; set; }
+        [Required(ErrorMessage = "กรุณาใส่นามสกุล")]
         public string User_last_name { get; set; }
         public Nullable<int> C_FK_Address_U { get; set; }
         public Nullable<int> C_FK_Location_U_id { get; set; }
+        [Required(ErrorMessage = "กรุณาใส่เบอร์ติดต่อ")]
         public string User_phone { get; set; }
+        [Required]
         public string Status { get; set; }
         public string Province { get; set; }
     }

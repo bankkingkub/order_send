@@ -142,6 +142,11 @@ namespace Order_Food.Controllers
             ViewBag.test = getasd;
             return View(a);
         }
+        public ActionResult Homecustomer()
+        {
+
+            return View();
+        }
 
     }
 }

@@ -1,60 +1,65 @@
 ﻿
 @model Order_Food.Models.User
 
-<style>
-    .red > .field-validation-error {
-        color: red;
-    }
-</style>
+
 @using (Html.BeginForm("Resgister", "Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @*@Html.ValidationSummary(true, "")*@
-    <div class="red">
-        <p>User</p>
-        <p>@Html.ValidationMessageFor(m => m.User_user)</p>
-        @Html.EditorFor(n => n.User_user)
-        <p>Pw</p>
-        <p>@Html.ValidationMessageFor(m => m.User_pw)</p>
-        @Html.EditorFor(n => n.User_pw)
-        <p>RePw</p>
-        @Html.ValidationMessageFor(m => m.User_repw)<br>
-        @Html.EditorFor(n => n.User_repw)
-        <p>Name</p>
-        @Html.ValidationMessageFor(m => m.User_name)<br>
-        @Html.EditorFor(n => n.User_name)
-        <p>Last Name</p>
-        @Html.ValidationMessageFor(m => m.User_last_name)<br>
-        @Html.EditorFor(n => n.User_last_name)
-        <p>Phone</p>
-        @Html.ValidationMessageFor(m => m.User_phone)<br>
-        @Html.EditorFor(n => n.User_phone)
 
+<div class="red">
+    <div class="row">
+        <div class="col-md-6">
 
-        @{
-            var listItems = new List<SelectListItem>
+            @Html.EditorFor(n => n.User_user, new { htmlAttributes = new { placeholder = "อีเมล*" } })
+            @Html.ValidationMessageFor(m => m.User_user)<br>
+
+            @Html.EditorFor(n => n.User_pw, new { htmlAttributes = new { placeholder = "รหัสผ่าน*" } })
+            @Html.ValidationMessageFor(m => m.User_pw)<br>
+
+            @Html.EditorFor(n => n.User_repw, new { htmlAttributes = new { placeholder = "รหัสผ่านอีกครั่ง*" } })
+            @Html.ValidationMessageFor(m => m.User_repw)<br>
+
+            @Html.EditorFor(n => n.User_name, new { htmlAttributes = new { placeholder = "ชื่อ*" } })
+            @Html.ValidationMessageFor(m => m.User_name)<br>
+
+            @Html.EditorFor(n => n.User_last_name, new { htmlAttributes = new { placeholder = "นามสกุล*" } })
+            @Html.ValidationMessageFor(m => m.User_last_name)<br>
+
+            @Html.EditorFor(n => n.User_phone, new { htmlAttributes = new { placeholder = "เบอร์โทร*" } })
+            @Html.ValidationMessageFor(m => m.User_phone)<br>
+
+        </div>
+        <div class="col-md-6">
+
+            @{
+                var listItems = new List<SelectListItem>
 {
 new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
 new SelectListItem { Text = "ร้านค้า", Value = "customer" }
 };
-        }
+            }
 
-        @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"))
+            @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"), new { @class = "list_contrl select2-single" })
 
+            <div style="height:36px;"></div>
 
+            @{
 
-        @{
-            var list_province = new List<SelectListItem>
+                var midel = new SelectListGroup { Name = "midel" };
+                var nost = new SelectListGroup { Name = "nost" };
+
+                var list_province = new List<SelectListItem>
 {
-new SelectListItem { Text = "กรุณาเลือกจังหวัด", Value = ""},
-new SelectListItem { Text = "ภาคกลาง", Value = ""},
-new SelectListItem { Text = "จังหวัด กรุงเทพ", Value = "กรุงเทพ"},
-new SelectListItem { Text = "จังหวัด กำแพงเพชร", Value = "กำแพงเพชร"},
-new SelectListItem { Text = "จังหวัด ชัยนาท", Value = "ชัยนาท"},
-new SelectListItem { Text = "จังหวัด นครนายก", Value = "นครนายก"},
-new SelectListItem { Text = "จังหวัด นครปฐม", Value = "นครปฐม"},
-new SelectListItem { Text = "จังหวัด นครสวรรค์", Value = "นครสวรรค์"},
-new SelectListItem { Text = "จังหวัด นนทบุรี", Value = "นนทบุรี"},
-new SelectListItem { Text = "จังหวัด ปทุมธานี", Value = "ปทุมธานี"},
+new SelectListItem { Text = "กรุณาเลือกจังหวัด*", Value =""},
+new SelectListItem { Text = "-- ภาคกลาง --", Value = ""},
+new SelectListItem { Text = "จังหวัด กรุงเทพ", Value = "กรุงเทพ" ,Group = midel},
+new SelectListItem { Text = "จังหวัด กำแพงเพชร", Value = "กำแพงเพชร" ,Group = midel},
+new SelectListItem { Text = "จังหวัด ชัยนาท", Value = "ชัยนาท" ,Group = midel},
+new SelectListItem { Text = "จังหวัด นครนายก", Value = "นครนายก" ,Group = midel},
+new SelectListItem { Text = "จังหวัด นครปฐม", Value = "นครปฐม",Group = nost},
+new SelectListItem { Text = "จังหวัด นครสวรรค์", Value = "นครสวรรค์",Group = nost},
+new SelectListItem { Text = "จังหวัด นนทบุรี", Value = "นนทบุรี",Group = nost},
+new SelectListItem { Text = "จังหวัด ปทุมธานี", Value = "ปทุมธานี",Group = nost},
 new SelectListItem { Text = "จังหวัด พระนครศรีอยุธยา", Value = "พระนครศรีอยุธยา"},
 new SelectListItem { Text = "จังหวัด พิจิตร", Value = "พิจิตร"},
 new SelectListItem { Text = "จังหวัด พิษณุโลก", Value = "พิษณุโลก"},
@@ -70,7 +75,7 @@ new SelectListItem { Text = "จังหวัด สระบุรี", Value
 new SelectListItem { Text = "จังหวัด อ่างทอง", Value = "อ่างทอง"},
 new SelectListItem { Text = "จังหวัด อุทัยธานี", Value = "อุทัยธานี"},
 
-new SelectListItem { Text = "ภาคเหนือ", Value = ""},
+new SelectListItem { Text = "-- ภาคเหนือ --", Value = ""},
 new SelectListItem { Text = "จังหวัด เชียงราย", Value = "เชียงราย"},
 new SelectListItem { Text = "จังหวัด เชียงใหม่", Value = "เชียงใหม่"},
 new SelectListItem { Text = "จังหวัด น่าน", Value = "น่าน"},
@@ -82,7 +87,7 @@ new SelectListItem { Text = "จังหวัด ลำพูน", Value = "�
 new SelectListItem { Text = "จังหวัด อุตรดิตถ์", Value = "อุตรดิตถ์"},
 
 
-new SelectListItem { Text = "ภาคตะวันออกเฉียงเหนือ", Value = ""},
+new SelectListItem { Text = "-- ภาคตะวันออกเฉียงเหนือ --", Value = ""},
 new SelectListItem { Text = "จังหวัด กาฬสินธุ์", Value = "กาฬสินธุ์"},
 new SelectListItem { Text = "จังหวัด ขอนแก่น", Value = "ขอนแก่น"},
 new SelectListItem { Text = "จังหวัด ชัยภูมิ", Value = "ชัยภูมิ"},
@@ -104,7 +109,7 @@ new SelectListItem { Text = "จังหวัด อุดรธานี", Va
 new SelectListItem { Text = "จังหวัด อุบลราชธานี", Value = "อุบลราชธานี"},
 new SelectListItem { Text = "จังหวัด อำนาจเจริญ", Value = "อำนาจเจริญ"},
 
-new SelectListItem { Text = "ภาคตะวันออก", Value = ""},
+new SelectListItem { Text = "-- ภาคตะวันออก --", Value = ""},
 new SelectListItem { Text = "จังหวัด จันทบุรี", Value = "จันทบุรี"},
 new SelectListItem { Text = "จังหวัด ฉะเชิงเทรา", Value = "ฉะเชิงเทรา"},
 new SelectListItem { Text = "จังหวัด ชลบุรี", Value = "ชลบุรี"},
@@ -114,7 +119,7 @@ new SelectListItem { Text = "จังหวัด ระยอง", Value = "�
 new SelectListItem { Text = "จังหวัด สระแก้ว", Value = "สระแก้ว"},
 
 
-new SelectListItem { Text = "ภาคตะวันตก", Value = ""},
+new SelectListItem { Text = "-- ภาคตะวันตก --", Value = ""},
 new SelectListItem { Text = "จังหวัด กาญจนบุรี", Value = "กาญจนบุรี"},
 new SelectListItem { Text = "จังหวัด ตาก", Value = "ตาก"},
 new SelectListItem { Text = "จังหวัด ประจวบคีรีขันธ์", Value = "ประจวบคีรีขันธ์"},
@@ -122,7 +127,7 @@ new SelectListItem { Text = "จังหวัด เพชรบุรี", Va
 new SelectListItem { Text = "จังหวัด ราชบุรี", Value = "ราชบุรี"},
 
 
-new SelectListItem { Text = "ภาคใต้", Value = ""},
+new SelectListItem { Text = "-- ภาคใต้ --", Value = ""},
 new SelectListItem { Text = "จังหวัด กระบี่", Value = "กระบี่"},
 new SelectListItem { Text = "จังหวัด ชุมพร", Value = "ชุมพร"},
 new SelectListItem { Text = "จังหวัด ตรัง", Value = "ตรัง"},
@@ -138,22 +143,25 @@ new SelectListItem { Text = "จังหวัด สงขลา", Value = "�
 new SelectListItem { Text = "จังหวัด สุราษฎร์ธานี", Value = "สุราษฎร์ธานี"},
 new SelectListItem { Text = "จังหวัด ยะลา", Value = "ยะลา"}
 };
-        }
-        @Html.DropDownList("province", new SelectList(list_province, "Value", "Text"), new { @class = "form-group" })
+            }
+            @Html.DropDownList("Province", new SelectList(list_province, "Value", "Text"), new { @class = "list_contrl select2-single" })
 
-
-        <div class="form-group">
-            <!-- แสดงตัวเลือก จังหวัด -->
-            <select class="form-control select2-single" id="province">
-                <option id="province_list"> -- Select --</option>
-
-            </select>
         </div>
-        <br><input type="file" name="Food_Picture_pic"><br>
+    </div>
+    <div class="col-md-6">
+    <div style="height:15px;"></div>
 
-        <input type="submit" value="Submit">
+    <label id="#bb">
+        กรุณาใส่รูปภาพประจำตัว
+        <input type="file" name="Food_Picture_pic" id="File" size="60">
+    </label>
+
+    <div style="height:5px;"></div>
+
+    <input class="w3-button w3-dark-grey" type="submit" value="ตกลง">
+
+</div>
     </div>
 }
 @*@RenderPage("~/Views/Index/UploadFile.cshtml")*@
-<div> @ViewBag.ab </div>
 

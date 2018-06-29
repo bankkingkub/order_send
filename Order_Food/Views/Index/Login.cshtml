@@ -1,17 +1,23 @@
 ﻿
-<div> @ViewBag.asd </div>
 <div class="cardview">
     @using (Html.BeginForm("Login", "Index", FormMethod.Post))
     {
-        <div>
-            login
-            <br>
-            Id: <input type="text" name="FirstName"><br>
-            Pw: <input type="password" name="pw"><br>
+        <div style="padding:25px 250px">
+            <div style="font-size:20px;">
+                เข้าสู่ระบบ
+            </div>
+            <input type="text" name="FirstName" class="list_contrl" style="line-height:unset" placeholder="อีเมล"><br>
+            <input type="password" name="pw" class="list_contrl" style="line-height:unset" placeholder="รหัสผ่าน"><br>
+
+            <div style="height:15px;"></div>
+            <input type="submit" class="w3-button w3-dark-grey" value="ตกลง">
+
+            <div style="margin-top:10px; text-align:center">
+                @Html.ActionLink("สมัคสมาชิค", "Resgister", "Index")
+                <span style="padding:0 10px;">|</span>
+                @Html.ActionLink("ลืมรหัสผ่าน", "redit", "Index")
+            </div>
         </div>
-        <input type="submit" value="Login">
     }
-    <div> @ViewBag.testlogin </div>
-    <a href="http://localhost:55400/Index/Resgister">Resgister</a>
-    <a href="http://localhost:55400/Index/redit">Rwpas</a>
+
 </div>  

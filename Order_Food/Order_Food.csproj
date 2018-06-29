@@ -175,7 +175,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Add_StoreMetadata.cs" />
-    <Compile Include="Models\Add_UserMetadata.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -210,6 +209,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Add_UserMetadata.cs" />
     <Compile Include="Models\user_account.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -292,6 +292,7 @@
     <Content Include="Views\UsingU\Show_food.cshtml" />
     <Content Include="Views\UsingU\Showsaveimg.cshtml" />
     <Content Include="Views\UsingU\Showcus_to_use.cshtml" />
+    <Content Include="Views\UsingU\Homecustomer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
