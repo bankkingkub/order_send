@@ -40,7 +40,7 @@ namespace Order_Food.Controllers
             }
             return View();
         }
-        public ActionResult Resgister(User obj, Food_Picture img, HttpPostedFileBase Food_Picture_pic, string Direction,string Province)
+        public ActionResult Resgister(User obj, Food_Picture img, HttpPostedFileBase Food_Picture_pic, string Direction, string Province)
         {
             if (obj.User_user != null)
             {
@@ -190,11 +190,16 @@ namespace Order_Food.Controllers
                 ViewBag.logcheck = 1;
                 return View();
             }
-            else { 
+            else
+            {
                 ViewBag.logcheck = null;
                 return View();
             }
 
+        }
+        public ActionResult Homeregister()
+        {
+            return View();
         }
     }
 }

@@ -6,49 +6,49 @@
 {
     @*@Html.ValidationSummary(true, "")*@
 
-<div class="red">
-    <div class="row">
-        <div class="col-md-6">
+    <div class="red">
+        <div class="row">
+            <div class="col-md-6">
 
-            @Html.EditorFor(n => n.User_user, new { htmlAttributes = new { placeholder = "อีเมล*" } })
-            @Html.ValidationMessageFor(m => m.User_user)<br>
+                @Html.EditorFor(n => n.User_user, new { htmlAttributes = new { placeholder = "อีเมล*", @class = "add_wd" } })
+                @Html.ValidationMessageFor(m => m.User_user)<br>
 
-            @Html.EditorFor(n => n.User_pw, new { htmlAttributes = new { placeholder = "รหัสผ่าน*" } })
-            @Html.ValidationMessageFor(m => m.User_pw)<br>
+                @Html.EditorFor(n => n.User_pw, new { htmlAttributes = new { placeholder = "รหัสผ่าน*" ,  @class = "add_pd add_wd" } })
+                @Html.ValidationMessageFor(m => m.User_pw)<br>
 
-            @Html.EditorFor(n => n.User_repw, new { htmlAttributes = new { placeholder = "รหัสผ่านอีกครั่ง*" } })
-            @Html.ValidationMessageFor(m => m.User_repw)<br>
+                @Html.EditorFor(n => n.User_repw, new { htmlAttributes = new { placeholder = "รหัสผ่านอีกครั่ง*", @class = "add_pd add_wd" } })
+                @Html.ValidationMessageFor(m => m.User_repw)<br>
 
-            @Html.EditorFor(n => n.User_name, new { htmlAttributes = new { placeholder = "ชื่อ*" } })
-            @Html.ValidationMessageFor(m => m.User_name)<br>
+                @Html.EditorFor(n => n.User_name, new { htmlAttributes = new { placeholder = "ชื่อ*", @class = "add_pd add_wd" } })
+                @Html.ValidationMessageFor(m => m.User_name)<br>
 
-            @Html.EditorFor(n => n.User_last_name, new { htmlAttributes = new { placeholder = "นามสกุล*" } })
-            @Html.ValidationMessageFor(m => m.User_last_name)<br>
+                @Html.EditorFor(n => n.User_last_name, new { htmlAttributes = new { placeholder = "นามสกุล*", @class = "add_pd add_wd" } })
+                @Html.ValidationMessageFor(m => m.User_last_name)<br>
 
-            @Html.EditorFor(n => n.User_phone, new { htmlAttributes = new { placeholder = "เบอร์โทร*" } })
-            @Html.ValidationMessageFor(m => m.User_phone)<br>
+                @Html.EditorFor(n => n.User_phone, new { htmlAttributes = new { placeholder = "เบอร์โทร*", @class = "add_pd add_wd" } })
+                @Html.ValidationMessageFor(m => m.User_phone)<br>
 
-        </div>
-        <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
 
-            @{
-                var listItems = new List<SelectListItem>
+                @{
+                    var listItems = new List<SelectListItem>
 {
 new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
 new SelectListItem { Text = "ร้านค้า", Value = "customer" }
 };
-            }
+                }
 
-            @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"), new { @class = "list_contrl select2-single" })
+                @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"), new { @class = "list_contrl select2-single" })
 
-            <div style="height:36px;"></div>
+                <div style="height:36px;"></div>
 
-            @{
+                @{
 
-                var midel = new SelectListGroup { Name = "midel" };
-                var nost = new SelectListGroup { Name = "nost" };
+                    var midel = new SelectListGroup { Name = "midel" };
+                    var nost = new SelectListGroup { Name = "nost" };
 
-                var list_province = new List<SelectListItem>
+                    var list_province = new List<SelectListItem>
 {
 new SelectListItem { Text = "กรุณาเลือกจังหวัด*", Value =""},
 new SelectListItem { Text = "-- ภาคกลาง --", Value = ""},
@@ -143,24 +143,24 @@ new SelectListItem { Text = "จังหวัด สงขลา", Value = "�
 new SelectListItem { Text = "จังหวัด สุราษฎร์ธานี", Value = "สุราษฎร์ธานี"},
 new SelectListItem { Text = "จังหวัด ยะลา", Value = "ยะลา"}
 };
-            }
-            @Html.DropDownList("Province", new SelectList(list_province, "Value", "Text"), new { @class = "list_contrl select2-single" })
+                }
+                @Html.DropDownList("Province", new SelectList(list_province, "Value", "Text"), new { @class = "list_contrl select2-single" })
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div style="height:15px;"></div>
+
+            <label>
+                กรุณาใส่รูปภาพประจำตัว
+                <input type="file" name="Food_Picture_pic" id="File" size="60">
+            </label>
+
+            <div style="height:5px;"></div>
+
+            <input class="w3-button w3-dark-grey" type="submit" value="ตกลง">
 
         </div>
-    </div>
-    <div class="col-md-6">
-    <div style="height:15px;"></div>
-
-    <label id="#bb">
-        กรุณาใส่รูปภาพประจำตัว
-        <input type="file" name="Food_Picture_pic" id="File" size="60">
-    </label>
-
-    <div style="height:5px;"></div>
-
-    <input class="w3-button w3-dark-grey" type="submit" value="ตกลง">
-
-</div>
     </div>
 }
 @*@RenderPage("~/Views/Index/UploadFile.cshtml")*@

@@ -139,5 +139,6 @@
     <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="pic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

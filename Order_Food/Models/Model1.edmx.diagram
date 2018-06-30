@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="Order_Food_dbModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Food_Picture" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Location_C" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Order_Food_dbModel.Menu" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Menu" Width="1.5" PointX="4.625" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Report" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Order_Food_dbModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Order_Food_dbModel.user_account" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />

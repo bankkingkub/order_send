@@ -112,6 +112,7 @@
     <EntitySetMapping Name="Add_Store">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Add_Store">
         <MappingFragment StoreEntitySet="Add_Store">
+          <ScalarProperty Name="category" ColumnName="category" />
           <ScalarProperty Name="pic" ColumnName="pic" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="description" ColumnName="description" />

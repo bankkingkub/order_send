@@ -18,5 +18,6 @@ namespace Order_Food.Models
         public string description { get; set; }
         public string name { get; set; }
         public string pic { get; set; }
+        public string category { get; set; }
     }
 }

@@ -19,5 +19,4 @@ namespace Order_Food.Models
         public string Food_Picture_pic { get; set; }
         public string Food_Picture_name { get; set; }
     }
-
 }

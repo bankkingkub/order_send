@@ -147,6 +147,11 @@ namespace Order_Food.Controllers
 
             return View();
         }
+        public ActionResult Homeaddstore()
+        {
+
+            return View();
+        }
 
     }
 }

@@ -293,6 +293,8 @@
     <Content Include="Views\UsingU\Showsaveimg.cshtml" />
     <Content Include="Views\UsingU\Showcus_to_use.cshtml" />
     <Content Include="Views\UsingU\Homecustomer.cshtml" />
+    <Content Include="Views\UsingU\Homeaddstore.cshtml" />
+    <Content Include="Views\Index\Homeregister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

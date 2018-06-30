@@ -8,6 +8,7 @@
     <Property Name="description" Type="varchar" MaxLength="50" />
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="pic" Type="varchar" MaxLength="50" />
+    <Property Name="category" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Address_C">
     <Key>
