@@ -34,7 +34,7 @@ namespace Order_Food.Controllers
 
         //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg, Get_catagory get_cat, string[] get_check)
+        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg, Get_catagory get_cat)
         {
 
             if (obj.description != null)
@@ -94,23 +94,7 @@ namespace Order_Food.Controllers
             //string fileName = Path.GetFileName(Food_Picture_pic.FileName);
             //string path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
             //Food_Picture_pic.SaveAs(path);
-            if (get_check != null)
-            {
-                int i = get_check.Length;
-                using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
-                {
-                    string checkid = Session["namesec"].ToString();
-                    for (int ch = 0; ch < i; ch++)
-                    {
-                        get_cat.category = get_check[ch];
-                        get_cat.customer_name = checkid;
-                        db.Get_catagory.Add(get_cat);
-                        db.SaveChanges();
-                    }
-                };
-            }
-
-            return RedirectToAction("Homepage", "Index");
+            return View();
         }
         //[AcceptVerbs(HttpVerbs.Post)]
         public List<Add_Store> loop_img()
@@ -178,7 +162,7 @@ namespace Order_Food.Controllers
         //    }
         //    return loop_cat;
         //}
-        public ActionResult Category(Category category)
+        public ActionResult Category(string[] ajex_cat, Get_catagory get_cat)
         {
             //List<user_account> ad_st = new List<user_account> { new user_account { name = "", last = "" } };
             var ab = model_car();
@@ -187,48 +171,31 @@ namespace Order_Food.Controllers
             {
                 loob_cat = db.Category.ToList();
             }
-            return View(loob_cat);
-            //return View(ad_st);
 
-        }
-        public Add_Store model_car()
-        {
-            Add_Store modeluser = new Add_Store();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                modeluser.category2 = db.Category.ToList<Category>();
-            }
-            return modeluser;
-        }
-        //public int test_add()
-        //{
-        //    int cut = Convert.ToInt32(Session["cut"]);
-        //    cut = cut + 1;
-        //    Session["checklogin"] = cut;
-        //    return cut;
-        //}
-
-        public ActionResult getnamestore(Get_storename get_storename)
-        {
-            string checkid = Session["namesec"].ToString();
-            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
-            {
-
-                var check = db.Get_storename.Where(x => x.customer_name == checkid).FirstOrDefault();
+                string checkid = Session["namesec"].ToString();
+                var check = db.Get_catagory.Where(x => x.customer_name == checkid).FirstOrDefault();
                 if (check != null)
                 {
                     ViewBag.storechek = "true";
-                    ViewBag.namestore = db.Get_storename.Where(x => x.customer_name == checkid).Select(x => x.get_storename1).FirstOrDefault();
+                    List<string> a = new List<string>();
+                    a = db.Get_catagory.Where(x => x.customer_name == checkid).Select(x => x.category).ToList();
+                    ViewBag.show_cat = a;
+                    return View();
                 }
                 else
                 {
-                    if (get_storename.get_storename1 != null)
+                    if (ajex_cat != null)
                     {
-                        get_storename.customer_name = checkid;
-                        db.Get_storename.Add(get_storename);
-                        db.SaveChanges();
-                        ViewBag.storechek = "true";
-                        ViewBag.namestore = db.Get_storename.Where(x => x.customer_name == checkid).Select(x => x.get_storename1).FirstOrDefault();
+                        int i = ajex_cat.Length;
+                        for (int ch = 0; ch < i; ch++)
+                        {
+                            get_cat.category = ajex_cat[ch];
+                            get_cat.customer_name = checkid;
+                            db.Get_catagory.Add(get_cat);
+                            db.SaveChanges();
+                        }
                     }
                     else
                     {
@@ -236,41 +203,103 @@ namespace Order_Food.Controllers
                     }
                 }
             }
-            return View();
+            return View(loob_cat);
+        //return View(ad_st);
+
+    }
+    public Add_Store model_car()
+    {
+        Add_Store modeluser = new Add_Store();
+        using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+        {
+            modeluser.category2 = db.Category.ToList<Category>();
         }
-        //[HttpPost]
-        //public ActionResult getnamestore(string name) {
+        return modeluser;
+    }
+    //public int test_add()
+    //{
+    //    int cut = Convert.ToInt32(Session["cut"]);
+    //    cut = cut + 1;
+    //    Session["checklogin"] = cut;
+    //    return cut;
+    //}
 
-        //    ViewBag.get = "เข้า สู่ get นะไอน้อง";
-
-
-        //    return View();
-        //}
-        //public string get_ajex(string name) {
-
-        //    var getstring = name;
-
-        //    return getstring;
-        //}
-        public ActionResult Get_c_address()
+    public ActionResult getnamestore(Get_storename get_storename)
+    {
+        string checkid = Session["namesec"].ToString();
+        using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
         {
 
-
-
-
-            return View();
-
-
-        }
-        public ActionResult Get_time_store(Get_time get_time)
-        {
-            string checkid = Session["namesec"].ToString();
-            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            var check = db.Get_storename.Where(x => x.customer_name == checkid).FirstOrDefault();
+            if (check != null)
             {
-
-                var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
-                if (check != null)
+                ViewBag.storechek = "true";
+                ViewBag.namestore = db.Get_storename.Where(x => x.customer_name == checkid).Select(x => x.get_storename1).FirstOrDefault();
+            }
+            else
+            {
+                if (get_storename.get_storename1 != null)
                 {
+                    get_storename.customer_name = checkid;
+                    db.Get_storename.Add(get_storename);
+                    db.SaveChanges();
+                    ViewBag.storechek = "true";
+                    ViewBag.namestore = db.Get_storename.Where(x => x.customer_name == checkid).Select(x => x.get_storename1).FirstOrDefault();
+                }
+                else
+                {
+                    ViewBag.storechek = "false";
+                }
+            }
+        }
+        return View();
+    }
+    //[HttpPost]
+    //public ActionResult getnamestore(string name) {
+
+    //    ViewBag.get = "เข้า สู่ get นะไอน้อง";
+
+
+    //    return View();
+    //}
+    //public string get_ajex(string name) {
+
+    //    var getstring = name;
+
+    //    return getstring;
+    //}
+    public ActionResult Get_c_address()
+    {
+        ViewBag.yo = "โยกากมาก";
+
+
+
+        return View();
+
+
+    }
+    public ActionResult Get_time_store(Get_time get_time)
+    {
+        string checkid = Session["namesec"].ToString();
+        using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+        {
+
+            var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
+            if (check != null)
+            {
+                ViewBag.storechek = "true";
+                ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
+                ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
+                ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
+                ViewBag.timeclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_close).FirstOrDefault();
+            }
+            else
+            {
+                if (get_time.day_close != null && get_time.day_open != null && get_time.time_close != null && get_time.time_open != null)
+                {
+                    get_time.customer_name = checkid;
+                    db.Get_time.Add(get_time);
+                    db.SaveChanges();
                     ViewBag.storechek = "true";
                     ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
                     ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
@@ -279,29 +308,16 @@ namespace Order_Food.Controllers
                 }
                 else
                 {
-                    if (get_time.day_close != null && get_time.day_open != null && get_time.time_close != null && get_time.time_open != null)
-                    {
-                        get_time.customer_name = checkid;
-                        db.Get_time.Add(get_time);
-                        db.SaveChanges();
-                        ViewBag.storechek = "true";
-                        ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
-                        ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
-                        ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
-                        ViewBag.timeclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_close).FirstOrDefault();
-                    }
-                    else
-                    {
-                        ViewBag.storechek = "false";
-                    }
+                    ViewBag.storechek = "false";
                 }
             }
-
-            return View();
         }
 
-
-
-
+        return View();
     }
+
+
+
+
+}
 }

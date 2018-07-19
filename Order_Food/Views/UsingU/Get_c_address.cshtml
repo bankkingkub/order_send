@@ -23,11 +23,11 @@
         <div class="col-md-6">
             <input class="text-box single-line" type="text" name="state" id="state" placeholder="จังหวัด" />
         </div>
-        <div class="col-md-6">
+        @*<div class="col-md-6">
             <input class="text-box single-line" type="text" name="zip" id="zip" placeholder="รหัสไปรษณีย์" />
         </div>
         <div class="col-md-6">
-        </div>
+        </div>*@
     </div>
 </div>
 <p id="alert"></p>
@@ -64,7 +64,9 @@
 
     //Show the address in a paragraph
     function showComplete(data) {
-        par.textContent = "คุณอยู่ที่ " + data.results[0].address_components[1].long_name + ", " + data.results[0].address_components[2].long_name + ", " + data.results[0].address_components[4].long_name + ", " + data.results[0].address_components[5].short_name + ", รหัสไปรษณีย์: " + data.results[0].address_components[7].short_name + ".";
+
+        //par.textContent = "คุณอยู่ที่ " + data.results[0].address_components[1].long_name + ", " + data.results[0].address_components[2].long_name + ", " + data.results[0].address_components[4].long_name + ", " + data.results[0].address_components[5].short_name + ", รหัสไปรษณีย์: " + data.results[0].address_components[7].short_name + ".";
+
     }
 
     //Fills out the form

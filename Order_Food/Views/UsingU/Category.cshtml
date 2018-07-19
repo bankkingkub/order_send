@@ -1,7 +1,6 @@
-﻿
-@*@{
+﻿@{
     Layout = null;
-}*@
+}
 
 
 @*@model Order_Food.Models.Get_catagory*@
@@ -17,27 +16,50 @@
             <input class="w3-button w3-dark-grey" id="btnAdd" type="button" value="เพิ่ม">
         </div>
     </div>*@
-<div>
-    เลือกประเภทอาหาร
-</div>
-<div>
-    <button id="colab" class="btn btn-cooler fas fa-angle-down cat" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></button>
-</div>
-<div class="collapse" id="collapseExample">
-    <div class="card card-body">
-        <div class="row">
-            @foreach (var iteam in Model)
-            {
-                <div class="col-md-3">
-                    <input type="checkbox" name="get_check" value=" @iteam.category1" id="getcat">
-                    <span style="padding-left:5px;">@iteam.category1</span>
-                </div>
-                <div style="height:40px;">
-                </div>
-            }
-            <input type="submit" id="get_cat" class="w3-button w3-dark-grey" value="ตกลง">
+
+<div id="re_cat">
+
+    @if (ViewBag.storechek == "true")
+    {
+
+        foreach (var item in ViewBag.show_cat)
+        {
+            @item; <br>
+        }
+
+
+    }
+    else
+    {
+
+        <div>
+            เลือกประเภทอาหาร
         </div>
-    </div>
+        <div>
+            <button id="colab" class="btn btn-cooler fas fa-angle-down cat" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></button>
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <div class="row">
+                    @foreach (var iteam in Model)
+                    {
+                        <div class="col-md-3">
+                            <input type="checkbox" name="get_check[]" value=" @iteam.category1" id="getcat">
+                            <span style="padding-left:5px;">@iteam.category1</span>
+                        </div>
+                        <div style="height:40px;">
+                        </div>
+                    }
+                    <input type="submit" id="get_cat" class="w3-button w3-dark-grey" value="ตกลง">
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+
+
 </div>
 
 @*----------------- chage collap icon -----------------*@
@@ -53,28 +75,52 @@
 </script>
 <script>
     $(document).ready(function () {
+        let i = 0;
         $("#get_cat").click(function () {
+            var checkbox_value = [];
+            $(":checkbox").each(function () {
+                var ischecked = $(this).is(":checked");
+                if (ischecked) {
+                    checkbox_value[i] = $(this).val();
+                    ++i;
+                }
+            });
 
-            var Category = {
-                category1: $('#getcat').val()
-            }
 
             $.ajax({
                 url: "@Url.Action("Category", "UsingU")",
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify({ category: Category }),
+                data: JSON.stringify({ ajex_cat: checkbox_value }),
                 success: function (response) {
                     response ? re() : alert("It didn't work.");
                 }
             });
         });
         function re() {
-            $("#re").load(location.href + " #re");
+            $("#re_cat").load(location.href + " #re_cat");
             //location.reload();
         }
     });
 </script>
+
+
+
+@*<script>
+    $("#btn_").on('click', function () {
+        var checkbox_value = "";
+        $(":checkbox").each(function () {
+            var ischecked = $(this).is(":checked");
+            if (ischecked) {
+                checkbox_value += $(this).val() + "|";
+            }
+        });
+        alert(checkbox_value);
+        // your awesome code calling ajax
+    });
+    </script>*@
+@*<input type="submit" id="btn_" class="w3-button w3-dark-grey" value="ตกลง">*@
+
 
 
 
