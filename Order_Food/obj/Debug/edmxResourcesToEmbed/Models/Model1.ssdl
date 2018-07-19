@@ -8,7 +8,6 @@
     <Property Name="description" Type="varchar" MaxLength="50" />
     <Property Name="name" Type="varchar" MaxLength="50" />
     <Property Name="pic" Type="varchar" MaxLength="50" />
-    <Property Name="category" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Address_C">
     <Key>
@@ -17,6 +16,12 @@
     <Property Name="Address_C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Address_C_lat" Type="nchar" MaxLength="10" />
     <Property Name="Address_C_long" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="category" />
+    </Key>
+    <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -51,6 +56,33 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     <Property Name="(FK)Customer_id" Type="varchar" MaxLength="50" />
     <Property Name="Food_Picture_pic" Type="varchar" MaxLength="100" />
     <Property Name="Food_Picture_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Get_catagory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="category" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Get_storename">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="get_storename" Type="varchar" MaxLength="50" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Get_time">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="day_open" Type="varchar" MaxLength="50" />
+    <Property Name="day_close" Type="varchar" MaxLength="50" />
+    <Property Name="time_open" Type="varchar" MaxLength="50" />
+    <Property Name="time_close" Type="varchar" MaxLength="50" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Location_C">
     <Key>
@@ -114,18 +146,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
     <Property Name="last" Type="varchar(max)" />
     <Property Name="pw" Type="varchar(max)" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Order_Food_db.dbo.View_redit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="View_redit">
-    <Key>
-      <PropertyRef Name="User_id" />
-      <PropertyRef Name="User_user" />
-      <PropertyRef Name="User_pw" />
-    </Key>
-    <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="User_user" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="User_pw" Type="varchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <Association Name="FK_Customer_Customer">
     <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
     <End Role="Customer1" Type="Self.Customer" Multiplicity="0..1" />
@@ -141,20 +161,17 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_redit' does not have a prim
   <EntityContainer Name="Order_Food_dbModelStoreContainer">
     <EntitySet Name="Add_Store" EntityType="Self.Add_Store" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Address_C" EntityType="Self.Address_C" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Get_catagory" EntityType="Self.Get_catagory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Get_storename" EntityType="Self.Get_storename" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Get_time" EntityType="Self.Get_time" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location_C" EntityType="Self.Location_C" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_account" EntityType="Self.user_account" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="View_redit" EntityType="Self.View_redit" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [View_redit].[User_id] AS [User_id], 
-    [View_redit].[User_user] AS [User_user], 
-    [View_redit].[User_pw] AS [User_pw]
-    FROM [dbo].[View_redit] AS [View_redit]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Customer1" EntitySet="Customer" />

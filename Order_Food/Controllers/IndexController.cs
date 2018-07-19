@@ -198,7 +198,9 @@ namespace Order_Food.Controllers
 
         }
         public ActionResult Homeregister()
+
         {
+
             return View();
         }
     }

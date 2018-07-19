@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+    @model Order_Food.Models.Get_time
+    var daylist = new List<SelectListItem>
+{
+new SelectListItem { Text = "วันจันทร์", Value = "วันจันทร์" },
+new SelectListItem { Text = "วันอังคาร", Value = "วันอังคาร" },
+new SelectListItem { Text = "วันพุธ", Value = "วันพุธ" },
+new SelectListItem { Text = "วันพฤหัสบดี", Value = "วันพฤหัสบดี" },
+new SelectListItem { Text = "วันศุกร์", Value = "วันศุกร์" },
+new SelectListItem { Text = "วันเสาร์", Value = "วันเสาร์" },
+new SelectListItem { Text = "วันอาทิตย์", Value = "วันอาทิตย์" }
+};
+
+}
+<div id="retime">
+@{
+    if (ViewBag.storechek == "true")
+    {
+        <div class="row">
+            @ViewBag.dayopen
+            -
+            @ViewBag.dayclose
+            @ViewBag.timeopen
+            @ViewBag.timeclose
+        </div>
+    }
+    else
+    {
+
+        <div class="row">
+            <div class="col-md-6">
+                เปิดร้านวันที่
+                @Html.DropDownListFor(x => x.day_open, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayopen" })
+            </div>
+            <div class="col-md-6">
+                ถึง
+                @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose" })
+            </div>
+
+            <div class="col-md-6">
+                เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen" })
+            </div>
+            <div class="col-md-6">
+                เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose" })
+            </div>
+        </div>
+        <input type="submit" id="gettime" class="w3-button w3-dark-grey" value="ตกลง">
+
+    }
+}
+    </div>
+<script>
+
+    $(document).ready(function () {
+        $("#gettime").click(function () {
+            var gettime = {
+                day_open: $('#dayopen').val(),
+                day_close: $('#dayclose').val(),
+                time_open: $('#timeopen').val(),
+                time_close: $('#timeclose').val()
+
+            }
+            $.ajax({
+                url: "@Url.Action("get_time_store", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ get_time: gettime }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#retime").load(location.href + " #retime");
+            //location.reload();
+        }
+    });
+
+</script>

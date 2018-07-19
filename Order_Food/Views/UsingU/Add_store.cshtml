@@ -1,47 +1,21 @@
-﻿<h4>demo</h4>
+﻿
 @{
-    @model Order_Food.Models.Add_Store
 
+    @model Order_Food.Models.Add_Store
     using (Html.BeginForm("update_customer", "UsingU", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <p>เพิ่มร้านค้า</p>
-        @Html.EditorFor(s => s.description)
         <label>
             เลือกรูปภาพโปรโมทร้านค้า
             <input type="file" name="getimg" id="File" size="60">
         </label>
 
+        <div>
+            ชื่อใต้รูป
+        </div>
+        @Html.EditorFor(s => s.description)
+        <div style="padding-top:5px;"></div>
         <input type="submit" class="w3-button w3-dark-grey" value="ตกลง">
 
     }
-
-}
-@{
-    var category_food = new List<SelectListItem>
-{
-new SelectListItem { Text = "ก๋วยเตี๋ยว", Value = "ก๋วยเตี๋ยว" },
-new SelectListItem { Text = "อาหารจานเดียว/ตามสั่ง", Value = "อาหารจานเดียว/ตามสั่ง" },
-new SelectListItem { Text = "เบเกอร์รี/เค้ก", Value = "เบเกอร์รี/เค้ก" },
-new SelectListItem { Text = "ของหวาน", Value = "ของหวาน" },
-new SelectListItem { Text = "เครื่องดืม/น้ำผลไม้/ชานมไขมุก", Value = "เครื่องดืม/น้ำผลไม้/ชานมไขมุก" },
-new SelectListItem { Text = "อาหารทะเล", Value = "อาหารทะเล" },
-new SelectListItem { Text = "สเต็ก", Value = "สเต็ก" },
-new SelectListItem { Text = "ไอศกรีม", Value = "ไอศกรีม" },
-new SelectListItem { Text = "ฟาสต์ฟู้ด/จานด่วน", Value = "ฟาสต์ฟู้ด/จานด่วน" },
-new SelectListItem { Text = "ชาบู/สุกี้ยากี้/หม้อไฟ", Value = "ชาบู/สุกี้ยากี้/หม้อไฟ" },
-new SelectListItem { Text = "อาหารเช้า", Value = "อาหารเช้า" },
-new SelectListItem { Text = "บุฟเฟ่ต์", Value = "บุฟเฟ่ต์" },
-new SelectListItem { Text = "ปิ้งย่าง", Value = "ปิ้งย่าง" },
-new SelectListItem { Text = "อาหารคลีน/สลัด", Value = "อาหารคลีน/สลัด" },
-new SelectListItem { Text = "พิซซ่า", Value = "พิซซ่า" },
-new SelectListItem { Text = "หมูกระทะ", Value = "หมูกระทะ" },
-new SelectListItem { Text = "ซูชิ", Value = "ซูชิ" },
-new SelectListItem { Text = "ราเมง", Value = "ราเมง" },
-new SelectListItem { Text = "อาหารมังสวิรัติ", Value = "อาหารมังสวิรัติ" },
-new SelectListItem { Text = "ติ่มซำ", Value = "ติ่มซำ" }
-
-};
-
-@Html.DropDownList("category_food", new SelectList(category_food, "Value", "Text"), new { @class = "list_contrl select2-single" })
-
+    @ViewBag.add
 }

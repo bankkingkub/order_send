@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <button id="okbutton">ที่อยู่ของคุณในตอนนี้</button>
+    </div>
+</div>
+<div class="">
+    <p id="paragraph" style="display:none"></p>
+
+    <p id="position" style="display:none"></p>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="text-box single-line" type="text" name="street" id="street" placeholder="ถนน" />
+        </div>
+        <div class="col-md-6">
+            <input class="text-box single-line" type="text" name="neighborhood" id="neighborhood" placeholder="แขวง" />
+        </div>
+        <div class="col-md-6">
+            <input class="text-box single-line" type="text" name="area" id="area" placeholder="เขต" />
+        </div>
+        <div class="col-md-6">
+            <input class="text-box single-line" type="text" name="state" id="state" placeholder="จังหวัด" />
+        </div>
+        <div class="col-md-6">
+            <input class="text-box single-line" type="text" name="zip" id="zip" placeholder="รหัสไปรษณีย์" />
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+</div>
+<p id="alert"></p>
+
+<script>
+    var alr = document.getElementById("alert");
+    var par = document.getElementById("paragraph");
+    var pos = document.getElementById("position");
+    var str = document.getElementById("street");
+    var nei = document.getElementById("neighborhood");
+    var sta = document.getElementById("state");
+    var zip = document.getElementById("zip");
+    var area = document.getElementById("area")
+
+    function getLocation() {
+        try {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(getInfo);
+            }
+            else {
+                alr.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        catch (e) {
+            alr.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    //Shows the position numbers
+    function showPosition(lat, long) {
+        pos.innerHTML = "Latitude: " + lat +
+            "<br>Longitude: " + long;
+    }
+
+    //Show the address in a paragraph
+    function showComplete(data) {
+        par.textContent = "คุณอยู่ที่ " + data.results[0].address_components[1].long_name + ", " + data.results[0].address_components[2].long_name + ", " + data.results[0].address_components[4].long_name + ", " + data.results[0].address_components[5].short_name + ", รหัสไปรษณีย์: " + data.results[0].address_components[7].short_name + ".";
+    }
+
+    //Fills out the form
+    function fillForm(data) {
+        str.value = data.results[0].address_components[1].long_name;
+        nei.value = data.results[0].address_components[2].long_name;
+        area.value = data.results[0].address_components[3].short_name;
+        sta.value = data.results[0].address_components[5].short_name;
+        zip.value = data.results[0].address_components[7].short_name;
+
+    }
+
+    function getInfo(position) {
+        latlng = position.coords.latitude + "," + position.coords.longitude;
+        request = new XMLHttpRequest();
+        request.open('GET', 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng, true);
+
+        request.onload = function () {
+            if (request.status == 200 || request.status == 0) {
+                // Success!
+                data = JSON.parse(request.responseText);
+
+                //Call the method that will handle the address information
+                showComplete(data);
+                fillForm(data);
+                showPosition(position.coords.latitude, position.coords.longitude);
+            }
+            else {
+                // We reached our target server, but it returned an error
+                alr.textContent = "Google Server Request didn't worked";
+            }
+        };
+
+        request.onerror = function () {
+            // There was a connection error of some sort
+            alr.textContent = "Google Server Request didn't worked";
+        };
+
+        request.send();
+    }
+
+    document.getElementById("okbutton").addEventListener("click", getLocation);
+</script>

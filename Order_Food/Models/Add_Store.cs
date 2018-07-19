@@ -11,13 +11,16 @@ namespace Order_Food.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Add_Store
     {
         public int id { get; set; }
         public string description { get; set; }
         public string name { get; set; }
         public string pic { get; set; }
-        public string category { get; set; }
+        [NotMapped]
+        public List<Category> category2 { get; set; }
+        public string numcut { get; set; }
     }
 }

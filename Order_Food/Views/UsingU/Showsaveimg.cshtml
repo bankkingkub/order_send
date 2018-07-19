@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
 }
+<div class="pd_15px"></div>
+
 @model List<Order_Food.Models.Add_Store>
 @if (Session["checkstatus"] == null)
 {
@@ -10,21 +12,25 @@ else
 {
     if (Model != null)
     {
-        <div class="row">
+        <div>รูปภาพที่เมีในระบบ</div>
+        <button id="colabimg" class="btn btn-cooler fas fa-angle-down img" type="button" data-toggle="collapse" data-target="#collapseimg" aria-expanded="false" aria-controls="collapseimg"></button>
+        <div class="collapse" id="collapseimg">
+            <div class="row">
+                    
+                @foreach (var item in Model)
+                {
 
-            @foreach (var item in Model)
-            {
-
-                <div class="col-md-3" style="padding:0px;">
-                    <div class="img_loopshow sh_border">
-                        <img src="~/img/user_img/@ViewBag.folder/@item.pic">
+                    <div class="col-md-3" style="padding:0px;">
+                        <div class="img_loopshow sh_border">
+                            <img src="~/img/user_img/@ViewBag.folder/@item.pic">
+                        </div>
+                        <div style="text-align:center;padding-top:5px;">
+                            @item.description
+                        </div>
                     </div>
-                    <div style="text-align:center;padding-top:5px;">
-                        @item.description
-                    </div>
-                </div>
 
-            }
+                }
+            </div>
         </div>
     }
     else
@@ -33,3 +39,13 @@ else
     }
 }
 
+<script>
+    $(document).ready(function () {
+        $("#colabimg").click(function () {
+            if ($(".fa-angle-up").hasClass("fa-angle-up")) {
+                $(".img").removeClass("fa-angle-up").addClass("fa-angle-down");
+            } else
+                $(".img").removeClass("fa-angle-down").addClass("fa-angle-up");
+        });
+    });
+</script>

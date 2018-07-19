@@ -1,0 +1,132 @@
+﻿
+@{
+    Layout = null;
+    @model Order_Food.Models.Get_storename
+}
+<div id="re">
+    @{
+        if (ViewBag.storechek == "true")
+        {
+    <div class="row">
+        <div class="col-md-9" style="line-height: 38px;">
+        โชว ชื่อร้านอาหาร : @ViewBag.namestore
+            </div>
+        <div class="col-md-3">
+        <input type="submit" id="edit" class="w3-button w3-dark-grey" value="แก้ไข">
+            </div>
+    </div>
+        }
+        else
+        {
+            <div>
+                กรุณาใส่ชื่อร้าน :<input type="text" id="name" class="text-box single-line">
+                <input type="submit" id="get" class="w3-button w3-dark-grey" value="ตกลง">
+            </div>
+        }
+    }
+</div>
+<div style="height:15px;"></div>
+
+@*@ViewBag.get*@
+
+<script>
+
+    $(document).ready(function () {
+        $("#get").click(function () {
+            var getname = {
+                get_storename1: $('#name').val()
+            }
+            $.ajax({
+                url: "@Url.Action("getnamestore", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ get_storename: getname }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#re").load(location.href + " #re");
+            //location.reload();
+        }
+    });
+
+</script>
+
+
+
+@*<script>
+        $(document).ready(function () {
+            $("#te").click(function () {
+                $("#a").load(location.href + " #a");
+                alert("ไม่รู้สินะ")
+            });
+        });
+    </script>*@
+
+
+@*<script>
+
+        $(document).ready(function () {
+            $("#get").click(function () {
+                console.log("เข้า functiom");
+
+            var model = {
+                Name: $('#name').val()
+
+            };
+            console.log(model);
+                jQuery.ajax({
+                    type: "POST",
+                    url: "@Url.Action("getnamestore", "UsingU")",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(model),
+                    success: console.log("สำเร็จ")
+                });
+            });
+        });
+
+    </script>*@
+@*$(document).ready(function () {$("#get").click(function () {
+        $.ajax({
+            url: '@Url.Action("get_ajex")',
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { "user_account": bank },
+            success: function (response) {
+                alert("Success");
+            }
+
+        });
+    })
+    });*@
+
+@*$(document).ready(function () {
+        var get_name = {
+       Namecustomer_name: $('#name').val()
+    };
+
+        $("#get").click(function () {
+           $.ajax({
+        type: 'POST',
+        url: '@Url.Action("get_ajex")',
+        data: { "user_account": bank },
+            dataType: 'json',
+            success: alert("asd")
+    });
+        });
+    });*@
+
+@* $.ajax({
+        url: "@Url.Action("getnamestore", "UsingU")",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ item: name }),
+        success: function (response) {
+            response ? alert("It worked!") : alert("It didn't work.");
+        }
+
+    });*@

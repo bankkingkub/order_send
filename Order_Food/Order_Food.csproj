@@ -175,6 +175,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Add_StoreMetadata.cs" />
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Customer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -182,6 +185,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Food_PictureMetadata.cs" />
+    <Compile Include="Models\Get_catagory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Get_storename.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Get_time.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Location_C.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -211,9 +223,6 @@
     </Compile>
     <Compile Include="Models\Add_UserMetadata.cs" />
     <Compile Include="Models\user_account.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\View_redit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,6 +304,10 @@
     <Content Include="Views\UsingU\Homecustomer.cshtml" />
     <Content Include="Views\UsingU\Homeaddstore.cshtml" />
     <Content Include="Views\Index\Homeregister.cshtml" />
+    <Content Include="Views\UsingU\Category.cshtml" />
+    <Content Include="Views\UsingU\Getnamestore.cshtml" />
+    <Content Include="Views\UsingU\Get_c_address.cshtml" />
+    <Content Include="Views\UsingU\Get_time_store.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

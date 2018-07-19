@@ -13,7 +13,7 @@
                 @Html.EditorFor(n => n.User_user, new { htmlAttributes = new { placeholder = "อีเมล*", @class = "add_wd" } })
                 @Html.ValidationMessageFor(m => m.User_user)<br>
 
-                @Html.EditorFor(n => n.User_pw, new { htmlAttributes = new { placeholder = "รหัสผ่าน*" ,  @class = "add_pd add_wd" } })
+                @Html.EditorFor(n => n.User_pw, new { htmlAttributes = new { placeholder = "รหัสผ่าน*", @class = "add_pd add_wd" } })
                 @Html.ValidationMessageFor(m => m.User_pw)<br>
 
                 @Html.EditorFor(n => n.User_repw, new { htmlAttributes = new { placeholder = "รหัสผ่านอีกครั่ง*", @class = "add_pd add_wd" } })
@@ -33,14 +33,12 @@
 
                 @{
                     var listItems = new List<SelectListItem>
-{
-new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
-new SelectListItem { Text = "ร้านค้า", Value = "customer" }
-};
+                    {
+                        new SelectListItem { Text = "บุคลทั่งไป", Value = "user" },
+                        new SelectListItem { Text = "ร้านค้า", Value = "customer" }
+                    };
                 }
-
                 @Html.DropDownList("Direction", new SelectList(listItems, "Value", "Text"), new { @class = "list_contrl select2-single" })
-
                 <div style="height:36px;"></div>
 
                 @{

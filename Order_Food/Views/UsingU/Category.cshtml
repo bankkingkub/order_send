@@ -1,0 +1,209 @@
+﻿
+@*@{
+    Layout = null;
+}*@
+
+
+@*@model Order_Food.Models.Get_catagory*@
+@*@model Order_Food.Models.Add_Store*@
+@*@model List<Order_Food.Models.user_account>*@
+@model List<Order_Food.Models.Category>
+
+@*<div class="row">
+        <div class="col-md-10" id="SelectList">
+            @Html.DropDownListFor(x => x.category, new SelectList(Model.category2, "category1", "category1"), "Select", new { @class = "list_contrl select2-single" })
+        </div>
+        <div class="col-md-2">
+            <input class="w3-button w3-dark-grey" id="btnAdd" type="button" value="เพิ่ม">
+        </div>
+    </div>*@
+<div>
+    เลือกประเภทอาหาร
+</div>
+<div>
+    <button id="colab" class="btn btn-cooler fas fa-angle-down cat" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></button>
+</div>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <div class="row">
+            @foreach (var iteam in Model)
+            {
+                <div class="col-md-3">
+                    <input type="checkbox" name="get_check" value=" @iteam.category1" id="getcat">
+                    <span style="padding-left:5px;">@iteam.category1</span>
+                </div>
+                <div style="height:40px;">
+                </div>
+            }
+            <input type="submit" id="get_cat" class="w3-button w3-dark-grey" value="ตกลง">
+        </div>
+    </div>
+</div>
+
+@*----------------- chage collap icon -----------------*@
+<script>
+    $(document).ready(function () {
+        $("#colab").click(function () {
+            if ($(".fa-angle-up").hasClass("fa-angle-up")) {
+                $(".cat").removeClass("fa-angle-up").addClass("fa-angle-down");
+            } else
+                $(".cat").removeClass("fa-angle-down").addClass("fa-angle-up");
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#get_cat").click(function () {
+
+            var Category = {
+                category1: $('#getcat').val()
+            }
+
+            $.ajax({
+                url: "@Url.Action("Category", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ category: Category }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#re").load(location.href + " #re");
+            //location.reload();
+        }
+    });
+</script>
+
+
+
+@*<div style="margin-bottom:15px;"></div>
+    <div>
+        <div><a href="#" id="test">test</a></div>
+        <p id="demo"></p>
+        <div><a href="#" id="addNew">Add</a></div>
+        <table id="dataTable">
+            <tr>
+                <th>contex name</th>
+                <th>contex no</th>
+                <th></th>
+
+
+            </tr>
+            @{
+                if (Model != null && Model.Count() > 0)
+                {
+                    int j = 0;
+                    foreach (var i in Model)
+                    {
+                        <tr>
+                            <th> @Html.TextBoxFor(x => x[j].name)</th>
+                            <th>@Html.TextBoxFor(x => x[j].last)</th>
+                        </tr>
+                        <tr>
+                            if (j > 0)
+                            {
+                            <a href="#" class="remove">Remove</a>
+                            }
+                        </tr>
+                    }
+
+                }
+            }
+        </table>
+    </div>*@
+
+@*@section scripts {
+
+        <script>
+            $(document).ready(function () {
+
+                $("#addNew").click(function (e) {
+                    e.preventDefault();
+                    var $tableBody = $("#dataTable");
+                    var $trlast = $tableBody.find("tr:last");
+                    var $trNew = $trlast.clone();
+
+                    var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                    $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+                    $.each($trNew.find(':input'), function (i, val) {
+                        var oloN = $(this).attr('name');
+                        var newN = oloN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                        $(this).attr('name', newN);
+                        var type = $(this).attr('type');
+                        if (type.toLocaleLowerCase() == "text") {
+                            $(this).attr('value', '');
+                        }
+                        $(this).removeClass("input-validation-error");
+                    });
+                    $trlast.after($trNew);
+
+                    var form = $("form")
+                        .removeData("validator")
+                        .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+                });
+                $('a.remove').live("click", function (e) {
+                    e.preventDefault();
+                    $(this).parent().parent().parent();
+
+                });
+            });
+        </script>
+
+    }*@
+
+@*----------------------------------------------------***************-------------------------*@
+@*chang class show and hinde
+    @Html.DropDownListFor(x => x.category, new SelectList(Model.category2, "category1", "category1"), "Select", new { @class = "list_contrl select2-single", id = "ddlCity" })
+    <div id="div_content" style="display:none">
+        <input id="txtNewOption" type="text" />
+        <input id="btnAddNewItem" type="button" value="AddNewItem" />
+    </div>
+    ----------------------------------------------------***************-------------------------
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#ddlCity").change(function () {
+                    var item = $(this).find("option:selected");
+                    var value = item.val(); //get the selected option value
+                    var text = item.html(); //get the selected option text
+                    if (text == "ไอศกรีม") {
+                        $("#div_content").css("display", "block"); //display the add new dialog
+                    }
+                });
+                $("#btnAddNewItem").click(function () {
+                    var newitem = $("#txtNewOption").val(); //get the new value
+                    //alert(newitem);
+                    var newOption = "<option value='" + newitem + "'>" + newitem + "</option>";
+                    $(newOption).insertBefore($("#ddlCity option:last")); //add new option
+                    $("#ddlCity").val(newitem);
+                    return false;
+                });
+            });
+        </script>*@
+
+
+
+@*<script>
+        $("#aa").on("click", function () {
+
+            $("#SelectList").append('');
+        });
+    </script>
+    <script>
+        $("#btnAdd").on("click", function () {
+            var myOptions = {
+
+            val1: '@(new SelectList(Model.category2, "category1", "category1"))'
+        };
+            var mySelect = $('select');
+
+        $.each(myOptions, function (val, text)
+        {
+            mySelect.append($('<option></option>').val(val).html(text));
+        });
+            });
+    </script>*@
+

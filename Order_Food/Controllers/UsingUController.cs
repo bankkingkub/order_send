@@ -10,10 +10,6 @@ namespace Order_Food.Controllers
 {
     public class UsingUController : Controller
     {
-        // GET: UsingU
-        //อิอิ นี่คือสารท้ารบจากกลุ่มคนผู้เร่าร้อนจนมอดไหม้
-        //หากเจ้าแน่จิงจงตามข้ามา 
-        //หึหึหึหึหึหึหึ
         public ActionResult Admin()
         {
             ViewBag.test = "เข้าหน้า แอดมิน";
@@ -38,8 +34,9 @@ namespace Order_Food.Controllers
 
         //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg)
+        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg, Get_catagory get_cat, string[] get_check)
         {
+
             if (obj.description != null)
             {
                 if (getimg != null)
@@ -56,6 +53,11 @@ namespace Order_Food.Controllers
                     {
                         using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
                         {
+                            //List<string> get_list = get_check.ToList();
+                            //List<string> get_name = getname.ToList();
+                            //get_cat.category = get_list.ToString();
+                            //get_cat.customer_name = get_name.ToString();
+                            //db.Get_catagory.Add(get_cat);
                             getimg.SaveAs(path);
                             obj.pic = fileName;
                             obj.name = checkid;
@@ -92,6 +94,22 @@ namespace Order_Food.Controllers
             //string fileName = Path.GetFileName(Food_Picture_pic.FileName);
             //string path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
             //Food_Picture_pic.SaveAs(path);
+            if (get_check != null)
+            {
+                int i = get_check.Length;
+                using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+                {
+                    string checkid = Session["namesec"].ToString();
+                    for (int ch = 0; ch < i; ch++)
+                    {
+                        get_cat.category = get_check[ch];
+                        get_cat.customer_name = checkid;
+                        db.Get_catagory.Add(get_cat);
+                        db.SaveChanges();
+                    }
+                };
+            }
+
             return RedirectToAction("Homepage", "Index");
         }
         //[AcceptVerbs(HttpVerbs.Post)]
@@ -135,7 +153,6 @@ namespace Order_Food.Controllers
             List<Add_Store> show_customer = new List<Add_Store>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-
                 show_customer = db.Add_Store.ToList();
             }
             var a = show_customer;
@@ -152,6 +169,139 @@ namespace Order_Food.Controllers
 
             return View();
         }
+        //public List<Category> loop_Category()
+        //{
+        //    List<Category> loop_cat = new List<Category>();
+        //    using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+        //    {
+        //        loop_cat = db.Category.ToList();
+        //    }
+        //    return loop_cat;
+        //}
+        public ActionResult Category(Category category)
+        {
+            //List<user_account> ad_st = new List<user_account> { new user_account { name = "", last = "" } };
+            var ab = model_car();
+            List<Category> loob_cat = new List<Category>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                loob_cat = db.Category.ToList();
+            }
+            return View(loob_cat);
+            //return View(ad_st);
+
+        }
+        public Add_Store model_car()
+        {
+            Add_Store modeluser = new Add_Store();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                modeluser.category2 = db.Category.ToList<Category>();
+            }
+            return modeluser;
+        }
+        //public int test_add()
+        //{
+        //    int cut = Convert.ToInt32(Session["cut"]);
+        //    cut = cut + 1;
+        //    Session["checklogin"] = cut;
+        //    return cut;
+        //}
+
+        public ActionResult getnamestore(Get_storename get_storename)
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+
+                var check = db.Get_storename.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check != null)
+                {
+                    ViewBag.storechek = "true";
+                    ViewBag.namestore = db.Get_storename.Where(x => x.customer_name == checkid).Select(x => x.get_storename1).FirstOrDefault();
+                }
+                else
+                {
+                    if (get_storename.get_storename1 != null)
+                    {
+                        get_storename.customer_name = checkid;
+                        db.Get_storename.Add(get_storename);
+                        db.SaveChanges();
+                        ViewBag.storechek = "true";
+                        ViewBag.namestore = db.Get_storename.Where(x => x.customer_name == checkid).Select(x => x.get_storename1).FirstOrDefault();
+                    }
+                    else
+                    {
+                        ViewBag.storechek = "false";
+                    }
+                }
+            }
+            return View();
+        }
+        //[HttpPost]
+        //public ActionResult getnamestore(string name) {
+
+        //    ViewBag.get = "เข้า สู่ get นะไอน้อง";
+
+
+        //    return View();
+        //}
+        //public string get_ajex(string name) {
+
+        //    var getstring = name;
+
+        //    return getstring;
+        //}
+        public ActionResult Get_c_address()
+        {
+
+
+
+
+            return View();
+
+
+        }
+        public ActionResult Get_time_store(Get_time get_time)
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+
+                var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check != null)
+                {
+                    ViewBag.storechek = "true";
+                    ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
+                    ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
+                    ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
+                    ViewBag.timeclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_close).FirstOrDefault();
+                }
+                else
+                {
+                    if (get_time.day_close != null && get_time.day_open != null && get_time.time_close != null && get_time.time_open != null)
+                    {
+                        get_time.customer_name = checkid;
+                        db.Get_time.Add(get_time);
+                        db.SaveChanges();
+                        ViewBag.storechek = "true";
+                        ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
+                        ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
+                        ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
+                        ViewBag.timeclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_close).FirstOrDefault();
+                    }
+                    else
+                    {
+                        ViewBag.storechek = "false";
+                    }
+                }
+            }
+
+            return View();
+        }
+
+
+
 
     }
 }

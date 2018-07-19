@@ -26,14 +26,17 @@ namespace Order_Food.Models
         }
     
         public virtual DbSet<Address_C> Address_C { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Food_Picture> Food_Picture { get; set; }
+        public virtual DbSet<Get_catagory> Get_catagory { get; set; }
         public virtual DbSet<Location_C> Location_C { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<user_account> user_account { get; set; }
-        public virtual DbSet<View_redit> View_redit { get; set; }
+        public virtual DbSet<Get_storename> Get_storename { get; set; }
         public virtual DbSet<Add_Store> Add_Store { get; set; }
+        public virtual DbSet<Get_time> Get_time { get; set; }
     }
 }

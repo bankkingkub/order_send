@@ -4,73 +4,89 @@
     <EntitySetMapping Name="Address_C">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Address_C">
         <MappingFragment StoreEntitySet="Address_C">
-          <ScalarProperty Name="Address_C_id" ColumnName="Address_C_id" />
-          <ScalarProperty Name="Address_C_lat" ColumnName="Address_C_lat" />
           <ScalarProperty Name="Address_C_long" ColumnName="Address_C_long" />
+          <ScalarProperty Name="Address_C_lat" ColumnName="Address_C_lat" />
+          <ScalarProperty Name="Address_C_id" ColumnName="Address_C_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="category1" ColumnName="category" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Customer">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
-          <ScalarProperty Name="Customer_res_name" ColumnName="Customer_res_name" />
-          <ScalarProperty Name="Customer_user" ColumnName="Customer_user" />
-          <ScalarProperty Name="Customer_pw" ColumnName="Customer_pw" />
-          <ScalarProperty Name="Customer_name" ColumnName="Customer_name" />
-          <ScalarProperty Name="Customer_last_name" ColumnName="Customer_last_name" />
-          <ScalarProperty Name="Address_C_id_fk" ColumnName="Address_C_id fk" />
-          <ScalarProperty Name="Customer_email" ColumnName="Customer_email" />
-          <ScalarProperty Name="Customer_phone" ColumnName="Customer_phone" />
-          <ScalarProperty Name="Customer_pic" ColumnName="Customer_pic" />
-          <ScalarProperty Name="Customer_open" ColumnName="Customer_open" />
-          <ScalarProperty Name="Customer_close" ColumnName="Customer_close" />
           <ScalarProperty Name="Location_C_id" ColumnName="Location_C_id" />
+          <ScalarProperty Name="Customer_close" ColumnName="Customer_close" />
+          <ScalarProperty Name="Customer_open" ColumnName="Customer_open" />
+          <ScalarProperty Name="Customer_pic" ColumnName="Customer_pic" />
+          <ScalarProperty Name="Customer_phone" ColumnName="Customer_phone" />
+          <ScalarProperty Name="Customer_email" ColumnName="Customer_email" />
+          <ScalarProperty Name="Address_C_id_fk" ColumnName="Address_C_id fk" />
+          <ScalarProperty Name="Customer_last_name" ColumnName="Customer_last_name" />
+          <ScalarProperty Name="Customer_name" ColumnName="Customer_name" />
+          <ScalarProperty Name="Customer_pw" ColumnName="Customer_pw" />
+          <ScalarProperty Name="Customer_user" ColumnName="Customer_user" />
+          <ScalarProperty Name="Customer_res_name" ColumnName="Customer_res_name" />
+          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Food_Picture">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Food_Picture">
         <MappingFragment StoreEntitySet="Food_Picture">
-          <ScalarProperty Name="Food_Picture_id" ColumnName="Food_Picture_id" />
-          <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
-          <ScalarProperty Name="Food_Picture_pic" ColumnName="Food_Picture_pic" />
           <ScalarProperty Name="Food_Picture_name" ColumnName="Food_Picture_name" />
+          <ScalarProperty Name="Food_Picture_pic" ColumnName="Food_Picture_pic" />
+          <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
+          <ScalarProperty Name="Food_Picture_id" ColumnName="Food_Picture_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_catagory">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_catagory">
+        <MappingFragment StoreEntitySet="Get_catagory">
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Location_C">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Location_C">
         <MappingFragment StoreEntitySet="Location_C">
-          <ScalarProperty Name="Location_C_id" ColumnName="Location_C_id" />
-          <ScalarProperty Name="Location_C_number" ColumnName="Location_C_number" />
-          <ScalarProperty Name="Address_C_street" ColumnName="Address_C_street" />
-          <ScalarProperty Name="Address_C_province" ColumnName="Address_C_province" />
-          <ScalarProperty Name="Address_C_district" ColumnName="Address_C_district" />
-          <ScalarProperty Name="Address_C_sub_dstrict" ColumnName="Address_C_sub_dstrict" />
-          <ScalarProperty Name="Address_C_postal_code" ColumnName="Address_C_postal_code" />
           <ScalarProperty Name="Address_C_location_type" ColumnName="Address_C_location_type" />
+          <ScalarProperty Name="Address_C_postal_code" ColumnName="Address_C_postal_code" />
+          <ScalarProperty Name="Address_C_sub_dstrict" ColumnName="Address_C_sub_dstrict" />
+          <ScalarProperty Name="Address_C_district" ColumnName="Address_C_district" />
+          <ScalarProperty Name="Address_C_province" ColumnName="Address_C_province" />
+          <ScalarProperty Name="Address_C_street" ColumnName="Address_C_street" />
+          <ScalarProperty Name="Location_C_number" ColumnName="Location_C_number" />
+          <ScalarProperty Name="Location_C_id" ColumnName="Location_C_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Menu">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Menu">
         <MappingFragment StoreEntitySet="Menu">
-          <ScalarProperty Name="C_PK_Menu_id" ColumnName="(PK)Menu_id" />
-          <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
-          <ScalarProperty Name="Menu_time" ColumnName="Menu_time" />
-          <ScalarProperty Name="Menu_text" ColumnName="Menu_text" />
-          <ScalarProperty Name="Menu_price" ColumnName="Menu_price" />
           <ScalarProperty Name="Menu_amount" ColumnName="Menu_amount" />
+          <ScalarProperty Name="Menu_price" ColumnName="Menu_price" />
+          <ScalarProperty Name="Menu_text" ColumnName="Menu_text" />
+          <ScalarProperty Name="Menu_time" ColumnName="Menu_time" />
+          <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
+          <ScalarProperty Name="C_PK_Menu_id" ColumnName="(PK)Menu_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Report">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Report">
         <MappingFragment StoreEntitySet="Report">
-          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
-          <ScalarProperty Name="C_FK_Order_id" ColumnName="(FK)Order_id" />
           <ScalarProperty Name="C_FK_Menu_id" ColumnName="(FK)Menu_id" />
+          <ScalarProperty Name="C_FK_Order_id" ColumnName="(FK)Order_id" />
+          <ScalarProperty Name="Report_id" ColumnName="Report_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -78,45 +94,56 @@
       <EntityTypeMapping TypeName="Order_Food_dbModel.User">
         <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="Province" ColumnName="Province" />
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
-          <ScalarProperty Name="User_user" ColumnName="User_user" />
-          <ScalarProperty Name="User_pw" ColumnName="User_pw" />
-          <ScalarProperty Name="User_name" ColumnName="User_name" />
-          <ScalarProperty Name="User_last_name" ColumnName="User_last_name" />
-          <ScalarProperty Name="C_FK_Address_U" ColumnName="(FK)Address_U" />
-          <ScalarProperty Name="C_FK_Location_U_id" ColumnName="(FK)Location_U_id" />
-          <ScalarProperty Name="User_phone" ColumnName="User_phone" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="User_phone" ColumnName="User_phone" />
+          <ScalarProperty Name="C_FK_Location_U_id" ColumnName="(FK)Location_U_id" />
+          <ScalarProperty Name="C_FK_Address_U" ColumnName="(FK)Address_U" />
+          <ScalarProperty Name="User_last_name" ColumnName="User_last_name" />
+          <ScalarProperty Name="User_name" ColumnName="User_name" />
+          <ScalarProperty Name="User_pw" ColumnName="User_pw" />
+          <ScalarProperty Name="User_user" ColumnName="User_user" />
+          <ScalarProperty Name="User_id" ColumnName="User_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="user_account">
       <EntityTypeMapping TypeName="Order_Food_dbModel.user_account">
         <MappingFragment StoreEntitySet="user_account">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="last" ColumnName="last" />
           <ScalarProperty Name="pw" ColumnName="pw" />
+          <ScalarProperty Name="last" ColumnName="last" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="View_redit">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.View_redit">
-        <MappingFragment StoreEntitySet="View_redit">
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
-          <ScalarProperty Name="User_user" ColumnName="User_user" />
-          <ScalarProperty Name="User_pw" ColumnName="User_pw" />
+    <EntitySetMapping Name="Get_storename">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_storename">
+        <MappingFragment StoreEntitySet="Get_storename">
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Add_Store">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Add_Store">
         <MappingFragment StoreEntitySet="Add_Store">
-          <ScalarProperty Name="category" ColumnName="category" />
           <ScalarProperty Name="pic" ColumnName="pic" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_time">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_time">
+        <MappingFragment StoreEntitySet="Get_time">
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="time_close" ColumnName="time_close" />
+          <ScalarProperty Name="time_open" ColumnName="time_open" />
+          <ScalarProperty Name="day_close" ColumnName="day_close" />
+          <ScalarProperty Name="day_open" ColumnName="day_open" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
