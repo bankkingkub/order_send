@@ -127,9 +127,10 @@
     <EntitySetMapping Name="Get_location">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Get_location">
         <MappingFragment StoreEntitySet="Get_location">
-          <ScalarProperty Name="address_province" ColumnName="address_province" />
+          <ScalarProperty Name="edit_value" ColumnName="edit_value" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="address_zip" ColumnName="address_zip" />
+          <ScalarProperty Name="address_province" ColumnName="address_province" />
           <ScalarProperty Name="address_county" ColumnName="address_county" />
           <ScalarProperty Name="address_district" ColumnName="address_district" />
           <ScalarProperty Name="address_street" ColumnName="address_street" />
@@ -141,7 +142,7 @@
     <EntitySetMapping Name="Get_storename">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Get_storename">
         <MappingFragment StoreEntitySet="Get_storename">
-          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="edit_value" ColumnName="edit_value" />
           <ScalarProperty Name="customer_name" ColumnName="customer_name" />
           <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
           <ScalarProperty Name="id" ColumnName="id" />

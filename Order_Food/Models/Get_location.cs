@@ -19,8 +19,9 @@ namespace Order_Food.Models
         public string address_street { get; set; }
         public string address_district { get; set; }
         public string address_county { get; set; }
+        public string address_province { get; set; }
         public string address_zip { get; set; }
         public string status { get; set; }
-        public string address_province { get; set; }
+        public string edit_value { get; set; }
     }
 }

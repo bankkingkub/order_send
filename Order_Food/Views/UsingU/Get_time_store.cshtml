@@ -14,42 +14,47 @@ new SelectListItem { Text = "วันอาทิตย์", Value = "วัน
 
 }
 <div id="retime">
-@{
-    if (ViewBag.storechek == "true")
-    {
-        <div class="row">
-            @ViewBag.dayopen
-            -
-            @ViewBag.dayclose
-            @ViewBag.timeopen
-            @ViewBag.timeclose
-        </div>
+    @{
+        if (ViewBag.storechek == "true")
+        {
+            <div class="row">
+                <div class="col-md-9" style="line-height: 38px;">
+                    @ViewBag.dayopen
+                    -
+                    @ViewBag.dayclose
+                    @ViewBag.timeopen
+                    @ViewBag.timeclose
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" id="edit_location" class="w3-button w3-dark-grey" value="แก้ไข">
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <div class="row">
+                <div class="col-md-6">
+                    เปิดร้านวันที่
+                    @Html.DropDownListFor(x => x.day_open, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayopen" })
+                </div>
+                <div class="col-md-6">
+                    ถึง
+                    @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose" })
+                </div>
+
+                <div class="col-md-6">
+                    เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen" })
+                </div>
+                <div class="col-md-6">
+                    เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose" })
+                </div>
+            </div>
+            <input type="submit" id="gettime" class="w3-button w3-dark-grey" value="ตกลง">
+
+        }
     }
-    else
-    {
-
-        <div class="row">
-            <div class="col-md-6">
-                เปิดร้านวันที่
-                @Html.DropDownListFor(x => x.day_open, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayopen" })
-            </div>
-            <div class="col-md-6">
-                ถึง
-                @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose" })
-            </div>
-
-            <div class="col-md-6">
-                เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen" })
-            </div>
-            <div class="col-md-6">
-                เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose" })
-            </div>
-        </div>
-        <input type="submit" id="gettime" class="w3-button w3-dark-grey" value="ตกลง">
-
-    }
-}
-    </div>
+</div>
 <script>
 
     $(document).ready(function () {

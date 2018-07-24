@@ -23,25 +23,15 @@
             </div>
 
         }
-        else
-        {
-            <div>
-                กรุณาใส่ชื่อร้าน :<input type="text" id="name" class="text-box single-line">
-                <input type="submit" id="get" class="w3-button w3-dark-grey" value="ตกลง">
-            </div>
-        }
     }
-
-
-    @*@ViewBag.get*@
-
-    <script>
+</div>
+<script>
 
     $(document).ready(function () {
         $("#get").click(function () {
             var getname = {
                 get_storename1: $('#name').val(),
-                status: "show"
+                edit_value: "show"
             }
             $.ajax({
                 url: "@Url.Action("getnamestore", "UsingU")",
@@ -59,14 +49,14 @@
         }
     });
 
-    </script>
+</script>
 
-    <script>
+<script>
 
     $(document).ready(function () {
         $("#edit").click(function () {
             var getname = {
-                status: "edit"
+                edit_value: "edit"
             }
             $.ajax({
                 url: "@Url.Action("getnamestore", "UsingU")",
@@ -80,15 +70,10 @@
         });
         function re() {
             $("#re").load("http://localhost:55400/UsingU/Getnamestore");
-
-            //location.reload();
         }
     });
 
-    </script>
-</div>
-
-<div style="height:15px;"></div>
+</script>
 
 @*<script>
         $(document).ready(function () {

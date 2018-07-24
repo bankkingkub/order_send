@@ -154,9 +154,10 @@
     <Property Name="address_street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="address_district" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="address_county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="address_zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Get_storename">
     <Key>
@@ -165,6 +166,6 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="get_storename1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

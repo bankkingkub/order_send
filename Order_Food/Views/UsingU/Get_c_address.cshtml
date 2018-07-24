@@ -1,18 +1,25 @@
 ﻿@{
     Layout = null;
+    @model Order_Food.Models.Get_location
 }
 <div id="re_location">
     @if (ViewBag.storechek == "true")
     {
-        <div>
-            @ViewBag.street
-            @ViewBag.district
-            @ViewBag.county
-            @ViewBag.province
-
+        <div class="row">
+            <div class="col-md-9" style="line-height: 38px;">
+                <div>
+                    @ViewBag.street
+                    @ViewBag.district
+                    @ViewBag.county
+                    @ViewBag.province
+                </div>
+            </div>
+            <div class="col-md-3">
+                <input type="submit" id="edit_location" class="w3-button w3-dark-grey" value="แก้ไข">
+            </div>
         </div>
     }
-    else
+    else if (ViewBag.storechek == "false")
     {
         <div class="row">
             <div class="col-md-12">
@@ -24,25 +31,30 @@
 
             <p id="position" style="display:none"></p>
             <div class="row">
+
                 <div class="col-md-6">
-                    <input class="text-box single-line" type="text" name="street" id="street" placeholder="ถนน" />
+                    <input class="text-box single-line" type="text" name="street" id="street" placeholder="ถนน" value="@ViewBag.street" />
                 </div>
                 <div class="col-md-6">
-                    <input class="text-box single-line" type="text" name="neighborhood" id="neighborhood" placeholder="แขวง" />
+                    <input class="text-box single-line" type="text" name="neighborhood" id="neighborhood" placeholder="แขวง" value="@ViewBag.district" />
                 </div>
                 <div class="col-md-6">
-                    <input class="text-box single-line" type="text" name="area" id="area" placeholder="เขต" />
+                    <input class="text-box single-line" type="text" name="area" id="area" placeholder="เขต" value="@ViewBag.county" />
                 </div>
                 <div class="col-md-6">
-                    <input class="text-box single-line" type="text" name="state" id="state" placeholder="จังหวัด" />
+                    <input class="text-box single-line" type="text" name="state" id="state" placeholder="จังหวัด" value="@ViewBag.province" />
                 </div>
                 @*<div class="col-md-6">
                         <input class="text-box single-line" type="text" name="zip" id="zip" placeholder="รหัสไปรษณีย์" />
                     </div>
                     <div class="col-md-6">
                     </div>*@
+                <div class="col-md-12">
+                    <div class="pd_15px"></div>
+                    <input type="submit" id="get_location" class="w3-button w3-dark-grey" value="ตกลง">
+                </div>
             </div>
-            <input type="submit" id="get_location" class="w3-button w3-dark-grey" value="ตกลง">
+
         </div>
         <p id="alert"></p>
 
@@ -136,7 +148,8 @@
                 address_street: $('#street').val(),
                 address_district: $('#neighborhood').val(),
                 address_county: $('#area').val(),
-                address_province: $('#state').val()
+                address_province: $('#state').val(),
+                edit_value: "show"
             }
             $.ajax({
                 url: "@Url.Action("Get_c_address", "UsingU")",
@@ -149,7 +162,33 @@
             });
         });
         function re() {
-            $("#re_location").load(location.href + " #re_location");
+            $("#re_location").load("http://localhost:55400/UsingU/Get_c_address");
+        }
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#edit_location").click(function () {
+            var getname = {
+                address_street: $('#street').val(),
+                address_district: $('#neighborhood').val(),
+                address_county: $('#area').val(),
+                address_province: $('#state').val(),
+                edit_value: "edit"
+            }
+            $.ajax({
+                url: "@Url.Action("Get_c_address", "UsingU")",
+                type: "POST",
+                contentType: "application/json;",
+                data: JSON.stringify({ get_lo: getname }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#re_location").load("http://localhost:55400/UsingU/Get_c_address");
         }
     });
 

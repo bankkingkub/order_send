@@ -10,7 +10,6 @@ namespace Order_Food.Controllers
 {
     public class IndexController : Controller
     {
-
         public ActionResult Homepage()
         {
             if (Session["checklogin"] == null)

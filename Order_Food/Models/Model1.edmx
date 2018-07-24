@@ -82,6 +82,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
           <Property Name="address_province" Type="varchar" MaxLength="50" />
           <Property Name="address_zip" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Get_storename">
           <Key>
@@ -90,7 +91,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="get_storename" Type="varchar" MaxLength="50" />
           <Property Name="customer_name" Type="varchar" MaxLength="50" />
-          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Get_time">
           <Key>
@@ -341,9 +342,10 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="address_street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="address_district" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="address_county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="address_zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Get_storename">
           <Key>
@@ -352,7 +354,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="get_storename1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -486,9 +488,10 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <EntitySetMapping Name="Get_location">
             <EntityTypeMapping TypeName="Order_Food_dbModel.Get_location">
               <MappingFragment StoreEntitySet="Get_location">
-                <ScalarProperty Name="address_province" ColumnName="address_province" />
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="address_zip" ColumnName="address_zip" />
+                <ScalarProperty Name="address_province" ColumnName="address_province" />
                 <ScalarProperty Name="address_county" ColumnName="address_county" />
                 <ScalarProperty Name="address_district" ColumnName="address_district" />
                 <ScalarProperty Name="address_street" ColumnName="address_street" />
@@ -500,7 +503,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <EntitySetMapping Name="Get_storename">
             <EntityTypeMapping TypeName="Order_Food_dbModel.Get_storename">
               <MappingFragment StoreEntitySet="Get_storename">
-                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
                 <ScalarProperty Name="customer_name" ColumnName="customer_name" />
                 <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
                 <ScalarProperty Name="id" ColumnName="id" />
