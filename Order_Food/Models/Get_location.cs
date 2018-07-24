@@ -12,15 +12,15 @@ namespace Order_Food.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Location_C
+    public partial class Get_location
     {
-        public int Location_C_id { get; set; }
-        public string Location_C_number { get; set; }
-        public string Address_C_street { get; set; }
-        public string Address_C_province { get; set; }
-        public string Address_C_district { get; set; }
-        public string Address_C_sub_dstrict { get; set; }
-        public string Address_C_postal_code { get; set; }
-        public string Address_C_location_type { get; set; }
+        public int id { get; set; }
+        public string customer_name { get; set; }
+        public string address_street { get; set; }
+        public string address_district { get; set; }
+        public string address_county { get; set; }
+        public string address_zip { get; set; }
+        public string status { get; set; }
+        public string address_province { get; set; }
     }
 }

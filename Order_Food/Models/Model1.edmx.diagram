@@ -10,15 +10,15 @@
         <EntityTypeShape EntityType="Order_Food_dbModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Food_Picture" Width="1.5" PointX="4.75" PointY="2.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Get_catagory" Width="1.5" PointX="4.75" PointY="5.75" />
-        <EntityTypeShape EntityType="Order_Food_dbModel.Location_C" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Menu" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Report" Width="1.5" PointX="6.75" PointY="4.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.User" Width="1.5" PointX="6.75" PointY="7.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.user_account" Width="1.5" PointX="8.75" PointY="0.75" />
         <AssociationConnector Association="Order_Food_dbModel.FK_Customer_Customer" />
-        <EntityTypeShape EntityType="Order_Food_dbModel.Get_storename" Width="1.5" PointX="3.375" PointY="8.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Add_Store" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Get_time" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Get_location" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Get_storename" Width="1.5" PointX="3.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

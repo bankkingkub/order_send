@@ -1,36 +1,53 @@
 ﻿@{
     Layout = null;
 }
-<div class="row">
-    <div class="col-md-12">
-        <button id="okbutton">ที่อยู่ของคุณในตอนนี้</button>
-    </div>
-</div>
-<div class="">
-    <p id="paragraph" style="display:none"></p>
+<div id="re_location">
+    @if (ViewBag.storechek == "true")
+    {
+        <div>
+            @ViewBag.street
+            @ViewBag.district
+            @ViewBag.county
+            @ViewBag.province
 
-    <p id="position" style="display:none"></p>
-    <div class="row">
-        <div class="col-md-6">
-            <input class="text-box single-line" type="text" name="street" id="street" placeholder="ถนน" />
         </div>
-        <div class="col-md-6">
-            <input class="text-box single-line" type="text" name="neighborhood" id="neighborhood" placeholder="แขวง" />
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <button id="okbutton">ที่อยู่ของคุณในตอนนี้</button>
+            </div>
         </div>
-        <div class="col-md-6">
-            <input class="text-box single-line" type="text" name="area" id="area" placeholder="เขต" />
+        <div class="">
+            <p id="paragraph" style="display:none"></p>
+
+            <p id="position" style="display:none"></p>
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="text-box single-line" type="text" name="street" id="street" placeholder="ถนน" />
+                </div>
+                <div class="col-md-6">
+                    <input class="text-box single-line" type="text" name="neighborhood" id="neighborhood" placeholder="แขวง" />
+                </div>
+                <div class="col-md-6">
+                    <input class="text-box single-line" type="text" name="area" id="area" placeholder="เขต" />
+                </div>
+                <div class="col-md-6">
+                    <input class="text-box single-line" type="text" name="state" id="state" placeholder="จังหวัด" />
+                </div>
+                @*<div class="col-md-6">
+                        <input class="text-box single-line" type="text" name="zip" id="zip" placeholder="รหัสไปรษณีย์" />
+                    </div>
+                    <div class="col-md-6">
+                    </div>*@
+            </div>
+            <input type="submit" id="get_location" class="w3-button w3-dark-grey" value="ตกลง">
         </div>
-        <div class="col-md-6">
-            <input class="text-box single-line" type="text" name="state" id="state" placeholder="จังหวัด" />
-        </div>
-        @*<div class="col-md-6">
-            <input class="text-box single-line" type="text" name="zip" id="zip" placeholder="รหัสไปรษณีย์" />
-        </div>
-        <div class="col-md-6">
-        </div>*@
-    </div>
+        <p id="alert"></p>
+
+    }
 </div>
-<p id="alert"></p>
 
 <script>
     var alr = document.getElementById("alert");
@@ -71,8 +88,8 @@
 
     //Fills out the form
     function fillForm(data) {
-        str.value = data.results[0].address_components[1].long_name;
-        nei.value = data.results[0].address_components[2].long_name;
+        str.value = data.results[0].address_components[1].short_name;
+        nei.value = data.results[0].address_components[2].short_name;
         area.value = data.results[0].address_components[3].short_name;
         sta.value = data.results[0].address_components[5].short_name;
         zip.value = data.results[0].address_components[7].short_name;
@@ -109,4 +126,31 @@
     }
 
     document.getElementById("okbutton").addEventListener("click", getLocation);
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $("#get_location").click(function () {
+            var getname = {
+                address_street: $('#street').val(),
+                address_district: $('#neighborhood').val(),
+                address_county: $('#area').val(),
+                address_province: $('#state').val()
+            }
+            $.ajax({
+                url: "@Url.Action("Get_c_address", "UsingU")",
+                type: "POST",
+                contentType: "application/json;",
+                data: JSON.stringify({ get_lo: getname }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#re_location").load(location.href + " #re_location");
+        }
+    });
+
 </script>

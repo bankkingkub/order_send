@@ -65,6 +65,19 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     <Property Name="customer_name" Type="varchar" MaxLength="50" />
     <Property Name="category" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Get_location">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="address_street" Type="varchar" MaxLength="50" />
+    <Property Name="address_district" Type="varchar" MaxLength="50" />
+    <Property Name="address_county" Type="varchar" MaxLength="50" />
+    <Property Name="address_province" Type="varchar" MaxLength="50" />
+    <Property Name="address_zip" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Get_storename">
     <Key>
       <PropertyRef Name="id" />
@@ -72,6 +85,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="get_storename" Type="varchar" MaxLength="50" />
     <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Get_time">
     <Key>
@@ -83,19 +97,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     <Property Name="time_open" Type="varchar" MaxLength="50" />
     <Property Name="time_close" Type="varchar" MaxLength="50" />
     <Property Name="customer_name" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Location_C">
-    <Key>
-      <PropertyRef Name="Location_C_id" />
-    </Key>
-    <Property Name="Location_C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Location_C_number" Type="varchar" MaxLength="50" />
-    <Property Name="Address_C_street" Type="varchar" MaxLength="50" />
-    <Property Name="Address_C_province" Type="varchar" MaxLength="50" />
-    <Property Name="Address_C_district" Type="varchar" MaxLength="50" />
-    <Property Name="Address_C_sub_dstrict" Type="varchar" MaxLength="50" />
-    <Property Name="Address_C_postal_code" Type="varchar" MaxLength="50" />
-    <Property Name="Address_C_location_type" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -165,9 +166,9 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_catagory" EntityType="Self.Get_catagory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Get_location" EntityType="Self.Get_location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_storename" EntityType="Self.Get_storename" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_time" EntityType="Self.Get_time" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Location_C" EntityType="Self.Location_C" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />

@@ -55,20 +55,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Location_C">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.Location_C">
-        <MappingFragment StoreEntitySet="Location_C">
-          <ScalarProperty Name="Address_C_location_type" ColumnName="Address_C_location_type" />
-          <ScalarProperty Name="Address_C_postal_code" ColumnName="Address_C_postal_code" />
-          <ScalarProperty Name="Address_C_sub_dstrict" ColumnName="Address_C_sub_dstrict" />
-          <ScalarProperty Name="Address_C_district" ColumnName="Address_C_district" />
-          <ScalarProperty Name="Address_C_province" ColumnName="Address_C_province" />
-          <ScalarProperty Name="Address_C_street" ColumnName="Address_C_street" />
-          <ScalarProperty Name="Location_C_number" ColumnName="Location_C_number" />
-          <ScalarProperty Name="Location_C_id" ColumnName="Location_C_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Menu">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Menu">
         <MappingFragment StoreEntitySet="Menu">
@@ -116,15 +102,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Get_storename">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_storename">
-        <MappingFragment StoreEntitySet="Get_storename">
-          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-          <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Add_Store">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Add_Store">
         <MappingFragment StoreEntitySet="Add_Store">
@@ -144,6 +121,30 @@
           <ScalarProperty Name="day_close" ColumnName="day_close" />
           <ScalarProperty Name="day_open" ColumnName="day_open" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_location">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_location">
+        <MappingFragment StoreEntitySet="Get_location">
+          <ScalarProperty Name="address_province" ColumnName="address_province" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="address_zip" ColumnName="address_zip" />
+          <ScalarProperty Name="address_county" ColumnName="address_county" />
+          <ScalarProperty Name="address_district" ColumnName="address_district" />
+          <ScalarProperty Name="address_street" ColumnName="address_street" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_storename">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_storename">
+        <MappingFragment StoreEntitySet="Get_storename">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

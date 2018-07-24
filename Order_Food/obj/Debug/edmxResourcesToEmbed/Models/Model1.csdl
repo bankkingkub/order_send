@@ -6,7 +6,6 @@
     <EntitySet Name="Customer" EntityType="Order_Food_dbModel.Customer" />
     <EntitySet Name="Food_Picture" EntityType="Order_Food_dbModel.Food_Picture" />
     <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
-    <EntitySet Name="Location_C" EntityType="Order_Food_dbModel.Location_C" />
     <EntitySet Name="Menu" EntityType="Order_Food_dbModel.Menu" />
     <EntitySet Name="Report" EntityType="Order_Food_dbModel.Report" />
     <EntitySet Name="User" EntityType="Order_Food_dbModel.User" />
@@ -15,9 +14,10 @@
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Customer1" EntitySet="Customer" />
     </AssociationSet>
-    <EntitySet Name="Get_storename" EntityType="Order_Food_dbModel.Get_storename" />
     <EntitySet Name="Add_Store" EntityType="Order_Food_dbModel.Add_Store" />
     <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
+    <EntitySet Name="Get_location" EntityType="Order_Food_dbModel.Get_location" />
+    <EntitySet Name="Get_storename" EntityType="Order_Food_dbModel.Get_storename" />
   </EntityContainer>
   <EntityType Name="Address_C">
     <Key>
@@ -69,19 +69,6 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Location_C">
-    <Key>
-      <PropertyRef Name="Location_C_id" />
-    </Key>
-    <Property Name="Location_C_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Location_C_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address_C_street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address_C_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address_C_district" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address_C_sub_dstrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address_C_postal_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address_C_location_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -138,14 +125,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Get_storename">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="get_storename1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="Add_Store">
     <Key>
       <PropertyRef Name="id" />
@@ -165,5 +144,27 @@
     <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="time_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Get_location">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_district" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Get_storename">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="get_storename1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
     @model Order_Food.Models.Get_storename
 }
@@ -7,14 +6,22 @@
     @{
         if (ViewBag.storechek == "true")
         {
-    <div class="row">
-        <div class="col-md-9" style="line-height: 38px;">
-        โชว ชื่อร้านอาหาร : @ViewBag.namestore
+            <div class="row">
+                <div class="col-md-9" style="line-height: 38px;">
+                    โชว ชื่อร้านอาหาร : @ViewBag.namestore
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" id="edit" class="w3-button w3-dark-grey" value="แก้ไข">
+                </div>
             </div>
-        <div class="col-md-3">
-        <input type="submit" id="edit" class="w3-button w3-dark-grey" value="แก้ไข">
+        }
+        else if (ViewBag.storechek == "false")
+        {
+            <div>
+                กรุณาใส่ชื่อร้าน :<input type="text" id="name" value="@ViewBag.namestore" class="text-box single-line">
+                <input type="submit" id="get" class="w3-button w3-dark-grey" value="ตกลง">
             </div>
-    </div>
+
         }
         else
         {
@@ -24,17 +31,17 @@
             </div>
         }
     }
-</div>
-<div style="height:15px;"></div>
 
-@*@ViewBag.get*@
 
-<script>
+    @*@ViewBag.get*@
+
+    <script>
 
     $(document).ready(function () {
         $("#get").click(function () {
             var getname = {
-                get_storename1: $('#name').val()
+                get_storename1: $('#name').val(),
+                status: "show"
             }
             $.ajax({
                 url: "@Url.Action("getnamestore", "UsingU")",
@@ -47,14 +54,41 @@
             });
         });
         function re() {
-            $("#re").load(location.href + " #re");
+            $("#re").load("http://localhost:55400/UsingU/Getnamestore");
             //location.reload();
         }
     });
 
-</script>
+    </script>
 
+    <script>
 
+    $(document).ready(function () {
+        $("#edit").click(function () {
+            var getname = {
+                status: "edit"
+            }
+            $.ajax({
+                url: "@Url.Action("getnamestore", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ get_storename: getname }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#re").load("http://localhost:55400/UsingU/Getnamestore");
+
+            //location.reload();
+        }
+    });
+
+    </script>
+</div>
+
+<div style="height:15px;"></div>
 
 @*<script>
         $(document).ready(function () {

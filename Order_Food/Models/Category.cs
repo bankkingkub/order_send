@@ -11,10 +11,9 @@ namespace Order_Food.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Category
     {
         public string category1 { get; set; }
-        public string[] getvlue { get; set; }
-}
+    }
 }
