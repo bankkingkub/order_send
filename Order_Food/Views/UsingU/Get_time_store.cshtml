@@ -26,7 +26,7 @@ new SelectListItem { Text = "วันอาทิตย์", Value = "วัน
                     @ViewBag.timeclose
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" id="edit_location" class="w3-button w3-dark-grey" value="แก้ไข">
+                    <input type="submit" id="edit_time" class="w3-button w3-dark-grey" value="แก้ไข">
                 </div>
             </div>
         }
@@ -40,14 +40,14 @@ new SelectListItem { Text = "วันอาทิตย์", Value = "วัน
                 </div>
                 <div class="col-md-6">
                     ถึง
-                    @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose" })
+                    @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose"})
                 </div>
 
                 <div class="col-md-6">
-                    เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen" })
+                    เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen"})
                 </div>
                 <div class="col-md-6">
-                    เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose" })
+                    เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose"})
                 </div>
             </div>
             <input type="submit" id="gettime" class="w3-button w3-dark-grey" value="ตกลง">
@@ -63,7 +63,8 @@ new SelectListItem { Text = "วันอาทิตย์", Value = "วัน
                 day_open: $('#dayopen').val(),
                 day_close: $('#dayclose').val(),
                 time_open: $('#timeopen').val(),
-                time_close: $('#timeclose').val()
+                time_close: $('#timeclose').val(),
+                edit_value: "show"
 
             }
             $.ajax({
@@ -77,7 +78,35 @@ new SelectListItem { Text = "วันอาทิตย์", Value = "วัน
             });
         });
         function re() {
-            $("#retime").load(location.href + " #retime");
+            $("#retime").load("http://localhost:55400/UsingU/Get_time_store");
+        }
+    });
+
+</script>
+<script>
+
+    $(document).ready(function () {
+        $("#edit_time").click(function () {
+            var gettime = {
+                day_open: $('#dayopen').val(),
+                day_close: $('#dayclose').val(),
+                time_open: $('#timeopen').val(),
+                time_close: $('#timeclose').val(),
+                edit_value: "edit"
+
+            }
+            $.ajax({
+                url: "@Url.Action("get_time_store", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ get_time: gettime }),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
+        });
+        function re() {
+            $("#retime").load("http://localhost:55400/UsingU/Get_time_store");
         }
     });
 

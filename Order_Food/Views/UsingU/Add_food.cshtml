@@ -1,0 +1,141 @@
+﻿@{
+    Layout = null;
+    @model List<Order_Food.Models.Get_menu>
+}
+<div id="re_menu">
+    @if (ViewBag.storechek == "true")
+    {
+        <div>รายการอาหารที่มี</div>
+        foreach (var name_price in Model)
+        {
+            @name_price.Menu_name
+            @name_price.Menu_price
+            <span>บาท</span>
+            <br>
+            }
+            <input type="submit" id="edit_get_menu" class="w3-button w3-dark-grey" value="แก้ไข">
+            }
+            else if (ViewBag.storechek == "false")
+            {
+            <div>เพิ่มรายการอาหาร</div>
+            <div id="addnew_input">
+                <div class="row">
+                    <div class="col-md-5">
+                        @*<input type="text" id="get_foodname[0]" class="a">*@
+                        <input type="text" id="get_foodname0" class="get_name text-box single-line" placeholder="ชื่ออาหาร">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" id="get_foodprice0" class="get_price text-box single-line" placeholder="ราคาอาหาร">
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div class="pd_15px"></div>
+            <input type="submit" id="add_input" class="w3-button w3-dark-grey" value="เพิ่มช่อง">
+            <div class="pd_15px"></div>
+            <input type="submit" id="get_menu" class="w3-button w3-dark-grey" value="ตกลง">
+            }
+        </div>
+
+<script>
+    $(document).ready(function () {
+        let i = 1;
+        $("#add_input").click(function () {
+            $("#addnew_input").append('<div class="row delet' + i + '"><div class="col-md-5"> <input type="text" id="get_foodname[' + i + ']" class="get_name text-box single-line" placeholder="ชื่ออาหาร"> </div> <div class="col-md-5"> <input type = "text" id = "get_foodprice' + i + '" class= "get_price text-box single-line" placeholder = "ราคาอาหาร"> </div > <div class="col-md-2"><input type="submit" id="delet_input' + i + '" class="w3-button w3-dark-grey" value="ลบช่อง"></div></div>',
+                "<script> $('#delet_input" + i + "').click(function () {$('.delet" + i + "').remove();});<\/script>")
+            i++
+        });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        let i = 0;
+        $("#get_menu").click(function () {
+            var get_add_food = [];
+            var get_add_price = [];
+            var get_food = {
+                edit_value: "show"
+            };
+            $(".get_name").each(function () {
+                var check_null = $(this).is(".get_name");
+            if (check_null != null) {
+                get_add_food[i] = $(this).val();
+                ++i;
+            } else {
+                alert("null")
+                }
+            });
+            i = 0;
+            $(".get_price").each(function () {
+                var check_null = $(this).is(".get_price");
+                if (check_null != null) {
+                    get_add_price[i] = $(this).val();
+                    ++i;
+                } else {
+                    alert("null")
+                }
+            });
+
+                $.ajax({
+                    url: "@Url.Action("Add_food", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ get_menu: get_food, get_name_menu: get_add_food, get_name_price: get_add_price}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });
+
+        });
+        function re() {
+            $("#re_menu").load("http://localhost:55400/UsingU/Add_food");
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#edit_get_menu").click(function () {
+            var get_food = {
+                edit_value: "edit"
+            };
+            $.ajax({
+                    url: "@Url.Action("Add_food", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ get_menu: get_food}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });
+
+        });
+        function re() {
+            $("#re_menu").load("http://localhost:55400/UsingU/Add_food");
+        }
+        });
+
+
+</script>
+
+
+
+
+@*<script>
+    $(document).ready(function () {
+        let i = 1;
+        $("#add_input").click(function () {
+            $("#addnew_input").append('<div class="row delet"><div class="col-md-9"> <input type="text" id="get_foodname'+i+'" class="a">  </div> <div class="col-md-3"><input type="submit" id="delet_input'+i+'" class="w3-button w3-dark-grey" value="ลบช่อง"></div></div>')
+            i++;
+        });
+        $("#delet_input" + i + "").click(function () {
+            alert("#delet_input" + i + "")
+            $('#get_foodname'+i+'').remove();
+            i++;
+        })
+    });
+    </script>*@

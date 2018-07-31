@@ -68,7 +68,10 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customer_name" Type="varchar" MaxLength="50" />
-          <Property Name="category" Type="varchar" MaxLength="50" />
+          <Property Name="category01" Type="varchar" MaxLength="50" />
+          <Property Name="category02" Type="varchar" MaxLength="50" />
+          <Property Name="category03" Type="varchar" MaxLength="50" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Get_location">
           <Key>
@@ -82,6 +85,16 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
           <Property Name="address_province" Type="varchar" MaxLength="50" />
           <Property Name="address_zip" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Get_menu">
+          <Key>
+            <PropertyRef Name="Menu_id" />
+          </Key>
+          <Property Name="Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_name" Type="varchar" MaxLength="50" />
+          <Property Name="Menu_name" Type="varchar" MaxLength="50" />
+          <Property Name="Menu_price" Type="varchar" MaxLength="50" />
           <Property Name="edit_value" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Get_storename">
@@ -103,17 +116,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
           <Property Name="time_open" Type="varchar" MaxLength="50" />
           <Property Name="time_close" Type="varchar" MaxLength="50" />
           <Property Name="customer_name" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Menu">
-          <Key>
-            <PropertyRef Name="(PK)Menu_id" />
-          </Key>
-          <Property Name="(PK)Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="(FK)Customer_id" Type="int" />
-          <Property Name="Menu_time" Type="varchar" MaxLength="50" />
-          <Property Name="Menu_text" Type="varchar" MaxLength="50" />
-          <Property Name="Menu_price" Type="int" />
-          <Property Name="Menu_amount" Type="int" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -173,9 +176,9 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_catagory" EntityType="Self.Get_catagory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_location" EntityType="Self.Get_location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Get_menu" EntityType="Self.Get_menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_storename" EntityType="Self.Get_storename" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_time" EntityType="Self.Get_time" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_account" EntityType="Self.user_account" Schema="dbo" store:Type="Tables" />
@@ -193,8 +196,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <EntitySet Name="Category" EntityType="Order_Food_dbModel.Category" />
           <EntitySet Name="Customer" EntityType="Order_Food_dbModel.Customer" />
           <EntitySet Name="Food_Picture" EntityType="Order_Food_dbModel.Food_Picture" />
-          <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
-          <EntitySet Name="Menu" EntityType="Order_Food_dbModel.Menu" />
           <EntitySet Name="Report" EntityType="Order_Food_dbModel.Report" />
           <EntitySet Name="User" EntityType="Order_Food_dbModel.User" />
           <EntitySet Name="user_account" EntityType="Order_Food_dbModel.user_account" />
@@ -203,9 +204,11 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
             <End Role="Customer1" EntitySet="Customer" />
           </AssociationSet>
           <EntitySet Name="Add_Store" EntityType="Order_Food_dbModel.Add_Store" />
-          <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
           <EntitySet Name="Get_location" EntityType="Order_Food_dbModel.Get_location" />
           <EntitySet Name="Get_storename" EntityType="Order_Food_dbModel.Get_storename" />
+          <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
+          <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
+          <EntitySet Name="Get_menu" EntityType="Order_Food_dbModel.Get_menu" />
         </EntityContainer>
         <EntityType Name="Address_C">
           <Key>
@@ -249,25 +252,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="C_FK_Customer_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Food_Picture_pic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Food_Picture_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Get_catagory">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Menu">
-          <Key>
-            <PropertyRef Name="C_PK_Menu_id" />
-          </Key>
-          <Property Name="C_PK_Menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="C_FK_Customer_id" Type="Int32" />
-          <Property Name="Menu_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Menu_text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Menu_price" Type="Int32" />
-          <Property Name="Menu_amount" Type="Int32" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -322,17 +306,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Get_time">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="day_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="day_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="time_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Get_location">
           <Key>
             <PropertyRef Name="id" />
@@ -354,6 +327,39 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="get_storename1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Get_catagory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Get_time">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="day_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="day_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="time_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Get_menu">
+          <Key>
+            <PropertyRef Name="Menu_id" />
+          </Key>
+          <Property Name="Menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Menu_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Menu_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
@@ -407,27 +413,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Get_catagory">
-            <EntityTypeMapping TypeName="Order_Food_dbModel.Get_catagory">
-              <MappingFragment StoreEntitySet="Get_catagory">
-                <ScalarProperty Name="category" ColumnName="category" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Menu">
-            <EntityTypeMapping TypeName="Order_Food_dbModel.Menu">
-              <MappingFragment StoreEntitySet="Menu">
-                <ScalarProperty Name="Menu_amount" ColumnName="Menu_amount" />
-                <ScalarProperty Name="Menu_price" ColumnName="Menu_price" />
-                <ScalarProperty Name="Menu_text" ColumnName="Menu_text" />
-                <ScalarProperty Name="Menu_time" ColumnName="Menu_time" />
-                <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
-                <ScalarProperty Name="C_PK_Menu_id" ColumnName="(PK)Menu_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Report">
             <EntityTypeMapping TypeName="Order_Food_dbModel.Report">
               <MappingFragment StoreEntitySet="Report">
@@ -473,18 +458,6 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Get_time">
-            <EntityTypeMapping TypeName="Order_Food_dbModel.Get_time">
-              <MappingFragment StoreEntitySet="Get_time">
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="time_close" ColumnName="time_close" />
-                <ScalarProperty Name="time_open" ColumnName="time_open" />
-                <ScalarProperty Name="day_close" ColumnName="day_close" />
-                <ScalarProperty Name="day_open" ColumnName="day_open" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Get_location">
             <EntityTypeMapping TypeName="Order_Food_dbModel.Get_location">
               <MappingFragment StoreEntitySet="Get_location">
@@ -507,6 +480,42 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
                 <ScalarProperty Name="customer_name" ColumnName="customer_name" />
                 <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Get_catagory">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Get_catagory">
+              <MappingFragment StoreEntitySet="Get_catagory">
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+                <ScalarProperty Name="category03" ColumnName="category03" />
+                <ScalarProperty Name="category02" ColumnName="category02" />
+                <ScalarProperty Name="category01" ColumnName="category01" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Get_time">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Get_time">
+              <MappingFragment StoreEntitySet="Get_time">
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="time_close" ColumnName="time_close" />
+                <ScalarProperty Name="time_open" ColumnName="time_open" />
+                <ScalarProperty Name="day_close" ColumnName="day_close" />
+                <ScalarProperty Name="day_open" ColumnName="day_open" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Get_menu">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Get_menu">
+              <MappingFragment StoreEntitySet="Get_menu">
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+                <ScalarProperty Name="Menu_price" ColumnName="Menu_price" />
+                <ScalarProperty Name="Menu_name" ColumnName="Menu_name" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="Menu_id" ColumnName="Menu_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

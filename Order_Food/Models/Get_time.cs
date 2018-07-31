@@ -20,5 +20,6 @@ namespace Order_Food.Models
         public string time_open { get; set; }
         public string time_close { get; set; }
         public string customer_name { get; set; }
+        public string edit_value { get; set; }
     }
 }

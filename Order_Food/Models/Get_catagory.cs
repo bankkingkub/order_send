@@ -16,6 +16,9 @@ namespace Order_Food.Models
     {
         public int id { get; set; }
         public string customer_name { get; set; }
-        public string category { get; set; }
+        public string category01 { get; set; }
+        public string category02 { get; set; }
+        public string category03 { get; set; }
+        public string edit_value { get; set; }
     }
 }

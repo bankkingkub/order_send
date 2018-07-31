@@ -21,15 +21,23 @@
 
     @if (ViewBag.storechek == "true")
     {
-
-        foreach (var item in ViewBag.show_cat)
-        {
-            @item; <br>
-        }
-
-
+        @*ลูปข้อมูลออกจาก list
+            foreach (var item in ViewBag.show_cat)
+            {
+                @item; <br>
+            }*@
+        <div class="row">
+            <div class="col-md-9" style="line-height: 38px;">
+                @ViewBag.cat01<span style="width:5px;"></span>
+                @ViewBag.cat02<span style="width:5px;"></span>
+                @ViewBag.cat03<span style="width:5px;"></span>
+            </div>
+            <div class="col-md-3">
+                <input type="submit" id="edit_cat" class="w3-button w3-dark-grey" value="แก้ไข">
+            </div>
+        </div>
     }
-    else
+    else if (ViewBag.storechek == "false")
     {
 
         <div>
@@ -54,13 +62,9 @@
                 </div>
             </div>
         </div>
-
     }
-
-
-
-
 </div>
+
 
 @*----------------- chage collap icon -----------------*@
 <script>
@@ -78,6 +82,9 @@
         let i = 0;
         $("#get_cat").click(function () {
             var checkbox_value = [];
+            var getname_checkbox = {
+                edit_value: "show"
+            };
             $(":checkbox").each(function () {
                 var ischecked = $(this).is(":checked");
                 if (ischecked) {
@@ -86,23 +93,56 @@
                 }
             });
 
+                $.ajax({
+                    url: "@Url.Action("Category", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ ajex_cat: checkbox_value, get_catagory: getname_checkbox }),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });
 
-            $.ajax({
-                url: "@Url.Action("Category", "UsingU")",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({ ajex_cat: checkbox_value }),
-                success: function (response) {
-                    response ? re() : alert("It didn't work.");
-                }
-            });
         });
         function re() {
-            $("#re_cat").load(location.href + " #re_cat");
-            //location.reload();
+            $("#re_cat").load("http://localhost:55400/UsingU/Category");
         }
     });
 </script>
+<script>
+    $(document).ready(function () {
+        let i = 0;
+        $("#edit_cat").click(function () {
+            var checkbox_value = [];
+            var getname_checkbox = {
+                edit_value: "edit"
+            };
+            $(":checkbox").each(function () {
+                var ischecked = $(this).is(":checked");
+                if (ischecked) {
+                    checkbox_value[i] = $(this).val();
+                    ++i;
+                }
+            });
+                $.ajax({
+                    url: "@Url.Action("Category", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ ajex_cat: checkbox_value, get_catagory: getname_checkbox }),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });
+        });
+        function re() {
+            $("#re_cat").load("http://localhost:55400/UsingU/Category");
+        }
+    });
+
+</script>
+
+
+
 
 
 

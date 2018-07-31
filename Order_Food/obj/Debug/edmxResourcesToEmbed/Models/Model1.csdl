@@ -5,8 +5,6 @@
     <EntitySet Name="Category" EntityType="Order_Food_dbModel.Category" />
     <EntitySet Name="Customer" EntityType="Order_Food_dbModel.Customer" />
     <EntitySet Name="Food_Picture" EntityType="Order_Food_dbModel.Food_Picture" />
-    <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
-    <EntitySet Name="Menu" EntityType="Order_Food_dbModel.Menu" />
     <EntitySet Name="Report" EntityType="Order_Food_dbModel.Report" />
     <EntitySet Name="User" EntityType="Order_Food_dbModel.User" />
     <EntitySet Name="user_account" EntityType="Order_Food_dbModel.user_account" />
@@ -15,9 +13,11 @@
       <End Role="Customer1" EntitySet="Customer" />
     </AssociationSet>
     <EntitySet Name="Add_Store" EntityType="Order_Food_dbModel.Add_Store" />
-    <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
     <EntitySet Name="Get_location" EntityType="Order_Food_dbModel.Get_location" />
     <EntitySet Name="Get_storename" EntityType="Order_Food_dbModel.Get_storename" />
+    <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
+    <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
+    <EntitySet Name="Get_menu" EntityType="Order_Food_dbModel.Get_menu" />
   </EntityContainer>
   <EntityType Name="Address_C">
     <Key>
@@ -61,25 +61,6 @@
     <Property Name="C_FK_Customer_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Food_Picture_pic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Food_Picture_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Get_catagory">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="Menu">
-    <Key>
-      <PropertyRef Name="C_PK_Menu_id" />
-    </Key>
-    <Property Name="C_PK_Menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="C_FK_Customer_id" Type="Int32" />
-    <Property Name="Menu_time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Menu_text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Menu_price" Type="Int32" />
-    <Property Name="Menu_amount" Type="Int32" />
   </EntityType>
   <EntityType Name="Report">
     <Key>
@@ -134,17 +115,6 @@
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="pic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="Get_time">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="day_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="day_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="time_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="Get_location">
     <Key>
       <PropertyRef Name="id" />
@@ -166,6 +136,39 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="get_storename1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Get_catagory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="category01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="category02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="category03" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Get_time">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="day_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="day_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="time_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Get_menu">
+    <Key>
+      <PropertyRef Name="Menu_id" />
+    </Key>
+    <Property Name="Menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Menu_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Menu_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

@@ -63,7 +63,10 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="customer_name" Type="varchar" MaxLength="50" />
-    <Property Name="category" Type="varchar" MaxLength="50" />
+    <Property Name="category01" Type="varchar" MaxLength="50" />
+    <Property Name="category02" Type="varchar" MaxLength="50" />
+    <Property Name="category03" Type="varchar" MaxLength="50" />
+    <Property Name="edit_value" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Get_location">
     <Key>
@@ -77,6 +80,16 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     <Property Name="address_province" Type="varchar" MaxLength="50" />
     <Property Name="address_zip" Type="varchar" MaxLength="50" />
     <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="edit_value" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Get_menu">
+    <Key>
+      <PropertyRef Name="Menu_id" />
+    </Key>
+    <Property Name="Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="Menu_name" Type="varchar" MaxLength="50" />
+    <Property Name="Menu_price" Type="varchar" MaxLength="50" />
     <Property Name="edit_value" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Get_storename">
@@ -98,17 +111,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a pri
     <Property Name="time_open" Type="varchar" MaxLength="50" />
     <Property Name="time_close" Type="varchar" MaxLength="50" />
     <Property Name="customer_name" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="Menu">
-    <Key>
-      <PropertyRef Name="(PK)Menu_id" />
-    </Key>
-    <Property Name="(PK)Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="(FK)Customer_id" Type="int" />
-    <Property Name="Menu_time" Type="varchar" MaxLength="50" />
-    <Property Name="Menu_text" Type="varchar" MaxLength="50" />
-    <Property Name="Menu_price" Type="int" />
-    <Property Name="Menu_amount" Type="int" />
+    <Property Name="edit_value" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -168,9 +171,9 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
     <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_catagory" EntityType="Self.Get_catagory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_location" EntityType="Self.Get_location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Get_menu" EntityType="Self.Get_menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_storename" EntityType="Self.Get_storename" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Get_time" EntityType="Self.Get_time" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_account" EntityType="Self.user_account" Schema="dbo" store:Type="Tables" />

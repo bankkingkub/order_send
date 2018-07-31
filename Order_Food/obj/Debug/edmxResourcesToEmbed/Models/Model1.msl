@@ -46,27 +46,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Get_catagory">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_catagory">
-        <MappingFragment StoreEntitySet="Get_catagory">
-          <ScalarProperty Name="category" ColumnName="category" />
-          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Menu">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.Menu">
-        <MappingFragment StoreEntitySet="Menu">
-          <ScalarProperty Name="Menu_amount" ColumnName="Menu_amount" />
-          <ScalarProperty Name="Menu_price" ColumnName="Menu_price" />
-          <ScalarProperty Name="Menu_text" ColumnName="Menu_text" />
-          <ScalarProperty Name="Menu_time" ColumnName="Menu_time" />
-          <ScalarProperty Name="C_FK_Customer_id" ColumnName="(FK)Customer_id" />
-          <ScalarProperty Name="C_PK_Menu_id" ColumnName="(PK)Menu_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Report">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Report">
         <MappingFragment StoreEntitySet="Report">
@@ -112,18 +91,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Get_time">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_time">
-        <MappingFragment StoreEntitySet="Get_time">
-          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-          <ScalarProperty Name="time_close" ColumnName="time_close" />
-          <ScalarProperty Name="time_open" ColumnName="time_open" />
-          <ScalarProperty Name="day_close" ColumnName="day_close" />
-          <ScalarProperty Name="day_open" ColumnName="day_open" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Get_location">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Get_location">
         <MappingFragment StoreEntitySet="Get_location">
@@ -146,6 +113,42 @@
           <ScalarProperty Name="customer_name" ColumnName="customer_name" />
           <ScalarProperty Name="get_storename1" ColumnName="get_storename" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_catagory">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_catagory">
+        <MappingFragment StoreEntitySet="Get_catagory">
+          <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+          <ScalarProperty Name="category03" ColumnName="category03" />
+          <ScalarProperty Name="category02" ColumnName="category02" />
+          <ScalarProperty Name="category01" ColumnName="category01" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_time">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_time">
+        <MappingFragment StoreEntitySet="Get_time">
+          <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="time_close" ColumnName="time_close" />
+          <ScalarProperty Name="time_open" ColumnName="time_open" />
+          <ScalarProperty Name="day_close" ColumnName="day_close" />
+          <ScalarProperty Name="day_open" ColumnName="day_open" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Get_menu">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Get_menu">
+        <MappingFragment StoreEntitySet="Get_menu">
+          <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+          <ScalarProperty Name="Menu_price" ColumnName="Menu_price" />
+          <ScalarProperty Name="Menu_name" ColumnName="Menu_name" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="Menu_id" ColumnName="Menu_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

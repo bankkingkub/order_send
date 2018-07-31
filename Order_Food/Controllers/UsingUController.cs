@@ -34,7 +34,7 @@ namespace Order_Food.Controllers
 
         //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg, Get_catagory get_cat)
+        public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg)
         {
 
             if (obj.description != null)
@@ -152,7 +152,7 @@ namespace Order_Food.Controllers
         {
             if (Session["namesec"] == null)
             {
-            return RedirectToAction("Homepage", "Index");
+                return RedirectToAction("Homepage", "Index");
             }
             return View();
         }
@@ -165,51 +165,143 @@ namespace Order_Food.Controllers
         //    }
         //    return loop_cat;
         //}
-        public ActionResult Category(string[] ajex_cat, Get_catagory get_cat)
+        public ActionResult Category()
         {
-            //List<user_account> ad_st = new List<user_account> { new user_account { name = "", last = "" } };
-            var ab = model_car();
-            List<Category> loob_cat = new List<Category>();
+            string checkid = Session["namesec"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
+                List<Category> loob_cat = new List<Category>();
                 loob_cat = db.Category.ToList();
-            }
-
-            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
-            {
-                string checkid = Session["namesec"].ToString();
                 var check = db.Get_catagory.Where(x => x.customer_name == checkid).FirstOrDefault();
-                if (check != null)
+                if (check == null)
                 {
-                    ViewBag.storechek = "true";
-                    List<string> a = new List<string>();
-                    a = db.Get_catagory.Where(x => x.customer_name == checkid).Select(x => x.category).ToList();
-                    ViewBag.show_cat = a;
-                    return View();
+                    ViewBag.storechek = "false";
+                    return View(loob_cat);
                 }
                 else
                 {
-                    if (ajex_cat != null)
+                    var get_namescat = db.Get_catagory.Single(x => x.customer_name == checkid);
+                    if (get_namescat.edit_value == "edit")
                     {
-                        int i = ajex_cat.Length;
-                        for (int ch = 0; ch < i; ch++)
-                        {
-                            get_cat.category = ajex_cat[ch];
-                            get_cat.customer_name = checkid;
-                            db.Get_catagory.Add(get_cat);
-                            db.SaveChanges();
-                        }
+                        ViewBag.storechek = "false";
+                        return View(loob_cat);
                     }
                     else
                     {
-                        ViewBag.storechek = "false";
+                        ViewBag.storechek = "true";
+                        ViewBag.cat01 = db.Get_catagory.Where(x => x.customer_name == checkid).Select(x => x.category01).FirstOrDefault();
+                        ViewBag.cat02 = db.Get_catagory.Where(x => x.customer_name == checkid).Select(x => x.category02).FirstOrDefault();
+                        ViewBag.cat03 = db.Get_catagory.Where(x => x.customer_name == checkid).Select(x => x.category03).FirstOrDefault();
                     }
                 }
             }
-            return View(loob_cat);
-            //return View(ad_st);
-
+            return View();
         }
+
+
+        [HttpPost]
+        public ActionResult Category(string[] ajex_cat, Get_catagory get_catagory)
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var check = db.Get_catagory.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check != null)
+                {
+                    //เลือกที่เซฟจะไป เเล้ว เซฟ
+                    var get_namecat = db.Get_catagory.Single(x => x.customer_name == checkid);
+                    //save สถานะ
+                    get_namecat.edit_value = get_catagory.edit_value;
+                    db.SaveChanges();
+                    if (get_namecat.edit_value == "show")
+                    {
+                        //save ที่แก้ไชมาเเล้ว
+                        int i = ajex_cat.Length;
+                        get_catagory.customer_name = checkid;
+                        switch (i)
+                        {
+                            case 1:
+                                get_namecat.category01 = ajex_cat[0];
+                                get_namecat.category02 = null;
+                                get_namecat.category03 = null;
+                                break;
+                            case 2:
+                                get_namecat.category01 = ajex_cat[0];
+                                get_namecat.category02 = ajex_cat[1];
+                                get_namecat.category03 = null;
+                                break;
+                            case 3:
+                                get_namecat.category01 = ajex_cat[0];
+                                get_namecat.category02 = ajex_cat[1];
+                                get_namecat.category03 = ajex_cat[2];
+                                break;
+                        }
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    //save ครั้งฃเเรก
+                    int i = ajex_cat.Length;
+                    get_catagory.customer_name = checkid;
+                    switch (i)
+                    {
+                        case 1:
+                            get_catagory.category01 = ajex_cat[0];
+                            break;
+                        case 2:
+                            get_catagory.category01 = ajex_cat[0];
+                            get_catagory.category02 = ajex_cat[1];
+                            break;
+                        case 3:
+                            get_catagory.category01 = ajex_cat[0];
+                            get_catagory.category02 = ajex_cat[1];
+                            get_catagory.category02 = ajex_cat[2];
+                            break;
+                    }
+                    db.Get_catagory.Add(get_catagory);
+                    db.SaveChanges();
+
+                }
+                //List<user_account> ad_st = new List<user_account> { new user_account { name = "", last = "" } };
+                //var ab = model_car();
+                //List<Category> loob_cat = new List<Category>();
+                //using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+                //{
+                //    loob_cat = db.Category.ToList();
+                //}
+                //if (check != null)
+                //{
+                //    ViewBag.storechek = "true";
+                //    ลูปจาก db เพื่อเอามาใช่งาน
+                //    List<string> a = new List<string>();
+                //    a = db.Get_catagory.Where(x => x.customer_name == checkid).Select(x => x.category01).ToList();
+                //    ViewBag.show_cat = a;
+                //    return View();
+                //}
+                //else
+                //{
+                //    if (ajex_cat != null)
+                //    {
+                //        int i = ajex_cat.Length;
+                //        for (int ch = 0; ch < i; ch++)
+                //        {
+                //            get_cat.category01 = ajex_cat[ch];
+                //            get_cat.customer_name = checkid;
+                //            db.Get_catagory.Add(get_cat);
+                //            db.SaveChanges();
+                //        }
+                //    }
+                //    else
+                //    {
+                //        ViewBag.storechek = "false";
+                //    }
+                //}
+            }
+            //return View(ad_st);
+            return View();
+        }
+
         public Add_Store model_car()
         {
             Add_Store modeluser = new Add_Store();
@@ -219,6 +311,7 @@ namespace Order_Food.Controllers
             }
             return modeluser;
         }
+
         //public int test_add()
         //{
         //    int cut = Convert.ToInt32(Session["cut"]);
@@ -275,7 +368,6 @@ namespace Order_Food.Controllers
         //    }
         //    return View();
         //}
-
         public ActionResult getnamestore()
         {
 
@@ -333,8 +425,6 @@ namespace Order_Food.Controllers
             }
             return View();
         }
-
-
         //[HttpPost]
         //public ActionResult getnamestore(string name) {
 
@@ -415,29 +505,23 @@ namespace Order_Food.Controllers
 
 
         }
-        public ActionResult Get_time_store(Get_time get_time)
+
+        public ActionResult Get_time_store()
         {
             string checkid = Session["namesec"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-
                 var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
-                if (check != null)
+                if (check == null)
                 {
-                    ViewBag.storechek = "true";
-                    ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
-                    ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
-                    ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
-                    ViewBag.timeclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_close).FirstOrDefault();
+                    ViewBag.storechek = "false";
                 }
                 else
                 {
-                    if (get_time.day_close != null && get_time.day_open != null && get_time.time_close != null && get_time.time_open != null)
+                    var get_namesto = db.Get_time.Single(x => x.customer_name == checkid);
+                    if (get_namesto.edit_value == "edit")
                     {
-                        get_time.customer_name = checkid;
-                        db.Get_time.Add(get_time);
-                        db.SaveChanges();
-                        ViewBag.storechek = "true";
+                        ViewBag.storechek = "false";
                         ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
                         ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
                         ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
@@ -445,16 +529,121 @@ namespace Order_Food.Controllers
                     }
                     else
                     {
+                        ViewBag.storechek = "true";
+                        ViewBag.dayopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_open).FirstOrDefault();
+                        ViewBag.dayclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.day_close).FirstOrDefault();
+                        ViewBag.timeopen = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_open).FirstOrDefault();
+                        ViewBag.timeclose = db.Get_time.Where(x => x.customer_name == checkid).Select(x => x.time_close).FirstOrDefault();
+                    }
+                }
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Get_time_store(Get_time get_time)
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check != null)
+                {
+                    var get_nametim = db.Get_time.Single(x => x.customer_name == checkid);
+                    get_nametim.edit_value = get_time.edit_value;
+                    db.SaveChanges();
+                    if (get_nametim.edit_value == "show")
+                    {
+                        get_nametim.day_open = get_time.day_open;
+                        get_nametim.day_close = get_time.day_close;
+                        get_nametim.time_open = get_time.time_open;
+                        get_nametim.time_close = get_time.time_close;
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    get_time.customer_name = checkid;
+                    db.Get_time.Add(get_time);
+                    db.SaveChanges();
+                }
+
+            }
+
+            return View();
+        }
+        public ActionResult Add_food()
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var check = db.Get_menu.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check == null)
+                {
+                    ViewBag.storechek = "false";
+                }
+                else
+                {
+                    var get_namesto = db.Get_time.Single(x => x.customer_name == checkid);
+                    if (get_namesto.edit_value == "edit")
+                    {
                         ViewBag.storechek = "false";
+
+                    }
+                    else
+                    {
+                        ViewBag.storechek = "true";
+                        List<Get_menu> show_name = new List<Get_menu>();
+                        show_name = db.Get_menu.ToList();
+                        return View(show_name);
                     }
                 }
             }
 
             return View();
         }
+        [HttpPost]
+        public ActionResult Add_food(string[] get_name_menu, string[] get_name_price, Get_menu get_menu)
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var check = db.Get_menu.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check != null)
+                {
+                    var get_namemenu = db.Get_menu.Single(x => x.customer_name == checkid);
+                    var checknum = db.Get_menu.Where(x => x.customer_name == checkid).ToList();
+                    for (int i = 1; i < checknum.Count(); i++)
+                    {
+                        get_namemenu.edit_value = get_menu.edit_value;
+                        db.SaveChanges();
+                    }
+                    if (get_namemenu.edit_value == "show")
+                    {
+                        int i = get_name_menu.Length;
+                        for (int ch = 0; ch < i; ch++)
+                        {
+                            get_namemenu.Menu_name = get_name_menu[ch];
+                            get_namemenu.Menu_price = get_name_price[ch];
+                            db.SaveChanges();
+                        }
+                    }
+                }
+                else
+                {
+                    int i = get_name_menu.Length;
+                    for (int ch = 0; ch < i; ch++)
+                    {
+                        get_menu.customer_name = checkid;
+                        get_menu.Menu_name = get_name_menu[ch];
+                        get_menu.Menu_price = get_name_price[ch];
+                        db.Get_menu.Add(get_menu);
+                        db.SaveChanges();
+                    }
+                }
 
+            }
 
-
-
+            return View();
+        }
     }
 }
