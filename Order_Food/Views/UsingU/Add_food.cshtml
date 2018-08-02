@@ -12,32 +12,62 @@
             @name_price.Menu_price
             <span>บาท</span>
             <br>
-            }
-            <input type="submit" id="edit_get_menu" class="w3-button w3-dark-grey" value="แก้ไข">
-            }
-            else if (ViewBag.storechek == "false")
-            {
-            <div>เพิ่มรายการอาหาร</div>
-            <div id="addnew_input">
-                <div class="row">
-                    <div class="col-md-5">
-                        @*<input type="text" id="get_foodname[0]" class="a">*@
-                        <input type="text" id="get_foodname0" class="get_name text-box single-line" placeholder="ชื่ออาหาร">
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" id="get_foodprice0" class="get_price text-box single-line" placeholder="ราคาอาหาร">
-                    </div>
-                    <div class="col-md-2">
-                    </div>
+        }
+        <input type="submit" id="edit_get_menu" class="w3-button w3-dark-grey" value="แก้ไข">
+    }
+    else if (ViewBag.storechek == "false")
+    {
+        <div>เพิ่มรายการอาหาร</div>
+        <div id="addnew_input">
+            <div class="row">
+                <div class="col-md-5">
+                    @*<input type="text" id="get_foodname[0]" class="a">*@
+                    <input type="text" id="get_foodname0" class="get_name text-box single-line" placeholder="ชื่ออาหาร">
                 </div>
-                <br>
+                <div class="col-md-5">
+                    <input type="text" id="get_foodprice0" class="get_price text-box single-line" placeholder="ราคาอาหาร">
+                </div>
+                <div class="col-md-2">
+                </div>
             </div>
-            <div class="pd_15px"></div>
-            <input type="submit" id="add_input" class="w3-button w3-dark-grey" value="เพิ่มช่อง">
-            <div class="pd_15px"></div>
-            <input type="submit" id="get_menu" class="w3-button w3-dark-grey" value="ตกลง">
-            }
+            <br>
         </div>
+        <div class="pd_15px"></div>
+        <input type="submit" id="add_input" class="w3-button w3-dark-grey" value="เพิ่มช่อง">
+        <div class="pd_15px"></div>
+        <input type="submit" id="get_menu" class="w3-button w3-dark-grey" value="ตกลง">
+    }
+    else if(ViewBag.storechek == "edit")
+    {
+        <div>เพิ่มรายการอาหาร</div>
+        int cu =0;
+        foreach (var name_price in Model)
+        {
+
+            <div class="row">
+                <div class="col-md-5">
+                    @*<input type="text" id="get_foodname[0]" class="a">*@
+                    <input type="text" id="get_foodname@(cu)" class="get_name text-box single-line" placeholder="ชื่ออาหาร" value="@name_price.Menu_name">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" id="get_foodprice@(cu)" class="get_price text-box single-line" placeholder="ราคาอาหาร" value="@name_price.Menu_price">
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <br>
+            cu++;
+        }
+        <div id="addnew_input">
+
+        </div>
+        <div class="pd_15px"></div>
+        <input type="submit" id="add_input" class="w3-button w3-dark-grey" value="เพิ่มช่อง">
+        <div class="pd_15px"></div>
+        <input type="submit" id="get_menu" class="w3-button w3-dark-grey" value="ตกลง">
+
+    }
+</div>
 
 <script>
     $(document).ready(function () {

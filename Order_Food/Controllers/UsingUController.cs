@@ -583,17 +583,19 @@ namespace Order_Food.Controllers
                 }
                 else
                 {
-                    var get_namesto = db.Get_time.Single(x => x.customer_name == checkid);
-                    if (get_namesto.edit_value == "edit")
+                    var get_namesme = db.Get_menu.Where(x => x.customer_name == checkid).Select(x => x.edit_value).FirstOrDefault();
+                    if (get_namesme == "edit")
                     {
-                        ViewBag.storechek = "false";
-
+                        ViewBag.storechek = "edit";
+                        List<Get_menu> show_name = new List<Get_menu>();
+                        show_name = db.Get_menu.Where(x => x.customer_name == checkid).ToList();
+                        return View(show_name);
                     }
                     else
                     {
                         ViewBag.storechek = "true";
                         List<Get_menu> show_name = new List<Get_menu>();
-                        show_name = db.Get_menu.ToList();
+                        show_name = db.Get_menu.Where(x => x.customer_name == checkid).ToList();
                         return View(show_name);
                     }
                 }
@@ -610,22 +612,42 @@ namespace Order_Food.Controllers
                 var check = db.Get_menu.Where(x => x.customer_name == checkid).FirstOrDefault();
                 if (check != null)
                 {
-                    var get_namemenu = db.Get_menu.Single(x => x.customer_name == checkid);
-                    var checknum = db.Get_menu.Where(x => x.customer_name == checkid).ToList();
-                    for (int i = 1; i < checknum.Count(); i++)
+                    //List<Get_menu> get_namemenu = new List<Get_menu>();
+                    var get_namemenu = db.Get_menu.Where(x => x.customer_name == checkid).First();
+
+                    var a = db.Get_menu.Where(x => x.customer_name == checkid).Select(x => x.edit_value);
+                    foreach (var obj in db.Get_menu.Where(x => x.customer_name == checkid))
                     {
-                        get_namemenu.edit_value = get_menu.edit_value;
-                        db.SaveChanges();
+                        obj.edit_value = get_menu.edit_value;
                     }
+                    db.SaveChanges();
+
                     if (get_namemenu.edit_value == "show")
                     {
+                        var data = from customer_name in db.Get_menu where customer_name.customer_name == checkid select customer_name;
+                        foreach (var remove in data)
+                        {
+                            db.Get_menu.Remove(remove);
+                        }
+                        db.SaveChanges();
+
                         int i = get_name_menu.Length;
                         for (int ch = 0; ch < i; ch++)
                         {
-                            get_namemenu.Menu_name = get_name_menu[ch];
-                            get_namemenu.Menu_price = get_name_price[ch];
+                            get_menu.customer_name = checkid;
+                            get_menu.Menu_name = get_name_menu[ch];
+                            get_menu.Menu_price = get_name_price[ch];
+                            db.Get_menu.Add(get_menu);
                             db.SaveChanges();
                         }
+
+                        //int i = get_name_menu.Length;
+                        //for (int ch = 0; ch < i; ch++)
+                        //{
+                        //    get_namemenu.Menu_name = get_name_menu[ch];
+                        //    get_namemenu.Menu_price = get_name_price[ch];
+                        //    db.SaveChanges();
+                        //}
                     }
                 }
                 else
