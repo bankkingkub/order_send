@@ -52,7 +52,7 @@
                     @foreach (var iteam in Model)
                     {
                         <div class="col-md-3">
-                            <input type="checkbox" name="get_check[]" value=" @iteam.category1" id="getcat">
+                            <input type="checkbox" name="get_check[]" value=" @iteam.category1" id="getcat" onclick="check_box(event)">
                             <span style="padding-left:5px;">@iteam.category1</span>
                         </div>
                         <div style="height:40px;">
@@ -78,6 +78,40 @@
     });
 </script>
 <script>
+    var arrData = [];
+    function check_box(event) {
+        if (event.target.checked) {
+            if (arrData.length >= 3) {
+                alert("ไม่เกิน 3 นะเด็กน่อย")
+                return event.target.checked = false;
+            } else {
+                arrData.push({
+                    name: event.target.defaultValue
+                })
+            }
+        } else {
+            let sss = arrData.find(test => test.name === event.target.defaultValue)
+            let index = arrData.lastIndexOf(sss)
+            arrData.splice(index,1)
+        }
+    }
+    //let t = 0;
+    //let y = 0;
+    //function check_box(event) {
+    //    if (event.target.checked == true) {
+    //        ++t;
+    //    } else {
+    //        ++y;
+    //    }
+    //    let cut = t - y;
+    //    alert(cut);
+    //    if (t - y > 3) {
+    //        cut - 1;
+    //        alert("เกิน")
+    //        return event.target.checked = false;
+    //    }
+    //}
+
     $(document).ready(function () {
         let i = 0;
         $("#get_cat").click(function () {

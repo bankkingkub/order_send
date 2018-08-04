@@ -40,14 +40,14 @@ new SelectListItem { Text = "วันอาทิตย์", Value = "วัน
                 </div>
                 <div class="col-md-6">
                     ถึง
-                    @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose"})
+                    @Html.DropDownListFor(x => x.day_close, new SelectList(daylist, "Value", "Text"), new { @class = "list_contrl select2-single", @id = "dayclose" })
                 </div>
 
                 <div class="col-md-6">
-                    เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen"})
+                    เวลาเปิด  @Html.TextBoxFor(x => x.time_open, new { type = "time", @id = "timeopen" })
                 </div>
                 <div class="col-md-6">
-                    เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose"})
+                    เวลาปิด  @Html.TextBoxFor(x => x.time_close, new { type = "time", @id = "timeclose" })
                 </div>
             </div>
             <input type="submit" id="gettime" class="w3-button w3-dark-grey" value="ตกลง">

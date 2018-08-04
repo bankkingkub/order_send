@@ -37,29 +37,32 @@
         <div class="pd_15px"></div>
         <input type="submit" id="get_menu" class="w3-button w3-dark-grey" value="ตกลง">
     }
-    else if(ViewBag.storechek == "edit")
+    else if (ViewBag.storechek == "edit")
     {
         <div>เพิ่มรายการอาหาร</div>
-        int cu =0;
+        int cu = 0;
         foreach (var name_price in Model)
         {
 
-            <div class="row">
+            <div class="row delet0@(cu)">
                 <div class="col-md-5">
                     @*<input type="text" id="get_foodname[0]" class="a">*@
-                    <input type="text" id="get_foodname@(cu)" class="get_name text-box single-line" placeholder="ชื่ออาหาร" value="@name_price.Menu_name">
+                    <input type="text" id="get_foodname0@(cu)" class="get_name text-box single-line" placeholder="ชื่ออาหาร" value="@name_price.Menu_name">
                 </div>
                 <div class="col-md-5">
-                    <input type="text" id="get_foodprice@(cu)" class="get_price text-box single-line" placeholder="ราคาอาหาร" value="@name_price.Menu_price">
+                    <input type="text" id="get_foodprice0@(cu)" class="get_price text-box single-line" placeholder="ราคาอาหาร" value="@name_price.Menu_price">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 delet_btn0@(cu)">
+
                 </div>
             </div>
-            <br>
             cu++;
         }
+        <input id="get_num" style="display:none" value="@cu">
         <div id="addnew_input">
 
+        </div>
+        <div id="test_add">
         </div>
         <div class="pd_15px"></div>
         <input type="submit" id="add_input" class="w3-button w3-dark-grey" value="เพิ่มช่อง">
@@ -80,7 +83,19 @@
 
     });
 </script>
+<script>
+    $(document).ready(function () {
 
+        let get_cu = $('#get_num').val();
+
+        for (let i = 1; i < get_cu;) {
+            $(".delet_btn0" + i + "").append("<input type='submit' id='delet_input0" + i + "'class='w3-button w3-dark-grey' value='ลบช่อง'>",
+                "<script> $('#delet_input0" + i + "').click(function () {$('.delet0" + i + "').remove();});<\/script>");
+            ++i;
+        };
+
+    });
+</script>
 <script>
     $(document).ready(function () {
         let i = 0;

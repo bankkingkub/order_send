@@ -31,8 +31,12 @@ namespace Order_Food.Controllers
             ViewBag.test = "เข้าหน้า customoer";
             return View();
         }
-
         //[AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult update_customer()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult update_customer(Add_Store obj, HttpPostedFileBase getimg)
         {
@@ -94,8 +98,21 @@ namespace Order_Food.Controllers
             //string fileName = Path.GetFileName(Food_Picture_pic.FileName);
             //string path = Path.Combine(Server.MapPath("~/img/user_img"), fileName);
             //Food_Picture_pic.SaveAs(path);
+            return RedirectToAction("Homeaddstore", "UsingU");
+        }
+
+        [HttpPost]
+        public ActionResult del_pic(int get_del)
+        {
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var del_pic = db.Add_Store.Single(x => x.id == get_del);
+                db.Add_Store.Remove(del_pic);
+                db.SaveChanges();
+            }
             return View();
         }
+
         //[AcceptVerbs(HttpVerbs.Post)]
         public List<Add_Store> loop_img()
         {

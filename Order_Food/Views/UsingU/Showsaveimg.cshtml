@@ -1,44 +1,68 @@
 ﻿@{
     Layout = null;
 }
+<style>
+</style>
 <div class="pd_15px"></div>
-
-@model List<Order_Food.Models.Add_Store>
-@if (Session["checkstatus"] == null)
-{
-    <p>เอะมีปัญหา</p>
-}
-else
-{
-    if (Model != null)
+<div id="re_del">
+    @model List<Order_Food.Models.Add_Store>
+    @if (Session["checkstatus"] == null)
     {
-        <div>รูปภาพที่เมีในระบบ</div>
-        <button id="colabimg" class="btn btn-cooler fas fa-angle-down img" type="button" data-toggle="collapse" data-target="#collapseimg" aria-expanded="false" aria-controls="collapseimg"></button>
-        <div class="collapse" id="collapseimg">
-            <div class="row">
-                    
-                @foreach (var item in Model)
-                {
-
-                    <div class="col-md-3" style="padding:0px;">
-                        <div class="img_loopshow sh_border">
-                            <img src="~/img/user_img/@ViewBag.folder/@item.pic">
-                        </div>
-                        <div style="text-align:center;padding-top:5px;">
-                            @item.description
-                        </div>
-                    </div>
-
-                }
-            </div>
-        </div>
+        <p>เอะมีปัญหา</p>
     }
     else
     {
-        <p>ไม่มึรูป</p>
-    }
-}
+        if (Model != null)
+        {
+            int cu_delet = 0;
+            <div>รูปภาพที่มีในระบบ</div>
+            <button id="colabimg" class="btn btn-cooler fas fa-angle-down img" type="button" data-toggle="collapse" data-target="#collapseimg" aria-expanded="false" aria-controls="collapseimg"></button>
+            <div class="collapse" id="collapseimg">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-3" style="padding:0px;">
+                            <div class="img_loopshow sh_border img_hover">
+                                <div class="full_div">
+                                    <img src="~/img/user_img/@ViewBag.folder/@item.pic" style="box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)">
+                                </div>
+                                <div class="text_hover">
+                                    <input type="submit" class="cu_delet@(cu_delet)" value="ลบรูป" name="@item.id" onclick="delet_pic(event);">
+                                </div>
+                                <div style="text-align:center;padding-top:5px;">
+                                    @item.description
+                                </div>
+                            </div>
+                        </div>
+                        cu_delet++;
 
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>ไม่มึรูป</p>
+        }
+    }
+</div>
+<script>
+    function delet_pic(event) {
+            $.ajax({
+                url: "@Url.Action("del_pic", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ get_del: event.target.name }),
+                success: function (response) {
+                    response ? alert("สำเร็จ") : alert("It didn't work.");
+                }
+        });
+        function re_del_img() {
+            alert("สำเสร็จ")
+            $("#re_del").load("http://localhost:55400/UsingU/Showsaveimg");
+        }
+    }
+</script>
 <script>
     $(document).ready(function () {
         $("#colabimg").click(function () {
