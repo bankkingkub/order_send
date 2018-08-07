@@ -101,17 +101,17 @@ namespace Order_Food.Controllers
             return RedirectToAction("Homeaddstore", "UsingU");
         }
 
-        [HttpPost]
-        public ActionResult del_pic(int get_del)
-        {
-            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
-            {
-                var del_pic = db.Add_Store.Single(x => x.id == get_del);
-                db.Add_Store.Remove(del_pic);
-                db.SaveChanges();
-            }
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult del_pic(int get_del)
+        //{
+        //    using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+        //    {
+        //        var del_pic = db.Add_Store.Single(x => x.id == get_del);
+        //        db.Add_Store.Remove(del_pic);
+        //        db.SaveChanges();
+        //    }
+        //    return View();
+        //}
 
         //[AcceptVerbs(HttpVerbs.Post)]
         public List<Add_Store> loop_img()
@@ -142,6 +142,17 @@ namespace Order_Food.Controllers
             ViewBag.folder = Session["namesec"].ToString();
             var s = loop_img();
             return View(s);
+        }
+        [HttpPost]
+        public ActionResult showsaveimg(int get_del)
+        {
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var del_pic = db.Add_Store.Single(x => x.id == get_del);
+                db.Add_Store.Remove(del_pic);
+                db.SaveChanges();
+            }
+            return View();
         }
         public ActionResult presaveshow()
         {
@@ -682,6 +693,10 @@ namespace Order_Food.Controllers
 
             }
 
+            return View();
+        }
+        public ActionResult Add_store_img(HttpPostedFileBase getimg_store) {
+            var a = getimg_store;
             return View();
         }
     }

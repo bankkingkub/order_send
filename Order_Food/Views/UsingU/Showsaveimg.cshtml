@@ -49,18 +49,17 @@
 <script>
     function delet_pic(event) {
             $.ajax({
-                url: "@Url.Action("del_pic", "UsingU")",
+                url: "@Url.Action("showsaveimg", "UsingU")",
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify({ get_del: event.target.name }),
                 success: function (response) {
-                    response ? alert("สำเร็จ") : alert("It didn't work.");
+                    response ? re_del_img() : alert("It didn't work.");
                 }
         });
-        function re_del_img() {
-            alert("สำเสร็จ")
-            $("#re_del").load("http://localhost:55400/UsingU/Showsaveimg");
-        }
+    }
+    function re_del_img() {
+        $("#re_del").load("http://localhost:55400/UsingU/Showsaveimg");
     }
 </script>
 <script>

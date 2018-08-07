@@ -309,6 +309,7 @@
     <Content Include="Views\UsingU\Get_c_address.cshtml" />
     <Content Include="Views\UsingU\Get_time_store.cshtml" />
     <Content Include="Views\UsingU\Add_food.cshtml" />
+    <Content Include="Views\UsingU\Add_store_img.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

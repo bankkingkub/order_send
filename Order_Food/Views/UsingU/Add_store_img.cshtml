@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = null;
+}
+@model Order_Food.Models.Add_Store
+    @using (Html.BeginForm("Add_store_img", "UsingU", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+<label>
+    เลือกรูปภาพโปรโมทร้านค้า
+    <input type="file" name="getimg_store" id="File" size="60">
+</label>
+
+<div>
+    ชื่อใต้รูป
+</div>
+@Html.EditorFor(s => s.description)
+<div style="padding-top:5px;"></div>
+<input type="submit" class="w3-button w3-dark-grey" value="ตกลง">
+
+    }
