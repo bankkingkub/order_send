@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Order_Food_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Order_Food_db.dbo.Add_description' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Add_description">
+          <Property Name="(PK,FK)Description_id" Type="nchar" MaxLength="10" />
+          <Property Name="(FK)Food_Picture_id" Type="varbinary" MaxLength="50" />
+          <Property Name="Description_text" Type="varbinary" MaxLength="50" />
+          <Property Name="customer_name" Type="varchar" MaxLength="50" />
+        </EntityType>-->
         <EntityType Name="Add_Store">
           <Key>
             <PropertyRef Name="id" />
@@ -13,6 +21,14 @@
           <Property Name="description" Type="varchar" MaxLength="50" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="pic" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Add_store_img">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_name" Type="varchar" MaxLength="50" />
+          <Property Name="add_img" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Address_C">
           <Key>
@@ -46,13 +62,15 @@
           <Property Name="Customer_close" Type="varchar" MaxLength="50" />
           <Property Name="Location_C_id" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Order_Food_db.dbo.Description' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Description">
-          <Property Name="(PK,FK)Description_id" Type="nchar" MaxLength="10" />
-          <Property Name="(FK)Food_Picture_id" Type="varbinary" MaxLength="50" />
-          <Property Name="Description_text" Type="varbinary" MaxLength="50" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="customer_name" Type="varchar" MaxLength="50" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Food_Picture">
           <Key>
             <PropertyRef Name="Food_Picture_id" />
@@ -132,6 +150,16 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="(FK)Order_id" Type="int" Nullable="false" />
           <Property Name="(FK)Menu_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="User_id" />
@@ -170,9 +198,11 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
         </Association>
         <EntityContainer Name="Order_Food_dbModelStoreContainer">
           <EntitySet Name="Add_Store" EntityType="Self.Add_Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Add_store_img" EntityType="Self.Add_store_img" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address_C" EntityType="Self.Address_C" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Description" EntityType="Self.Description" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_catagory" EntityType="Self.Get_catagory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_location" EntityType="Self.Get_location" Schema="dbo" store:Type="Tables" />
@@ -180,6 +210,7 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <EntitySet Name="Get_storename" EntityType="Self.Get_storename" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Get_time" EntityType="Self.Get_time" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user_account" EntityType="Self.user_account" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
@@ -209,6 +240,9 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
           <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
           <EntitySet Name="Get_menu" EntityType="Order_Food_dbModel.Get_menu" />
+          <EntitySet Name="Add_store_img" EntityType="Order_Food_dbModel.Add_store_img" />
+          <EntitySet Name="sysdiagrams" EntityType="Order_Food_dbModel.sysdiagrams" />
+          <EntitySet Name="Description" EntityType="Order_Food_dbModel.Description" />
         </EntityContainer>
         <EntityType Name="Address_C">
           <Key>
@@ -360,6 +394,33 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
           <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Menu_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Menu_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Add_store_img">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="add_img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Description">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
@@ -516,6 +577,36 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
                 <ScalarProperty Name="Menu_name" ColumnName="Menu_name" />
                 <ScalarProperty Name="customer_name" ColumnName="customer_name" />
                 <ScalarProperty Name="Menu_id" ColumnName="Menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Add_store_img">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Add_store_img">
+              <MappingFragment StoreEntitySet="Add_store_img">
+                <ScalarProperty Name="add_img" ColumnName="add_img" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Description">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Description">
+              <MappingFragment StoreEntitySet="Description">
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="description1" ColumnName="description" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

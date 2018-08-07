@@ -38,5 +38,8 @@ namespace Order_Food.Models
         public virtual DbSet<Get_catagory> Get_catagory { get; set; }
         public virtual DbSet<Get_time> Get_time { get; set; }
         public virtual DbSet<Get_menu> Get_menu { get; set; }
+        public virtual DbSet<Add_store_img> Add_store_img { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Description> Description { get; set; }
     }
 }

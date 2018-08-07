@@ -12,7 +12,6 @@ namespace Order_Food.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
 
     public partial class Add_Store
     {
@@ -23,6 +22,5 @@ namespace Order_Food.Models
         [NotMapped]
         public List<Category> category2 { get; set; }
         public string numcut { get; set; }
-        public HttpPostedFileBase File { get; set; }
     }
 }

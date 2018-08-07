@@ -695,8 +695,102 @@ namespace Order_Food.Controllers
 
             return View();
         }
-        public ActionResult Add_store_img(HttpPostedFileBase getimg_store) {
-            var a = getimg_store;
+        public ActionResult Add_store_img()
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var img = db.Add_store_img.Where(x => x.customer_name == checkid).Select(x => x.add_img).ToList();
+                ViewBag.folder = checkid + "/store_pic";
+                return View(img);
+            }
+        }
+        [HttpPost]
+        public ActionResult Add_store_img(HttpPostedFileBase getimg_store, Add_store_img obj)
+        {
+            //----------------------new_folder------------------------
+            string checkid = Session["namesec"].ToString();
+            string name_folder = Path.Combine(Server.MapPath("~/img/user_img"), checkid, "store_pic");
+            //----------------------name and save img------------------------
+            string fileName = Path.GetFileNameWithoutExtension(getimg_store.FileName);
+            string extention = Path.GetExtension(getimg_store.FileName);
+            fileName = fileName + DateTime.Now.ToString("yyyyMMdd") + extention;
+            string path = Path.Combine(Server.MapPath("~/img/user_img" + "/" + checkid), "store_pic", fileName);
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                if (System.IO.Directory.Exists(name_folder))
+                {
+                    getimg_store.SaveAs(path);
+                    var get_img = db.Add_store_img.Single(x => x.customer_name == checkid);
+                    get_img.add_img = fileName;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Directory.CreateDirectory(name_folder);
+                    getimg_store.SaveAs(path);
+                    obj.add_img = fileName;
+                    obj.customer_name = checkid;
+                    db.Add_store_img.Add(obj);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Homeaddstore", "UsingU");
+        }
+        public ActionResult Add_description()
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var check = db.Description.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check == null)
+                {
+                    ViewBag.storechek = "false";
+                }
+                else
+                {
+                    var get_namesto = db.Description.Single(x => x.customer_name == checkid);
+                    if (get_namesto.edit_value == "edit")
+                    {
+                        ViewBag.storechek = "false";
+                        ViewBag.name = db.Description.Where(x => x.customer_name == checkid).Select(x => x.description1);
+                    }
+                    else
+                    {
+                        ViewBag.name = db.Description.Where(x => x.customer_name == checkid).Select(x => x.description1);
+                        ViewBag.storechek = "true";
+                    }
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add_description(Description get_description)
+        {
+            string checkid = Session["namesec"].ToString();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                var check = db.Description.Where(x => x.customer_name == checkid).FirstOrDefault();
+                if (check != null)
+                {
+                    var get_descrpt = db.Description.Single(x => x.customer_name == checkid);
+                    get_descrpt.edit_value = get_description.edit_value;
+                    db.SaveChanges();
+                    if (get_descrpt.edit_value == "show")
+                    {
+                        get_descrpt.description1 = get_description.description1;
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    get_description.customer_name = checkid;
+                    db.Description.Add(get_description);
+                    db.SaveChanges();
+                }
+            }
+
             return View();
         }
     }

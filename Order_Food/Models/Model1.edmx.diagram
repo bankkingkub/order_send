@@ -19,6 +19,9 @@
         <EntityTypeShape EntityType="Order_Food_dbModel.Get_catagory" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Get_time" Width="1.5" PointX="9.375" PointY="9.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Get_menu" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Add_store_img" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.sysdiagrams" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Description" Width="1.5" PointX="5.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

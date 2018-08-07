@@ -1,20 +1,18 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-@model Order_Food.Models.Add_Store
-    @using (Html.BeginForm("Add_store_img", "UsingU", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-<label>
-    เลือกรูปภาพโปรโมทร้านค้า
-    <input type="file" name="getimg_store" id="File" size="60">
-</label>
-
-<div>
-    ชื่อใต้รูป
-</div>
-@Html.EditorFor(s => s.description)
-<div style="padding-top:5px;"></div>
-<input type="submit" class="w3-button w3-dark-grey" value="ตกลง">
-
-    }
+@foreach (var item in Model)
+{
+    <div style="text-align:center">
+        <img src="~/img/user_img/@ViewBag.folder/@item" style="box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);width:120px;height:auto;">
+    </div>
+}
+<div class="pd_15px"></div>
+@using (Html.BeginForm("Add_store_img", "UsingU", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label>
+        เลือกรูปหน้าร้าน
+        <input type="file" name="getimg_store" id="File" size="60">
+    </label>
+    <input type="submit" class="w3-button w3-dark-grey" value="ตกลง">
+}

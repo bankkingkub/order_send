@@ -18,6 +18,9 @@
     <EntitySet Name="Get_catagory" EntityType="Order_Food_dbModel.Get_catagory" />
     <EntitySet Name="Get_time" EntityType="Order_Food_dbModel.Get_time" />
     <EntitySet Name="Get_menu" EntityType="Order_Food_dbModel.Get_menu" />
+    <EntitySet Name="Add_store_img" EntityType="Order_Food_dbModel.Add_store_img" />
+    <EntitySet Name="sysdiagrams" EntityType="Order_Food_dbModel.sysdiagrams" />
+    <EntitySet Name="Description" EntityType="Order_Food_dbModel.Description" />
   </EntityContainer>
   <EntityType Name="Address_C">
     <Key>
@@ -169,6 +172,33 @@
     <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Menu_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Menu_price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Add_store_img">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="add_img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Description">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>
