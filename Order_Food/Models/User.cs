@@ -15,6 +15,12 @@ namespace Order_Food.Models
 
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Get_storename = new HashSet<Get_storename>();
+        }
+
         public int User_id { get; set; }
         [Required(ErrorMessage = "*")]
         public string User_user { get; set; }
@@ -35,5 +41,8 @@ namespace Order_Food.Models
         [Required(ErrorMessage = "*")]
         public string Status { get; set; }
         public string Province { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Get_storename> Get_storename { get; set; }
     }
 }

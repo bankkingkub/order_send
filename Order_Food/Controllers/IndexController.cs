@@ -107,6 +107,8 @@ namespace Order_Food.Controllers
                     string checkstatus = db.User.Where(u => u.User_user == FirstName).Select(u => u.Status).Single();
                     Session.Add("checkstatus", checkstatus);
                     Session.Add("namesec", nameuser);
+                    string user_user = db.User.Where(u => u.User_user == FirstName).Select(u => u.User_user).Single();
+                    Session.Add("user_user", user_user);
                     return RedirectToAction("Homepage", "Index");
 
                 }
@@ -123,6 +125,11 @@ namespace Order_Food.Controllers
             Session.Clear();
             return RedirectToAction("Homepage", "Index");
         }
+        public ActionResult redit()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult redit(string user, string re_pw)
         {
             ViewBag.regis = "เข้า Editpw";
@@ -130,15 +137,13 @@ namespace Order_Food.Controllers
             {
                 try
                 {
-                    //ModelState.Remove("User_repw");
-                    var userModel = db.User.Single(u => u.User_user == user);
-                    userModel.User_pw = re_pw;
+                    var get_repw = db.User.Single(x => x.User_user == user);
+                    get_repw.User_repw = re_pw;
                     db.SaveChanges();
-                    ViewBag.regis = "ใส่ข้อมูลเรียบร้อย";
+                    ViewBag.regis = "ใส้ข้อมูลเรียบร้อย";
                 }
-                catch
-                {
-                    ViewBag.regis = "ไม่สามรถแก้ไขได้";
+                catch {
+                    ViewBag.regis = "แก้ไขไม่สำเร็จ";
                 }
 
                 return View();

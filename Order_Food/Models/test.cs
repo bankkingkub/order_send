@@ -12,13 +12,9 @@ namespace Order_Food.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Get_storename
+    public partial class test
     {
-        public int id { get; set; }
-        public string get_storename1 { get; set; }
-        public string customer_name { get; set; }
-        public string edit_value { get; set; }
-    
-        public virtual User User { get; set; }
+        public Nullable<int> id { get; set; }
+        public string name { get; set; }
     }
 }

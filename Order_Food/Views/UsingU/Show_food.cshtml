@@ -29,25 +29,26 @@
                             </div>
                         }*@
                     <div class="col-md-3 icom_menu">
-
-                        <div>
-                            <img src="~/img/user_img/@Model[a].Food_Picture_pic" style="height:110px;width:auto;">
-                        </div>
-                        <div>
-                            @Model[a].Food_Picture_name
-                        </div>
-                        <div>
-                            ข้อความใต่รูป
+                        <div id="@Model[a].Food_Picture_id" onclick="get_id_name(event)">
+                            <div>
+                                <img src="~/img/user_img/@Model[a].Food_Picture_pic" style="height:110px;width:auto;">
+                            </div>
+                            <div>
+                                @Model[a].Food_Picture_name
+                            </div>
+                            <div>
+                                ข้อความใต่รูป
+                            </div>
                         </div>
                     </div>
                     @*using (Html.BeginForm("Showcus_to_use", "UsingU", FormMethod.Post))
-                    {
-                        string getname = @Model[a].Food_Picture_name;
-                        @Html.Value(getname, "getasd");
+                        {
+                            string getname = @Model[a].Food_Picture_name;
+                            @Html.Value(getname, "getasd");
 
-                        <button> ใส่ชั่วคราว </button>
+                            <button> ใส่ชั่วคราว </button>
 
-                    }*@
+                        }*@
                 }
             }
 
@@ -60,3 +61,9 @@
     </div>
 
 </div>
+<script>
+    function get_id_name(event) {
+        var get_id = event.currentTarget.id;
+        alert(event.currentTarget.id);
+    };
+</script>

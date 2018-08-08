@@ -25,21 +25,21 @@ namespace Order_Food.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Add_Store> Add_Store { get; set; }
+        public virtual DbSet<Add_store_img> Add_store_img { get; set; }
         public virtual DbSet<Address_C> Address_C { get; set; }
         public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Description> Description { get; set; }
         public virtual DbSet<Food_Picture> Food_Picture { get; set; }
+        public virtual DbSet<Get_catagory> Get_catagory { get; set; }
+        public virtual DbSet<Get_location> Get_location { get; set; }
+        public virtual DbSet<Get_menu> Get_menu { get; set; }
+        public virtual DbSet<Get_storename> Get_storename { get; set; }
+        public virtual DbSet<Get_time> Get_time { get; set; }
         public virtual DbSet<Report> Report { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<user_account> user_account { get; set; }
-        public virtual DbSet<Add_Store> Add_Store { get; set; }
-        public virtual DbSet<Get_location> Get_location { get; set; }
-        public virtual DbSet<Get_storename> Get_storename { get; set; }
-        public virtual DbSet<Get_catagory> Get_catagory { get; set; }
-        public virtual DbSet<Get_time> Get_time { get; set; }
-        public virtual DbSet<Get_menu> Get_menu { get; set; }
-        public virtual DbSet<Add_store_img> Add_store_img { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Description> Description { get; set; }
+        public virtual DbSet<test> test { get; set; }
     }
 }

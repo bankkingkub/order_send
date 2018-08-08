@@ -399,7 +399,7 @@ namespace Order_Food.Controllers
         public ActionResult getnamestore()
         {
 
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_storename.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -427,7 +427,7 @@ namespace Order_Food.Controllers
         [HttpPost]
         public ActionResult getnamestore(Get_storename get_storename)
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_storename.Where(x => x.customer_name == checkid).FirstOrDefault();
