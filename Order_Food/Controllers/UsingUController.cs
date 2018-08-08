@@ -753,11 +753,11 @@ namespace Order_Food.Controllers
                     if (get_namesto.edit_value == "edit")
                     {
                         ViewBag.storechek = "false";
-                        ViewBag.name = db.Description.Where(x => x.customer_name == checkid).Select(x => x.description1);
+                        ViewBag.name = db.Description.Where(x => x.customer_name == checkid).Select(x => x.description1).FirstOrDefault();
                     }
                     else
                     {
-                        ViewBag.name = db.Description.Where(x => x.customer_name == checkid).Select(x => x.description1);
+                        ViewBag.name = db.Description.Where(x => x.customer_name == checkid).Select(x => x.description1).FirstOrDefault();
                         ViewBag.storechek = "true";
                     }
                 }

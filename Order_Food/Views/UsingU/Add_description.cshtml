@@ -1,12 +1,47 @@
 ﻿
 @{
+    /**/
+
     Layout = null;
 }
+<div id="re_dec">
+    @model Order_Food.Models.Description
+    @if (ViewBag.storechek == "true")
+    {
+        @ViewBag.name
+        <input type="submit" id="edit_description" class="w3-button w3-dark-grey" value="แก้ไข">
+    }
+    else if (ViewBag.storechek == "false")
+    {
+        <input type="text" id="get_des_val">
+        <input type="submit" id="get_description" class="w3-button w3-dark-grey" value="ตกลง">
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        $("#edit_description").click(function () {
+            var get_descript = {
+                description1: $("#get_des_val").val() ,
+                edit_value: "edit"
+            };
+            $.ajax({
+                    url: "@Url.Action("Add_description", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                data: JSON.stringify({ get_description: get_descript}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });
 
-@model Order_Food.Models.Description
-<input type="text" id="get_des_val">
+        });
+        function re() {
+            $("#re_dec").load("http://localhost:55400/UsingU/Add_description");
+        }
+        });
 
-<input type="submit" id="get_description" class="w3-button w3-dark-grey" value="ตกลง">
+
+</script>
 <script>
     $(document).ready(function () {
         $("#get_description").click(function () {
@@ -26,9 +61,7 @@
 
         });
         function re() {
-            $("#re_menu").load("http://localhost:55400/UsingU/Add_description");
+            $("#re_dec").load("http://localhost:55400/UsingU/Add_description");
         }
         });
-
-
 </script>
