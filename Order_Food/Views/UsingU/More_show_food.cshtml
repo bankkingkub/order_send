@@ -1,0 +1,35 @@
+﻿@model List<Order_Food.Models.View_showing>
+
+<h2>More_show_food</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+    <div class="col-md-3 icom_menu">
+        <div id="@item.User_user" onclick="get_id_name(event)">
+            <div>
+                <img src="~/img/user_img/@item.User_user/store_pic/@item.add_img" style="height:110px;width:auto;">
+            </div>
+            <div>
+                @item.get_storename
+            </div>
+            <div>
+                @item.description
+            </div>
+            <div>
+                @item.day_open @item.day_close
+            </div>
+            <div>
+                @item.time_open @item.time_close
+            </div>
+        </div>
+    </div>
+    }
+
+</div>
+<script>
+    function get_id_name(event) {
+        var get_id = event.currentTarget.id;
+        alert(event.currentTarget.id);
+    };
+</script>

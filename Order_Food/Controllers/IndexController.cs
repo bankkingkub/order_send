@@ -11,6 +11,7 @@ namespace Order_Food.Controllers
     public class IndexController : Controller
     {
         public ActionResult Homepage()
+
         {
             if (Session["checklogin"] == null)
             {
@@ -45,10 +46,6 @@ namespace Order_Food.Controllers
             {
                 using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
                 {
-                    if (!ModelState.IsValid)
-                    {
-                        return View();
-                    }
                     obj.Status = Direction;
                     obj.Province = Province;
                     db.User.Add(obj);
@@ -175,7 +172,7 @@ namespace Order_Food.Controllers
             {
                 try
                 {
-                    string user_check = Session["namesec"].ToString();
+                    string user_check = Session["user_user"].ToString();
                     var get_img = db.Food_Picture.Where(c => c.Food_Picture_name == user_check).Select(c => c.Food_Picture_pic).Single();
                     ViewBag.get_img = get_img;
 

@@ -40,6 +40,6 @@ namespace Order_Food.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<user_account> user_account { get; set; }
-        public virtual DbSet<test> test { get; set; }
+        public virtual DbSet<View_showing> View_showing { get; set; }
     }
 }

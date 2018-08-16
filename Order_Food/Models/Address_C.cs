@@ -17,5 +17,6 @@ namespace Order_Food.Models
         public int Address_C_id { get; set; }
         public string Address_C_lat { get; set; }
         public string Address_C_long { get; set; }
+        public string Address_C_name { get; set; }
     }
 }

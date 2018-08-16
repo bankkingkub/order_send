@@ -18,7 +18,5 @@ namespace Order_Food.Models
         public string get_storename1 { get; set; }
         public string customer_name { get; set; }
         public string edit_value { get; set; }
-    
-        public virtual User User { get; set; }
     }
 }

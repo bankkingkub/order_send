@@ -23,6 +23,7 @@
     <EntitySetMapping Name="Address_C">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Address_C">
         <MappingFragment StoreEntitySet="Address_C">
+          <ScalarProperty Name="Address_C_name" ColumnName="Address_C_name" />
           <ScalarProperty Name="Address_C_long" ColumnName="Address_C_long" />
           <ScalarProperty Name="Address_C_lat" ColumnName="Address_C_lat" />
           <ScalarProperty Name="Address_C_id" ColumnName="Address_C_id" />
@@ -149,7 +150,7 @@
           <ScalarProperty Name="User_name" ColumnName="User_name" />
           <ScalarProperty Name="User_pw" ColumnName="User_pw" />
           <ScalarProperty Name="User_user" ColumnName="User_user" />
-          <ScalarProperty Name="User_id" ColumnName="User_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -163,11 +164,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="test">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.test">
-        <MappingFragment StoreEntitySet="test">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+    <EntitySetMapping Name="View_showing">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.View_showing">
+        <MappingFragment StoreEntitySet="View_showing">
+          <ScalarProperty Name="time_open" ColumnName="time_open" />
+          <ScalarProperty Name="get_storename" ColumnName="get_storename" />
+          <ScalarProperty Name="add_img" ColumnName="add_img" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="time_close" ColumnName="time_close" />
+          <ScalarProperty Name="day_close" ColumnName="day_close" />
+          <ScalarProperty Name="day_open" ColumnName="day_open" />
+          <ScalarProperty Name="User_user" ColumnName="User_user" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

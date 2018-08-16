@@ -23,7 +23,7 @@ namespace Order_Food.Models
     [MetadataType(typeof(Add_StoreMetadata))]
     public class add_store
     {
-        public int User_id { get; set; }
+        public int id { get; set; }
         [Required(ErrorMessage = "*")]
         public string User_user { get; set; }
         [DataType(DataType.Password)]

@@ -24,6 +24,7 @@
     <Property Name="Address_C_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Address_C_lat" Type="nchar" MaxLength="10" />
     <Property Name="Address_C_long" Type="nchar" MaxLength="10" />
+    <Property Name="Address_C_name" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -37,7 +38,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="description" Type="varchar" MaxLength="50" />
-    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="edit_value" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Food_Picture">
@@ -47,14 +48,14 @@
     <Property Name="Food_Picture_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="(FK)Customer_id" Type="varchar" MaxLength="50" />
     <Property Name="Food_Picture_pic" Type="varchar" MaxLength="100" />
-    <Property Name="Food_Picture_name" Type="varchar" MaxLength="50" />
+    <Property Name="Food_Picture_name" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Get_catagory">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="category01" Type="varchar" MaxLength="50" />
     <Property Name="category02" Type="varchar" MaxLength="50" />
     <Property Name="category03" Type="varchar" MaxLength="50" />
@@ -65,7 +66,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="address_street" Type="varchar" MaxLength="50" />
     <Property Name="address_district" Type="varchar" MaxLength="50" />
     <Property Name="address_county" Type="varchar" MaxLength="50" />
@@ -129,20 +130,11 @@ warning 6013: The table/view 'Order_Food_db.dbo.Order_Status' does not have a pr
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Order_Food_db.dbo.test' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="test">
-    <Key>
-      <PropertyRef Name="name" />
-    </Key>
-    <Property Name="id" Type="int" />
-    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
-  </EntityType>
   <EntityType Name="User">
     <Key>
-      <PropertyRef Name="User_user" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_user" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_pw" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_name" Type="varchar" MaxLength="50" />
@@ -162,18 +154,21 @@ warning 6002: The table/view 'Order_Food_db.dbo.test' does not have a primary ke
     <Property Name="last" Type="varchar" MaxLength="50" />
     <Property Name="pw" Type="varchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK_Get_storename_Get_storename">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Get_storename" Type="Self.Get_storename" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="User_user" />
-      </Principal>
-      <Dependent Role="Get_storename">
-        <PropertyRef Name="customer_name" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_showing">
+    <Key>
+      <PropertyRef Name="User_user" />
+    </Key>
+    <Property Name="User_user" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="day_open" Type="varchar" MaxLength="50" />
+    <Property Name="day_close" Type="varchar" MaxLength="50" />
+    <Property Name="time_close" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+    <Property Name="add_img" Type="varchar" MaxLength="50" />
+    <Property Name="get_storename" Type="varchar" MaxLength="50" />
+    <Property Name="time_open" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityContainer Name="Order_Food_dbModelStoreContainer">
     <EntitySet Name="Add_Store" EntityType="Self.Add_Store" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Add_store_img" EntityType="Self.Add_store_img" Schema="dbo" store:Type="Tables" />
@@ -190,15 +185,17 @@ warning 6002: The table/view 'Order_Food_db.dbo.test' does not have a primary ke
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user_account" EntityType="Self.user_account" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="test" EntityType="Self.test" store:Type="Tables" store:Schema="dbo">
+    <EntitySet Name="View_showing" EntityType="Self.View_showing" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [test].[id] AS [id], 
-    [test].[name] AS [name]
-    FROM [dbo].[test] AS [test]</DefiningQuery>
+    [View_showing].[User_user] AS [User_user], 
+    [View_showing].[day_open] AS [day_open], 
+    [View_showing].[day_close] AS [day_close], 
+    [View_showing].[time_close] AS [time_close], 
+    [View_showing].[description] AS [description], 
+    [View_showing].[add_img] AS [add_img], 
+    [View_showing].[get_storename] AS [get_storename], 
+    [View_showing].[time_open] AS [time_open]
+    FROM [dbo].[View_showing] AS [View_showing]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK_Get_storename_Get_storename" Association="Self.FK_Get_storename_Get_storename">
-      <End Role="User" EntitySet="User" />
-      <End Role="Get_storename" EntitySet="Get_storename" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

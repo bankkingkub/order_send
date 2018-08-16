@@ -46,7 +46,7 @@ namespace Order_Food.Controllers
                 if (getimg != null)
                 {
                     //----------------------new_folder------------------------
-                    string checkid = Session["namesec"].ToString();
+                    string checkid = Session["user_user"].ToString();
                     string name_folder = Path.Combine(Server.MapPath("~/img/user_img"), checkid);
                     //----------------------name and save img------------------------
                     string fileName = Path.GetFileNameWithoutExtension(getimg.FileName);
@@ -90,7 +90,7 @@ namespace Order_Food.Controllers
             {
                 using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
                 {
-                    string checkid = Session["namesec"].ToString();
+                    string checkid = Session["user_user"].ToString();
                     var img = db.Add_Store.Where(s => s.name == checkid).Select(s => s.pic).ToList();
                     return View(img);
                 }
@@ -116,7 +116,7 @@ namespace Order_Food.Controllers
         //[AcceptVerbs(HttpVerbs.Post)]
         public List<Add_Store> loop_img()
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             //List<string> img;
             List<Add_Store> model = new List<Add_Store>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
@@ -126,20 +126,10 @@ namespace Order_Food.Controllers
             }
             return model;
         }
-        public ActionResult Show_food()
-        {
-            List<Food_Picture> show_food = new List<Food_Picture>();
-            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
-            {
-                show_food = db.Food_Picture.ToList();
-                ViewBag.check = show_food.Count;
-            }
-            var a = show_food;
-            return View(a);
-        }
+
         public ActionResult showsaveimg()
         {
-            ViewBag.folder = Session["namesec"].ToString();
+            ViewBag.folder = Session["user_user"].ToString();
             var s = loop_img();
             return View(s);
         }
@@ -195,7 +185,7 @@ namespace Order_Food.Controllers
         //}
         public ActionResult Category()
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 List<Category> loob_cat = new List<Category>();
@@ -230,7 +220,7 @@ namespace Order_Food.Controllers
         [HttpPost]
         public ActionResult Category(string[] ajex_cat, Get_catagory get_catagory)
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_catagory.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -469,7 +459,7 @@ namespace Order_Food.Controllers
         //}
         public ActionResult Get_c_address()
         {
-            var checkid = Session["namesec"].ToString();
+            var checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_location.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -504,7 +494,7 @@ namespace Order_Food.Controllers
         [HttpPost]
         public ActionResult Get_c_address(Get_location get_lo)
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_location.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -536,7 +526,7 @@ namespace Order_Food.Controllers
 
         public ActionResult Get_time_store()
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -570,7 +560,7 @@ namespace Order_Food.Controllers
         [HttpPost]
         public ActionResult Get_time_store(Get_time get_time)
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_time.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -601,7 +591,7 @@ namespace Order_Food.Controllers
         }
         public ActionResult Add_food()
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_menu.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -634,7 +624,7 @@ namespace Order_Food.Controllers
         [HttpPost]
         public ActionResult Add_food(string[] get_name_menu, string[] get_name_price, Get_menu get_menu)
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Get_menu.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -697,7 +687,7 @@ namespace Order_Food.Controllers
         }
         public ActionResult Add_store_img()
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var img = db.Add_store_img.Where(x => x.customer_name == checkid).Select(x => x.add_img).ToList();
@@ -709,7 +699,7 @@ namespace Order_Food.Controllers
         public ActionResult Add_store_img(HttpPostedFileBase getimg_store, Add_store_img obj)
         {
             //----------------------new_folder------------------------
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             string name_folder = Path.Combine(Server.MapPath("~/img/user_img"), checkid, "store_pic");
             //----------------------name and save img------------------------
             string fileName = Path.GetFileNameWithoutExtension(getimg_store.FileName);
@@ -739,7 +729,7 @@ namespace Order_Food.Controllers
         }
         public ActionResult Add_description()
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Description.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -768,7 +758,7 @@ namespace Order_Food.Controllers
         [HttpPost]
         public ActionResult Add_description(Description get_description)
         {
-            string checkid = Session["namesec"].ToString();
+            string checkid = Session["user_user"].ToString();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
                 var check = db.Description.Where(x => x.customer_name == checkid).FirstOrDefault();
@@ -791,6 +781,47 @@ namespace Order_Food.Controllers
                 }
             }
 
+            return View();
+        }
+
+
+        public ActionResult Show_food()
+        {
+            List<View_showing> show_food = new List<View_showing>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                show_food = db.View_showing.ToList();
+                ViewBag.check = show_food.Count;
+            }
+            var a = show_food;
+            return View(a);
+        }
+        [HttpPost]
+        public ActionResult Show_food(string get_name)
+        {
+            Session["get_name_sto"] = get_name;
+            return RedirectToAction("Home_show_food_detile", "UsingU");
+        }
+            public ActionResult More_show_food()
+        {
+            List<View_showing> show_food = new List<View_showing>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                show_food = db.View_showing.ToList();
+                ViewBag.check = show_food.Count;
+            }
+            var a = show_food;
+            return View(a);
+        }
+        public ActionResult Home_show_food_detile()
+        {
+            var get_sec = Session["get_name_sto"].ToString();
+            ViewBag.get_name = get_sec;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Home_show_food_detile(string get_name)
+        {
             return View();
         }
     }
