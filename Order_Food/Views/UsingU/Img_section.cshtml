@@ -1,0 +1,17 @@
+﻿@model List<Order_Food.Models.Add_Store>
+@{
+    Layout = null;
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-2">
+        <div>
+            <img src="~/img/user_img/@item.name/@item.pic" style="box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);height: 110px;width: auto;">
+        </div>
+        <div>
+            @item.description
+        </div>
+            </div>
+    }
+</div>

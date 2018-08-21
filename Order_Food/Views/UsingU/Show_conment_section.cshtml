@@ -1,0 +1,62 @@
+﻿@model List<Order_Food.Models.Coment_section>
+@{
+    Layout = null;
+}
+<div id="re_coment" onclick="no_re(event)">
+    <table style="width:100%;">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.user_name
+                </td>
+                <td>
+                    @item.coment
+                </td>
+                <td id="@item.user_name"  class="get_edit" onopen="loadedit()">
+                    asedasd
+                </td>
+            </tr>
+        }
+    </table>
+    <input type="text" id="no_refect" />
+</div>
+<script>
+    function loadedit() {
+        alert("Image is loaded");
+    }
+
+        //if ("bankkingkub1" == "bankkingkub1") {
+        //        $("#get_edit").append('<input type="submit" value="แก้ไข" onclick="edit_com_val(event)" id="@@item.coment" />')
+        //    }
+</script>
+<script>
+    function edit_com_val(event) {
+        var get_comemt = {
+            coment: event.currentTarget.id,
+            edit: "edit"
+        }
+            @*$.ajax({
+                    url: "@Url.Action("Coment_section", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                data: JSON.stringify({ send_coment: get_comemt}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });*@
+    }
+
+</script>
+<script>
+    function no_re(event) {
+        var get_id_nore = event.target.id;
+        if (get_id_nore == "no_refect") {
+
+        } else{
+                @*setTimeout(function () {
+        $("#re_coment").load("@Url.Action("Show_conment_section", "UsingU")");
+    }, 5000);*@
+        }
+    };
+</script>

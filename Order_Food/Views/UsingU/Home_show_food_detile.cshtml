@@ -1,44 +1,36 @@
-﻿@ViewBag.get_name
-<div class="">
-    <div>
-        รูปร้าน
-    </div>
-    <div>
-        ชื่อร้าน
-    </div>
-    <div>
-        ข้อมูล - เวลาเปิดปิด
+﻿@model List<Order_Food.Models.View_how_show>
+@ViewBag.get_name
+@foreach (var item in Model)
+{
+    <div class="">
+        <div>
+            <img src="~/img/user_img/@item.User_user/store_pic/@item.add_img" style="height:110px;width:auto;">
+        </div>
+        <div class="pd_15px"></div>
+        <div>
+            ชื่อร้าน @item.get_storename
+        </div>
+        <div>
+            ข้อมูล @item.description
+        </div>
+        <div>
+            วัน เปิด @item.day_open วันปิด @item.day_close เปิดเวลา @item.time_open เวลาปิด @item.time_close
+        </div>
+        <div>
+            ที่อยู่ @item.address_county @item.address_district @item.address_street @item.address_province
+        </div>
     </div>
 
-    <div>
-        รูป โชวต่างๆ
-    </div>
-    <div>
-        สถานที่
-    </div>
+}
+<div class="pd_15px"></div>
+<div>
+    @Html.Action("Img_section", "UsingU")
 </div>
-@*coment-section*@
-<table style="width:100%;">
-    <tr>
-        <td>
-            หน้า user ฝั่งคนอื่น
-        </td>
-        <td>
-            coment section
-        </td>
-        <td>
-            หน้า user ฝั่งตัวเอง
-        </td>
-    </tr>
-    <tr>
-        <td>
+<div class="pd_15px"></div>
+<div>
 
-        </td>
-        <td>
-            <textarea rows="1"></textarea>
-        </td>
-        <td>
-            ปุ่มตกลง
-        </td>
-    </tr>
-</table>
+    โหวต
+</div>
+<div class="pd_15px"></div>
+@Html.Action("Show_conment_section", "UsingU")
+@Html.Action("Coment_section", "UsingU")

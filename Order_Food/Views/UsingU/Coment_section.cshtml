@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    @model List<Order_Food.Models.Coment_section>
+}
+    <table style="width:100%;">
+        <tr>
+            <td>
+                หน้า user ฝั่งคนอื่น
+            </td>
+            <td>
+                coment section
+            </td>
+            <td>
+                หน้า user ฝั่งตัวเอง
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <textarea rows="1" id="get_coment" style=""></textarea>
+            </td>
+            <td>
+                <input type="submit" value="ตกลง" id="get_coment_submit">
+            </td>
+        </tr>
+    </table>
+
+<script>
+    $(document).ready(function () {
+        $("#get_coment_submit").click(function () {
+            var get_comemt = {
+                coment : $("#get_coment").val()
+            }
+            $.ajax({
+                    url: "@Url.Action("Coment_section", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                data: JSON.stringify({ send_coment: get_comemt}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+                });
+
+        });
+        function re() {
+            $("#re_coment").load("@Url.Action("Show_conment_section", "UsingU")");
+            document.getElementById('get_coment').value = '';
+        }
+        });
+</script>

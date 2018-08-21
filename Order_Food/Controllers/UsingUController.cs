@@ -802,7 +802,7 @@ namespace Order_Food.Controllers
             Session["get_name_sto"] = get_name;
             return RedirectToAction("Home_show_food_detile", "UsingU");
         }
-            public ActionResult More_show_food()
+        public ActionResult More_show_food()
         {
             List<View_showing> show_food = new List<View_showing>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
@@ -815,14 +815,88 @@ namespace Order_Food.Controllers
         }
         public ActionResult Home_show_food_detile()
         {
-            var get_sec = Session["get_name_sto"].ToString();
-            ViewBag.get_name = get_sec;
+            List<View_how_show> home_show_food = new List<View_how_show>();
+            var get_sec = get_section_store();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                home_show_food = db.View_how_show.Where(x => x.User_user == get_sec).ToList();
+            }
+            var re = home_show_food;
+            return View(re);
+        }
+        public ActionResult Coment_section()
+        {
+            var checkid = get_section_user();
+            ViewBag.get_name = checkid;
             return View();
         }
         [HttpPost]
-        public ActionResult Home_show_food_detile(string get_name)
+        public ActionResult Coment_section(Coment_section send_coment)
         {
-            return View();
+            var get_sec = get_section_store();
+            var checkid = get_section_user();
+            List<Coment_section> show_coment = new List<Coment_section>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                show_coment = db.Coment_section.Where(x => x.customer_name == get_sec).ToList();
+                send_coment.user_name = checkid;
+                send_coment.customer_name = get_sec;
+                send_coment.date = DateTime.Now;
+                db.Coment_section.Add(send_coment);
+                db.SaveChanges();
+            }
+            return View(show_coment);
+        }
+        public ActionResult Show_conment_section()
+        {
+            var get_sec = get_section_store();
+            List<Coment_section> show_coment = new List<Coment_section>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                show_coment = db.Coment_section.Where(x => x.customer_name == get_sec).ToList();
+            }
+            ViewBag.get_name = get_section_user();
+            return View(show_coment);
+        }
+
+        public ActionResult Img_section()
+        {
+            var get_sec = get_section_store();
+            List<Add_Store> img_sec = new List<Add_Store>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                img_sec = db.Add_Store.Where(x => x.name == get_sec).ToList();
+            }
+            return View(img_sec);
+        }
+        string get_section_user()
+        {
+            try
+            {
+                string name = Session["user_user"].ToString();
+                return (name);
+            }
+            catch
+            {
+                toHome();
+            }
+            return (null);
+        }
+        string get_section_store()
+        {
+            try
+            {
+                string name = Session["get_name_sto"].ToString();
+                return (name);
+            }
+            catch
+            {
+                toHome();
+            }
+            return (null);
+        }
+        public ActionResult toHome() {
+            return RedirectToAction("Homepage", "Index");
         }
     }
 }

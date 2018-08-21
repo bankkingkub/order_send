@@ -178,5 +178,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="View_how_show">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.View_how_show">
+        <MappingFragment StoreEntitySet="View_how_show">
+          <ScalarProperty Name="get_storename" ColumnName="get_storename" />
+          <ScalarProperty Name="address_province" ColumnName="address_province" />
+          <ScalarProperty Name="address_county" ColumnName="address_county" />
+          <ScalarProperty Name="address_district" ColumnName="address_district" />
+          <ScalarProperty Name="address_street" ColumnName="address_street" />
+          <ScalarProperty Name="Food_Picture_pic" ColumnName="Food_Picture_pic" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="add_img" ColumnName="add_img" />
+          <ScalarProperty Name="time_close" ColumnName="time_close" />
+          <ScalarProperty Name="time_open" ColumnName="time_open" />
+          <ScalarProperty Name="day_close" ColumnName="day_close" />
+          <ScalarProperty Name="day_open" ColumnName="day_open" />
+          <ScalarProperty Name="User_user" ColumnName="User_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coment_section">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Coment_section">
+        <MappingFragment StoreEntitySet="Coment_section">
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="coment" ColumnName="coment" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

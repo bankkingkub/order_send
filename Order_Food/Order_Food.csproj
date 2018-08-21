@@ -181,6 +181,9 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Coment_section.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Description.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -229,6 +232,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user_account.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_how_show.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\View_showing.cs">
@@ -322,6 +328,9 @@
     <Content Include="Views\UsingU\Add_description.cshtml" />
     <Content Include="Views\UsingU\More_show_food.cshtml" />
     <Content Include="Views\UsingU\Home_show_food_detile.cshtml" />
+    <Content Include="Views\UsingU\Coment_section.cshtml" />
+    <Content Include="Views\UsingU\Img_section.cshtml" />
+    <Content Include="Views\UsingU\Show_conment_section.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

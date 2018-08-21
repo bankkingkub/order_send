@@ -17,6 +17,8 @@
     <EntitySet Name="User" EntityType="Order_Food_dbModel.User" />
     <EntitySet Name="user_account" EntityType="Order_Food_dbModel.user_account" />
     <EntitySet Name="View_showing" EntityType="Order_Food_dbModel.View_showing" />
+    <EntitySet Name="View_how_show" EntityType="Order_Food_dbModel.View_how_show" />
+    <EntitySet Name="Coment_section" EntityType="Order_Food_dbModel.Coment_section" />
   </EntityContainer>
   <EntityType Name="Add_Store">
     <Key>
@@ -56,7 +58,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="description1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="customer_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Food_Picture">
@@ -178,5 +180,33 @@
     <Property Name="add_img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="get_storename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="View_how_show">
+    <Key>
+      <PropertyRef Name="User_user" />
+    </Key>
+    <Property Name="User_user" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="day_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="day_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="time_open" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="time_close" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="add_img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Food_Picture_pic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="address_street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_district" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address_province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="get_storename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Coment_section">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="coment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date" Type="DateTime" Precision="0" />
   </EntityType>
 </Schema>
