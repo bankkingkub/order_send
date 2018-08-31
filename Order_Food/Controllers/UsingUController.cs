@@ -838,14 +838,31 @@ namespace Order_Food.Controllers
             List<Coment_section> show_coment = new List<Coment_section>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                show_coment = db.Coment_section.Where(x => x.customer_name == get_sec).ToList();
-                send_coment.user_name = checkid;
-                send_coment.customer_name = get_sec;
-                send_coment.date = DateTime.Now;
-                db.Coment_section.Add(send_coment);
-                db.SaveChanges();
+                if (send_coment.edit_value == "show")
+                {
+                    show_coment = db.Coment_section.Where(x => x.customer_name == get_sec).ToList();
+                    send_coment.user_name = checkid;
+                    send_coment.customer_name = get_sec;
+                    send_coment.date = DateTime.Now;
+                    db.Coment_section.Add(send_coment);
+                    db.SaveChanges();
+                }
+                else if (send_coment.edit_value == "edit")
+                {
+                    var edit_coment = db.Coment_section.Single(x => x.id == send_coment.id);
+                    edit_coment.edit_value = send_coment.edit_value;
+                    db.SaveChanges();
+                }
+                else if (send_coment.edit_value == "get_edit")
+                {
+                    var edit_coment = db.Coment_section.Single(x => x.id == send_coment.id);
+                    edit_coment.coment = send_coment.coment;
+                    edit_coment.edit_value = "show";
+                    db.SaveChanges();
+                }
+
             }
-            return View(show_coment);
+            return View();
         }
         public ActionResult Show_conment_section()
         {
@@ -868,6 +885,93 @@ namespace Order_Food.Controllers
                 img_sec = db.Add_Store.Where(x => x.name == get_sec).ToList();
             }
             return View(img_sec);
+        }
+        public ActionResult toHome()
+        {
+            return RedirectToAction("Homepage", "Index");
+        }
+        public ActionResult Home_chat()
+        {
+            return View();
+        }
+        public ActionResult Show_chat()
+        {
+            string get_chat_name = Session["get_chat_name"].ToString();
+            string get_non_alet = Session["get_non_alet"].ToString();
+            string get_check = Session["get_check"].ToString();
+
+            string get_name = get_section_user();
+            string get_anoter = get_section_store();
+            List<Chat> get_chat = new List<Chat>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                if (get_check == "true")
+                {
+                    ViewBag.me = get_name;
+                    ViewBag.anoter = get_chat_name;
+                    ViewBag.check = "c";
+                }
+                else
+                {
+                    ViewBag.me = get_name;
+                    ViewBag.anoter = get_anoter;
+                    ViewBag.check = "u";
+                }
+                get_chat = db.Chat.ToList();
+            }
+            return View(get_chat);
+        }
+        public ActionResult Chat_section()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Chat_section(Chat send_chat, Alert_customer alet_cu)
+        {
+            var get_name = get_section_user();
+            var get_store = get_section_store();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                send_chat.customer_name = get_name;
+                send_chat.user_name = get_store;
+                db.Chat.Add(send_chat);
+                try
+                {
+                    var check_null = db.Alert_customer.Single(x => x.name == get_name).ToString();
+                    alet_cu.alert = "show";
+                }
+                catch
+                {
+                    alet_cu.alert = "show";
+                    alet_cu.user_name = get_store;
+                    alet_cu.name = get_name;
+                    db.Alert_customer.Add(alet_cu);
+                }
+                db.SaveChanges();
+            }
+            return View();
+        }
+        public ActionResult Alet_section()
+        {
+            var get_name = get_section_user();
+            List<Alert_customer> alet_chat = new List<Alert_customer>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                alet_chat = db.Alert_customer.Where(x => x.user_name == get_name).ToList();
+                //foreach (var obj in db.Chat.Where(x => x.user_name == get_name))
+                //{
+                //}
+            }
+            return View(alet_chat);
+        }
+        [HttpPost]
+        public ActionResult Alet_section(string get_chat_name, string get_non_alet, string get_check)
+        {
+            Session["get_chat_name"] = get_chat_name;
+            Session["get_non_alet"] = get_non_alet;
+            Session["get_check"] = get_check;
+
+            return RedirectToAction("Homeaddstore", "UsingU");
         }
         string get_section_user()
         {
@@ -894,9 +998,6 @@ namespace Order_Food.Controllers
                 toHome();
             }
             return (null);
-        }
-        public ActionResult toHome() {
-            return RedirectToAction("Homepage", "Index");
         }
     }
 }

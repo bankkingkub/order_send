@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+    @model List<Order_Food.Models.Chat>
+}
+<div id="re_chat">
+    <table style="width:100%;margin:0 15px;">
+        <tr>
+            <td>
+                user ซ้าย
+            </td>
+            <td>
+                เเชท
+            </td>
+            <td>
+                user ขวา
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (ViewBag.check == "u")
+            {
+                <tr>
+                    @if (ViewBag.me == item.customer_name)
+                    {
+                        <td>
+                            @item.customer_name
+                        </td>
+                        <td>
+                            @item.chat1
+                        </td>
+                        <td></td>
+                    }
+                    else if (ViewBag.anoter == item.customer_name)
+                    {
+                        <td></td>
+                        <td>
+                            @item.chat1
+                        </td>
+                        <td>
+                            @item.customer_name
+                        </td>
+                    }
+                </tr>
+            }
+            else if (ViewBag.check == "c")
+            {
+                <tr>
+                    @if (ViewBag.me == item.customer_name)
+                    {
+                        <td>
+                            @item.customer_name
+                        </td>
+                        <td>
+                            @item.chat1
+                        </td>
+                        <td></td>
+                    }
+                    else if (ViewBag.anoter == item.customer_name)
+                    {
+                        <td></td>
+                        <td>
+                            @item.chat1
+                        </td>
+                        <td>
+                            @item.customer_name
+                        </td>
+                    }
+                </tr>
+
+            }
+        }
+    </table>
+</div>
+<script>
+            setTimeout(function () {
+                $("#re_chat").load("@Url.Action("Show_chat", "UsingU")");
+            }, 5000);
+</script>

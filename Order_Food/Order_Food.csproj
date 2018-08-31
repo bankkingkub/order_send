@@ -178,7 +178,13 @@
     <Compile Include="Models\Add_store_img.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Alert_customer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Chat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Coment_section.cs">
@@ -331,6 +337,10 @@
     <Content Include="Views\UsingU\Coment_section.cshtml" />
     <Content Include="Views\UsingU\Img_section.cshtml" />
     <Content Include="Views\UsingU\Show_conment_section.cshtml" />
+    <Content Include="Views\UsingU\Home_chat.cshtml" />
+    <Content Include="Views\UsingU\Chat_section.cshtml" />
+    <Content Include="Views\UsingU\Show_chat.cshtml" />
+    <Content Include="Views\UsingU\Alet_section.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

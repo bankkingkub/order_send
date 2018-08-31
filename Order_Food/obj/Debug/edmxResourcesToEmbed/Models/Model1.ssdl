@@ -26,11 +26,31 @@
     <Property Name="Address_C_long" Type="nchar" MaxLength="10" />
     <Property Name="Address_C_name" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Alert_customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="user_name" Type="varchar" MaxLength="50" />
+    <Property Name="alert" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Category">
     <Key>
       <PropertyRef Name="category" />
     </Key>
     <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="chat" Type="varchar" MaxLength="50" />
+    <Property Name="customer_name" Type="varchar" MaxLength="50" />
+    <Property Name="user_name" Type="varchar" MaxLength="50" />
+    <Property Name="date" Type="date" />
+    <Property Name="time" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="Coment_section">
     <Key>
@@ -41,6 +61,7 @@
     <Property Name="user_name" Type="varchar" MaxLength="50" />
     <Property Name="coment" Type="varchar" MaxLength="50" />
     <Property Name="date" Type="date" />
+    <Property Name="edit_value" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Description">
     <Key>
@@ -203,7 +224,9 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
     <EntitySet Name="Add_Store" EntityType="Self.Add_Store" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Add_store_img" EntityType="Self.Add_store_img" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Address_C" EntityType="Self.Address_C" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Alert_customer" EntityType="Self.Alert_customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Coment_section" EntityType="Self.Coment_section" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Description" EntityType="Self.Description" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />

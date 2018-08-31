@@ -23,6 +23,8 @@
         <EntityTypeShape EntityType="Order_Food_dbModel.View_showing" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.View_how_show" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="Order_Food_dbModel.Coment_section" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Chat" Width="1.5" PointX="5.375" PointY="10.625" />
+        <EntityTypeShape EntityType="Order_Food_dbModel.Alert_customer" Width="1.5" PointX="7.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

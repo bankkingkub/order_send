@@ -4,39 +4,72 @@
 }
 <div id="re_coment" onclick="no_re(event)">
     <table style="width:100%;">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.user_name
-                </td>
-                <td>
-                    @item.coment
-                </td>
-                <td id="@item.user_name"  class="get_edit" onopen="loadedit()">
-                    asedasd
-                </td>
-            </tr>
+        @{
+            foreach (var item in Model)
+            {
+                if (ViewBag.get_name == item.user_name)
+                {
+                    if (item.edit_value == "edit")
+                    {
+                        <tr>
+                            <td>
+                                @item.user_name
+                            </td>
+                            <td>
+                                <input type="text" id="no_refect" class="get_edit_coment"/>
+                            </td>
+                            <td>
+                                <input type="submit" value="คกลง" id="@item.id" ; onclick="get_edit_com_val(event)" />
+                            </td>
+                        </tr>
+
+                    }
+                    else if (item.edit_value == "show")
+                    {
+                        <tr>
+                            <td>
+                                @item.user_name
+                            </td>
+                            <td>
+                                @item.coment
+                            </td>
+                            <td>
+                                <input type="submit" value="แก้ไข" id="@item.id" ; onclick="edit_com_val(event)" />
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            @item.user_name
+                        </td>
+                        <td>
+                            @item.coment
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            }
         }
     </table>
-    <input type="text" id="no_refect" />
 </div>
-<script>
-    function loadedit() {
-        alert("Image is loaded");
-    }
-
-        //if ("bankkingkub1" == "bankkingkub1") {
-        //        $("#get_edit").append('<input type="submit" value="แก้ไข" onclick="edit_com_val(event)" id="@@item.coment" />')
-        //    }
-</script>
+@*<script>
+        $(document).ready(function () {
+            for (let num_check = 0; num_check < @getnum; num_check++) {
+                $("#@ViewBag.get_name"+ num_check +"").append('<input type="submit" value="แก้ไข" id="s"; onclick="edit_com_val(event)"/>')
+            }
+        });
+    </script>*@
 <script>
     function edit_com_val(event) {
+        alert(event.currentTarget.id);
         var get_comemt = {
-            coment: event.currentTarget.id,
-            edit: "edit"
+            id: event.currentTarget.id,
+            edit_value: "edit"
         }
-            @*$.ajax({
+            $.ajax({
                     url: "@Url.Action("Coment_section", "UsingU")",
                     type: "POST",
                     contentType: "application/json",
@@ -44,19 +77,44 @@
                     success: function (response) {
                         response ? re() : alert("It didn't work.");
                     }
-                });*@
+        });
+        function re() {
+            $("#re_coment").load("@Url.Action("Show_conment_section", "UsingU")");
+        }
     }
 
+</script>
+<script>
+    function get_edit_com_val(event) {
+        alert(event.currentTarget.id);
+        var get_comemt = {
+            id: event.currentTarget.id,
+            edit_value: "get_edit",
+            coment: $(".get_edit_coment").val()
+        }
+            $.ajax({
+                    url: "@Url.Action("Coment_section", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                data: JSON.stringify({ send_coment: get_comemt}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+        });
+        function re() {
+            $("#re_coment").load("@Url.Action("Show_conment_section", "UsingU")");
+        }
+    }
 </script>
 <script>
     function no_re(event) {
         var get_id_nore = event.target.id;
         if (get_id_nore == "no_refect") {
 
-        } else{
-                @*setTimeout(function () {
-        $("#re_coment").load("@Url.Action("Show_conment_section", "UsingU")");
-    }, 5000);*@
+        } else {
+            setTimeout(function () {
+                $("#re_coment").load("@Url.Action("Show_conment_section", "UsingU")");
+            }, 5000);
         }
     };
 </script>

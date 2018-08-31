@@ -43,5 +43,7 @@ namespace Order_Food.Models
         public virtual DbSet<View_showing> View_showing { get; set; }
         public virtual DbSet<View_how_show> View_how_show { get; set; }
         public virtual DbSet<Coment_section> Coment_section { get; set; }
+        public virtual DbSet<Chat> Chat { get; set; }
+        public virtual DbSet<Alert_customer> Alert_customer { get; set; }
     }
 }

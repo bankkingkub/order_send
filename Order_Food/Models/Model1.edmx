@@ -31,11 +31,31 @@
           <Property Name="Address_C_long" Type="nchar" MaxLength="10" />
           <Property Name="Address_C_name" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Alert_customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="user_name" Type="varchar" MaxLength="50" />
+          <Property Name="alert" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="category" />
           </Key>
           <Property Name="category" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chat" Type="varchar" MaxLength="50" />
+          <Property Name="customer_name" Type="varchar" MaxLength="50" />
+          <Property Name="user_name" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="date" />
+          <Property Name="time" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Coment_section">
           <Key>
@@ -46,6 +66,7 @@
           <Property Name="user_name" Type="varchar" MaxLength="50" />
           <Property Name="coment" Type="varchar" MaxLength="50" />
           <Property Name="date" Type="date" />
+          <Property Name="edit_value" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Description">
           <Key>
@@ -208,7 +229,9 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <EntitySet Name="Add_Store" EntityType="Self.Add_Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Add_store_img" EntityType="Self.Add_store_img" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address_C" EntityType="Self.Address_C" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alert_customer" EntityType="Self.Alert_customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coment_section" EntityType="Self.Coment_section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Description" EntityType="Self.Description" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Food_Picture" EntityType="Self.Food_Picture" Schema="dbo" store:Type="Tables" />
@@ -274,6 +297,8 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <EntitySet Name="View_showing" EntityType="Order_Food_dbModel.View_showing" />
           <EntitySet Name="View_how_show" EntityType="Order_Food_dbModel.View_how_show" />
           <EntitySet Name="Coment_section" EntityType="Order_Food_dbModel.Coment_section" />
+          <EntitySet Name="Chat" EntityType="Order_Food_dbModel.Chat" />
+          <EntitySet Name="Alert_customer" EntityType="Order_Food_dbModel.Alert_customer" />
         </EntityContainer>
         <EntityType Name="Add_Store">
           <Key>
@@ -463,6 +488,27 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="coment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chat1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="time" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Alert_customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="alert" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -669,10 +715,33 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <EntitySetMapping Name="Coment_section">
             <EntityTypeMapping TypeName="Order_Food_dbModel.Coment_section">
               <MappingFragment StoreEntitySet="Coment_section">
+                <ScalarProperty Name="edit_value" ColumnName="edit_value" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="coment" ColumnName="coment" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="chat1" ColumnName="chat" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alert_customer">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Alert_customer">
+              <MappingFragment StoreEntitySet="Alert_customer">
+                <ScalarProperty Name="alert" ColumnName="alert" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

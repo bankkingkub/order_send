@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+    <div class="row">
+        <div class="col-md-10">
+            <textarea rows="1" id="get_chat" style="width:100%;"> </textarea>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="ตกลง" onclick="send_chat()" />
+        </div>
+    </div>
+<script>
+    function send_chat() {
+        var get_chat = {
+            chat1: $("#get_chat").val()
+        }
+            $.ajax({
+                    url: "@Url.Action("Chat_section", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                data: JSON.stringify({ send_chat: get_chat}),
+                    success: function (response) {
+                        response ? re() : alert("It didn't work.");
+                    }
+        });
+        function re() {
+            $("#re_chat").load("@Url.Action("Show_chat", "UsingU")");
+            document.getElementById('get_chat').value = "";
+        }
+    }
+</script>
+
