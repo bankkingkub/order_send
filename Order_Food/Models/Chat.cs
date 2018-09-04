@@ -20,5 +20,6 @@ namespace Order_Food.Models
         public string user_name { get; set; }
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<System.TimeSpan> time { get; set; }
+        public string chexk { get; set; }
     }
 }

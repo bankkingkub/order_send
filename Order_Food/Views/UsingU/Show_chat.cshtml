@@ -21,7 +21,7 @@
             if (ViewBag.check == "u")
             {
                 <tr>
-                    @if (ViewBag.me == item.customer_name)
+                    @if (item.chexk == "u")
                     {
                         <td>
                             @item.customer_name
@@ -31,14 +31,14 @@
                         </td>
                         <td></td>
                     }
-                    else if (ViewBag.anoter == item.customer_name)
+                    else
                     {
                         <td></td>
                         <td>
                             @item.chat1
                         </td>
                         <td>
-                            @item.customer_name
+                            @item.user_name
                         </td>
                     }
                 </tr>
@@ -46,17 +46,17 @@
             else if (ViewBag.check == "c")
             {
                 <tr>
-                    @if (ViewBag.me == item.customer_name)
+                    @if (item.chexk == "c")
                     {
                         <td>
-                            @item.customer_name
+                            @item.user_name
                         </td>
                         <td>
                             @item.chat1
                         </td>
                         <td></td>
                     }
-                    else if (ViewBag.anoter == item.customer_name)
+                    else
                     {
                         <td></td>
                         <td>
@@ -75,5 +75,5 @@
 <script>
             setTimeout(function () {
                 $("#re_chat").load("@Url.Action("Show_chat", "UsingU")");
-            }, 5000);
+            }, 3000);
 </script>

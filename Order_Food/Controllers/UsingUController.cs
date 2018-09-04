@@ -896,28 +896,31 @@ namespace Order_Food.Controllers
         }
         public ActionResult Show_chat()
         {
-            string get_chat_name = Session["get_chat_name"].ToString();
-            string get_non_alet = Session["get_non_alet"].ToString();
-            string get_check = Session["get_check"].ToString();
-
             string get_name = get_section_user();
             string get_anoter = get_section_store();
             List<Chat> get_chat = new List<Chat>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                if (get_check == "true")
+                try
                 {
-                    ViewBag.me = get_name;
-                    ViewBag.anoter = get_chat_name;
+                    string get_chat_name = Session["get_chat_name"].ToString();
+                    string get_check = Session["get_check"].ToString();
+
+                    var get_non = db.Alert_customer.Single(x => x.name == get_chat_name && x.user_name == get_name);
+                    if (get_non.alert == "show")
+                    {
+                        get_non.alert = "non";
+                        db.SaveChanges();
+                    }
+                    get_chat = db.Chat.Where(x => x.customer_name == get_chat_name && x.user_name == get_name).ToList();
                     ViewBag.check = "c";
                 }
-                else
+                catch
                 {
-                    ViewBag.me = get_name;
-                    ViewBag.anoter = get_anoter;
                     ViewBag.check = "u";
+                    get_chat = db.Chat.Where(x => x.customer_name == get_name && x.user_name == get_anoter).ToList();
                 }
-                get_chat = db.Chat.ToList();
+
             }
             return View(get_chat);
         }
@@ -929,23 +932,36 @@ namespace Order_Food.Controllers
         public ActionResult Chat_section(Chat send_chat, Alert_customer alet_cu)
         {
             var get_name = get_section_user();
-            var get_store = get_section_store();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                send_chat.customer_name = get_name;
-                send_chat.user_name = get_store;
-                db.Chat.Add(send_chat);
                 try
                 {
-                    var check_null = db.Alert_customer.Single(x => x.name == get_name).ToString();
-                    alet_cu.alert = "show";
+                    string get_chat_name = Session["get_chat_name"].ToString();
+                    string get_check = Session["get_check"].ToString();
+                    send_chat.customer_name = get_chat_name;
+                    send_chat.user_name = get_name;
+                    send_chat.chexk = "c";
+                    db.Chat.Add(send_chat);
                 }
                 catch
                 {
-                    alet_cu.alert = "show";
-                    alet_cu.user_name = get_store;
-                    alet_cu.name = get_name;
-                    db.Alert_customer.Add(alet_cu);
+                    var get_store = get_section_store();
+                    send_chat.customer_name = get_name;
+                    send_chat.user_name = get_store;
+                    send_chat.chexk = "u";
+                    db.Chat.Add(send_chat);
+                    try
+                    {
+                        var check_null = db.Alert_customer.Single(x => x.name == get_name && x.user_name == get_store);
+                        check_null.alert = "show";
+                    }
+                    catch
+                    {
+                        alet_cu.alert = "show";
+                        alet_cu.user_name = get_store;
+                        alet_cu.name = get_name;
+                        db.Alert_customer.Add(alet_cu);
+                    }
                 }
                 db.SaveChanges();
             }

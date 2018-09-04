@@ -51,6 +51,7 @@
     <Property Name="user_name" Type="varchar" MaxLength="50" />
     <Property Name="date" Type="date" />
     <Property Name="time" Type="time" Precision="7" />
+    <Property Name="chexk" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Coment_section">
     <Key>

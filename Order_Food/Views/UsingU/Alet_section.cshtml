@@ -1,34 +1,42 @@
 ﻿
 @{
-//Layout = null;
+    Layout = null;
     @model List<Order_Food.Models.Alert_customer>
 }
-<div id="re_chat">
-    @foreach (var item in Model)
+@*<div id="re_chat">
+        @foreach (var item in Model)
+        {
+            if (item.alert == "show")
+            {
+                <div onclick="go_to_chat(event)" id="@item.name">ลูกค่าชื่อ @item.name ทักมา</div> <br>
+            }
+        }
+    </div>*@
+@using (Html.BeginForm("Alet_section", "UsingU", FormMethod.Post))
+{
+    foreach (var item in Model)
     {
         if (item.alert == "show")
         {
-            <div onclick="go_to_chat(event)" id="@item.name">ลูกค่าชื่อ @item.name ทักมา</div> <br>
+            @Html.ActionLink(item.name, "Home_chat", "UsingU", new { onclick = "go_to_chat(event)" ,id = item.name }) <br>
         }
     }
-</div>
+}
+
 <script>
-    function go_to_chat(event) {
-        alert(event.currentTarget.id);
-        var get_chat_name = event.currentTarget.id;
-        var get_non_alet = "non";
-        var get_check = "true";
-        $.ajax({
-            url: "@Url.Action("Alet_section", "UsingU")",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ get_chat_name, get_non_alet, get_check}),
-            success: function (response) {
-                response ? re() : alert("It didn't work.");
-            }
-        });
-        function re() {
-            $("#re_chat").load("@Url.Action("Home_chat", "UsingU")");
+        function go_to_chat(event) {
+            alert(event.currentTarget.id);
+            var get_chat_name = event.currentTarget.id;
+            var get_non_alet = "non";
+            var get_check = "true";
+            $.ajax({
+                url: "@Url.Action("Alet_section", "UsingU")",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ get_chat_name, get_non_alet, get_check}),
+                success: function (response) {
+                    response ? re() : alert("It didn't work.");
+                }
+            });
         }
-    }
 </script>
