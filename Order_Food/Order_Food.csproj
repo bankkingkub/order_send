@@ -197,6 +197,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Food_PictureMetadata.cs" />
+    <Compile Include="Models\Getvalue_order.cs" />
     <Compile Include="Models\Get_catagory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

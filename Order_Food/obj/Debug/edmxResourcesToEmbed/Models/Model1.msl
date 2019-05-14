@@ -209,16 +209,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Alert_customer">
-      <EntityTypeMapping TypeName="Order_Food_dbModel.Alert_customer">
-        <MappingFragment StoreEntitySet="Alert_customer">
-          <ScalarProperty Name="alert" ColumnName="alert" />
-          <ScalarProperty Name="user_name" ColumnName="user_name" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Chat">
       <EntityTypeMapping TypeName="Order_Food_dbModel.Chat">
         <MappingFragment StoreEntitySet="Chat">
@@ -228,6 +218,18 @@
           <ScalarProperty Name="user_name" ColumnName="user_name" />
           <ScalarProperty Name="customer_name" ColumnName="customer_name" />
           <ScalarProperty Name="chat1" ColumnName="chat" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Alert_customer">
+      <EntityTypeMapping TypeName="Order_Food_dbModel.Alert_customer">
+        <MappingFragment StoreEntitySet="Alert_customer">
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="alert" ColumnName="alert" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

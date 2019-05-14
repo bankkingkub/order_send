@@ -892,7 +892,36 @@ namespace Order_Food.Controllers
         }
         public ActionResult Home_chat()
         {
-            return View();
+            string get_anoter = get_section_store();
+            List<Get_menu> get_menu = new List<Get_menu>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                get_menu = db.Get_menu.Where(x => x.customer_name == get_anoter).ToList();
+            }
+            return View(get_menu);
+        }
+        [HttpPost]
+        public ActionResult Home_chat(Getvalue_order get_order, string[] senda)
+        {
+            string get_anoter = get_section_store();
+            List<Get_menu> get_menu = new List<Get_menu>();
+            using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
+            {
+                if (get_order.get_order != null)
+                {
+
+                    //int order_price_val = 0;
+                    //for (int i = 0; i < get_order.get_order.Length; i++)
+                    //{
+                    //    int order_price = get_order.get_order[i]*get_order.get_price[i];
+                    //    order_price_val = order_price + order_price_val;
+                    //}
+                    //ViewBag.price = order_price_val;
+                    //ViewBag.priceasdasd = "123456";
+                }
+                get_menu = db.Get_menu.Where(x => x.customer_name == get_anoter).ToList();
+            }
+            return View(get_menu);
         }
         public ActionResult Show_chat()
         {
@@ -910,6 +939,8 @@ namespace Order_Food.Controllers
                     if (get_non.alert == "show")
                     {
                         get_non.alert = "non";
+                        get_non.date = DateTime.Today;
+                        get_non.time = DateTime.Now.TimeOfDay;
                         db.SaveChanges();
                     }
                     get_chat = db.Chat.Where(x => x.customer_name == get_chat_name && x.user_name == get_name).ToList();
@@ -953,13 +984,18 @@ namespace Order_Food.Controllers
                     try
                     {
                         var check_null = db.Alert_customer.Single(x => x.name == get_name && x.user_name == get_store);
+                        check_null.date = DateTime.Today;
+                        check_null.time = DateTime.Now.TimeOfDay;
                         check_null.alert = "show";
+
                     }
                     catch
                     {
                         alet_cu.alert = "show";
                         alet_cu.user_name = get_store;
                         alet_cu.name = get_name;
+                        alet_cu.date = DateTime.Today;
+                        alet_cu.time = DateTime.Now.TimeOfDay;
                         db.Alert_customer.Add(alet_cu);
                     }
                 }
@@ -973,7 +1009,7 @@ namespace Order_Food.Controllers
             List<Alert_customer> alet_chat = new List<Alert_customer>();
             using (Order_Food_dbEntities1 db = new Order_Food_dbEntities1())
             {
-                alet_chat = db.Alert_customer.Where(x => x.user_name == get_name).ToList();
+                alet_chat = db.Alert_customer.Where(x => x.user_name == get_name).OrderByDescending(x => x.date).ThenByDescending(x => x.time).ToList();
                 //foreach (var obj in db.Chat.Where(x => x.user_name == get_name))
                 //{
                 //}

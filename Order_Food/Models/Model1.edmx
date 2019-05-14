@@ -39,6 +39,8 @@
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="user_name" Type="varchar" MaxLength="50" />
           <Property Name="alert" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="date" />
+          <Property Name="time" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -298,8 +300,8 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <EntitySet Name="View_showing" EntityType="Order_Food_dbModel.View_showing" />
           <EntitySet Name="View_how_show" EntityType="Order_Food_dbModel.View_how_show" />
           <EntitySet Name="Coment_section" EntityType="Order_Food_dbModel.Coment_section" />
-          <EntitySet Name="Alert_customer" EntityType="Order_Food_dbModel.Alert_customer" />
           <EntitySet Name="Chat" EntityType="Order_Food_dbModel.Chat" />
+          <EntitySet Name="Alert_customer" EntityType="Order_Food_dbModel.Alert_customer" />
         </EntityContainer>
         <EntityType Name="Add_Store">
           <Key>
@@ -491,15 +493,6 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="edit_value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Alert_customer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="alert" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Chat">
           <Key>
             <PropertyRef Name="id" />
@@ -511,6 +504,17 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="time" Type="Time" Precision="7" />
           <Property Name="chexk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Alert_customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="alert" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="time" Type="Time" Precision="7" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -726,16 +730,6 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Alert_customer">
-            <EntityTypeMapping TypeName="Order_Food_dbModel.Alert_customer">
-              <MappingFragment StoreEntitySet="Alert_customer">
-                <ScalarProperty Name="alert" ColumnName="alert" />
-                <ScalarProperty Name="user_name" ColumnName="user_name" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Chat">
             <EntityTypeMapping TypeName="Order_Food_dbModel.Chat">
               <MappingFragment StoreEntitySet="Chat">
@@ -745,6 +739,18 @@ warning 6002: The table/view 'Order_Food_db.dbo.View_showing' does not have a pr
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="customer_name" ColumnName="customer_name" />
                 <ScalarProperty Name="chat1" ColumnName="chat" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alert_customer">
+            <EntityTypeMapping TypeName="Order_Food_dbModel.Alert_customer">
+              <MappingFragment StoreEntitySet="Alert_customer">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="alert" ColumnName="alert" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

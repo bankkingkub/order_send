@@ -12,17 +12,24 @@
             }
         }
     </div>*@
-@using (Html.BeginForm("Alet_section", "UsingU", FormMethod.Post))
+<div>พึ่งทักมา</div>
+
+@foreach (var item in Model)
 {
-    foreach (var item in Model)
+    if (item.alert == "show")
     {
-        if (item.alert == "show")
-        {
-            @Html.ActionLink(item.name, "Home_chat", "UsingU", new { onclick = "go_to_chat(event)" ,id = item.name }) <br>
-        }
+        @Html.ActionLink(item.name, "Home_chat", "UsingU", new { onclick = "go_to_chat(event)", id = item.name }) <br>
     }
 }
 
+<div class="pd_15px"> ประวัตการคุย </div>
+@foreach (var item in Model)
+{
+    if (item.alert == "non")
+    {
+        @Html.ActionLink(item.name, "Home_chat", "UsingU", new { onclick = "go_to_chat(event)", id = item.name }) <br>
+    }
+}
 <script>
         function go_to_chat(event) {
             alert(event.currentTarget.id);

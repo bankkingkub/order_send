@@ -1,7 +1,285 @@
-﻿
-@{
+﻿@model List<Order_Food.Models.Get_menu>
 
-}
+<a onclick="popup()">รายการอารหาร</a>
+@ViewBag.priceasdasd
+@ViewBag.price
+
 @Html.Action("Show_chat", "UsingU")
 <div class="pd_15px"></div>
 @Html.Action("Chat_section", "UsingU")
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+@*<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    #regForm {
+        background-color: #ffffff;
+        margin: 100px auto;
+        font-family: Raleway;
+        padding: 40px;
+        width: 70%;
+        min-width: 300px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+        background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #4CAF50;
+        }
+</style>
+
+<div class="container">
+    <button type="button" data-toggle="modal" data-target="#myModal">รายการอาหาร</button>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                @{
+                    <h1>รายการอาหาร:</h1>
+
+                    <div class="tab">
+                        <div class="modal-body">
+                            @foreach (var item in Model)
+                            {
+                                <span>รายชื่อ : @item.Menu_name</span>
+                                <span>ราคา : @item.Menu_price</span>
+                                <span>จำนวน :<input type="number" class="get_val" name="quantity" min="1" max="100"></span>
+                                <input type="text" style="display:none" value="@item.Menu_id" class="get_id_val">
+                                <input type="text" style="display:none" value="@item.Menu_price" class="get_price_val">
+                                <input type="text" style="display:none" value="@item.Menu_name" class="get_name_val">
+                                <br>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="tab">
+                        <div id="re_chat_menu">
+                            <div>
+                                ราคาอาหารรวม <br>
+                                <table class="w3-table" id="bill_order"> </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab">
+
+                    </div>
+
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button type="button" id="nextBtn" class="nextshow" onclick="nextPrev(1),send_data(1)">Next</button>
+                        <button type="button" id="nextBtnsub">submit</button>
+                    </div>
+                    <!-- Circles which indicates the steps of the form: -->
+                    <div style="text-align:center;margin-top:40px;">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var getfood_order = {
+        get_order: [],
+        get_id: [],
+        get_price: [],
+        get_name:[]
+    };
+        function send_data(n) {
+            if (n = 1) {
+                let i = 0;
+                let a = 0;
+                var getnumarr = [];
+                //$(".get_val").each(function () {
+                //    get_order[i] = $(this).val();
+                //        ++i;
+                //});
+                $(".get_val").each(function () {
+                    getnumarr[i] = $(this).val();
+                    //getfood_order.get_id[i] = $(".get_id_val").val();
+                    if (getnumarr[i] != '' && getnumarr[i] != '0') {
+                        getfood_order.get_order[a] = $(".get_val").eq(i).val();
+                        getfood_order.get_id[a] = $(".get_id_val").eq(i).val();
+                        getfood_order.get_price[a] = $(".get_price_val").eq(i).val();
+                        getfood_order.get_name[a] = $(".get_name_val").eq(i).val();
+                        a++
+                    }
+                    ++i;
+                });
+                calfun();
+
+                //getfood_order.get_id[1] = $(".get_id_val").eq(getnumarr[a]).val();
+                //$(".get_id_val").each(function () {
+                //    getfood_order.get_id[i] = $(this).eq(getnumarr[a]).val();
+                //    a++
+                //    i++
+                //});
+
+            }
+
+    function calfun() {
+        let sum_price = 0, ans_price = 0;
+        for (var i = 0; i < getfood_order.get_order.length; i++) {
+            sum_price = getfood_order.get_order[i] * getfood_order.get_price[i];
+            ans_price = sum_price + ans_price;
+        }
+        //document.getElementById("bill_order").innerHTML = "<tr><th>" + getfood_order.get_name[i] + "</th><th>" + getfood_order.get_order[i] + "</th></tr>";
+
+        var food_history = '';
+        food_history += "<tr><th>ชื่อรายการ</th><th>จำนวน</th><th>ราคา</th></tr>"
+        for (var i = 0; i < getfood_order.get_order.length; i++) {
+            food_history += "<tr><th>" + getfood_order.get_name[i] + "</th><th>" + getfood_order.get_order[i] + "</th><th>" + getfood_order.get_price[i] + "</th></tr>";
+        }
+        food_history += "<tr><th>ราคารวม</th><th></th><th>" + ans_price + "</th></tr>"
+        document.getElementById("bill_order").innerHTML = food_history
+
+
+        //var para = document.createElement("tr");
+        //var node = document.createTextNode("<td>" + getfood_order.get_id[0] + "</td><td>" + getfood_order.get_order[0] + "</td>");
+        //para.appendChild(node);
+        //var elemenr = document.getElementById("bill_order");
+        //elemenr.appendChild(para);
+
+    }
+
+    @*function re() {
+        $("#re_chat_menu").load("@Url.Action("Home_chat", "UsingU")");
+    }*@
+            function send_ajex() {
+                $.ajax({
+                    url: "@Url.Action("Home_chat", "UsingU")",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ get_order: getfood_order, senda: a }),
+                    success: function (response) {
+                        response ? alert("fin") : alert("It didn't work.");
+                    }
+                });
+            }
+        }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#nextBtnsub").hide();
+    });
+
+    var currentTab = 0;
+    showTab(currentTab);
+    function showTab(n) {
+
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            $("#nextBtnsub").show();
+            $(".nextshow").hide();
+        } else {
+            $("#nextBtnsub").hide();
+            $(".nextshow").show();
+        }
+
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+
+        var x = document.getElementsByClassName("tab");
+
+        if (n == 1 && !validateForm()) return false;
+
+        x[currentTab].style.display = "none";
+
+        currentTab = currentTab + n;
+
+        if (currentTab >= x.length) {
+
+            document.getElementById("regForm").submit();
+            return false;
+        }
+
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        //// This function deals with validation of the form fields
+        //var x, y, i, valid = true;
+        //x = document.getElementsByClassName("tab");
+        //y = x[currentTab].getElementsByTagName("input");
+        //// A loop that checks every input field in the current tab:
+        //for (i = 0; i < y.length; i++) {
+        //    // If a field is empty...
+        //    if (y[i].value == "") {
+        //        // add an "invalid" class to the field:
+        //        y[i].className += " invalid";
+        //        // and set the current valid status to false
+        //        valid = false;
+        //    }
+        //}
+        //// If the valid status is true, mark the step as finished and valid:
+        //if (valid) {
+        //    document.getElementsByClassName("step")[currentTab].className += " finish";
+        //}
+        valid = true;
+        return valid;
+    }
+
+    function fixStepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        x[n].className += " active";
+    }
+</script>
+
+
